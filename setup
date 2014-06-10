@@ -5,6 +5,7 @@
 # branch=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
 # git checkout master
 # git pull origin master
+# git submodule update
 
 # set up configuration directiry
 
@@ -24,6 +25,7 @@ fi
 # GATEKEEPER - comment out to add a condition so skip code. add a closing fi
 # if [ -n "${GATE}" ]
 # then
+
 # bash
 if [ "${log_debug}" == "ON" ]
 then
