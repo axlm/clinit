@@ -1,0 +1,8 @@
+:set lines=70
+:set columns=110
+:set gfn=Ubuntu\ Mono\ 10
+:set background=dark
+:set guioptions-=r
+:set guioptions-=T
+:colorscheme golden
+
