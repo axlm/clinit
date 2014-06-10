@@ -1,0 +1,4 @@
+#!/bin/bash
+function swhich-java {
+    update-alternatives --config java
+}

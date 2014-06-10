@@ -1,0 +1,83 @@
+#!/bin/bash
+
+
+# work of the latest release
+# branch=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
+# git checkout master
+# git pull origin master
+
+# set up configuration directiry
+
+setup_dir=$(pwd)
+
+pushd ~
+
+log_info="OFF"
+log_debug="OFF"
+if [ -f "${setup_dir}"/bash/bsfl ]
+then
+    . "${setup_dir}"/bash/bsfl
+    log_info="ON"
+    log_debug="ON"
+fi
+
+# bash
+if [ "${log_info}" == "ON" ]; then msg_info "Backing up bash configuration files..."; fi
+if [ "${log_debug}" == "ON" ]
+then
+	cmd "mv .profile .profile.original"
+	cmd "mv .bashrc .bashrc.original"
+	cmd "mv .bash_logout .bash_logout.original"
+	cmd "ln -s ${setup_dir}/bash/bash_aliases .bash_aliases"
+	cmd "ln -s ${setup_dir}/bash/bash_colors .bash_colors"
+	cmd "ln -s ${setup_dir}/bash/bash_logout .bash_logout"
+	cmd "ln -s ${setup_dir}/bash/bash_prompt .bash_prompt"
+	cmd "ln -s ${setup_dir}/bash/bashrc .bashrc"
+	cmd "ln -s ${setup_dir}/common/inputrc .inputrc"
+	cmd "ln -s ${setup_dir}/common/profile .profile"
+else
+	mv .profile .profile.original
+	mv .bashrc .bashrc.original
+	mv .bash_logout .bash_logout.original
+	ln -s "${setup_dir}"/bash/bash_aliases .bash_aliases
+	ln -s "${setup_dir}"/bash/bash_colors .bash_colors
+	ln -s "${setup_dir}"/bash/bash_logout .bash_logout
+	ln -s "${setup_dir}"/bash/bash_prompt .bash_prompt
+	ln -s "${setup_dir}"/bash/bashrc .bashrc
+	ln -s "${setup_dir}"/common/inputrc .inputrc
+	ln -s "${setup_dir}"/common/profile .profile
+fi
+
+popd
+
+exit 0
+
+# git
+ln -s "${setup_dir}"/Git/ax_gitconfig .gitconfig
+ln -s "${setup_dir}"/Git/ax_gitignore .gitignore
+ln -s "${setup_dir}"/Git/ax_tigrc .tigrc
+
+# vim
+mkdir -p .vim/{colors,syntax}
+ln -s "${setup_dir}"/Vim/ax_gvimrc .gvimrc
+ln -s "${setup_dir}"/Vim/ax_vimrc .vimrc
+ln -s "${setup_dir}"/Vim/Colors/ax_solarized.vim .vim/colors/solarized.vim
+ln -s "${setup_dir}"/Vim/Syntax/ax_antlr3.vim .vim/syntax/antlr3.vim
+ln -s "${setup_dir}"/Vim/Syntax/ax_dtrace.vim .vim/syntax/dtrace.vim
+
+# tmux
+ln -s "${setup_dir}"/tmux/ax_tmux.conf .tmux.conf
+
+if [ "${log_info}" == "ON" ]; then msg_info "Configuring powerline..."; fi
+# powerline
+mkdir "${HOME}"/.fonts.conf.d
+cp "${setup_dir}"/powerline/font/10-powerline-symbols.conf "${HOME}"/.fonts.conf.d/
+mkdir "${HOME}"/.fonts
+cp "${setup_dir}"/powerline/font/PowerlineSymbols.otf "${HOME}"/.fonts/
+# TODO: `apt-get install fontconfig` if it does not exist
+sudo apt-get install fontconfig
+mkdir "${HOME}"/.config/powerline
+cp -r "${setup_dir}"/powerline/powerline/config_files/* "${HOME}"/.config/powerline/
+
+
+git checkout ${branch}
