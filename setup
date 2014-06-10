@@ -22,9 +22,9 @@ then
 fi
 
 # bash
-if [ "${log_info}" == "ON" ]; then msg_info "Backing up bash configuration files..."; fi
 if [ "${log_debug}" == "ON" ]
 then
+	if [ "${log_info}" == "ON" ]; then msg_info "Setting up bash environment..."; fi
 	cmd "mv .profile .profile.original"
 	cmd "mv .bashrc .bashrc.original"
 	cmd "mv .bash_logout .bash_logout.original"
@@ -35,7 +35,9 @@ then
 	cmd "ln -s ${setup_dir}/bash/bashrc .bashrc"
 	cmd "ln -s ${setup_dir}/common/inputrc .inputrc"
 	cmd "ln -s ${setup_dir}/common/profile .profile"
+	if [ "${log_info}" == "ON" ]; then msg_info "Done setting up bash environment..."; fi
 else
+	if [ "${log_info}" == "ON" ]; then msg_info "Setting up bash environment..."; fi
 	mv .profile .profile.original
 	mv .bashrc .bashrc.original
 	mv .bash_logout .bash_logout.original
@@ -46,16 +48,28 @@ else
 	ln -s "${setup_dir}"/bash/bashrc .bashrc
 	ln -s "${setup_dir}"/common/inputrc .inputrc
 	ln -s "${setup_dir}"/common/profile .profile
+	if [ "${log_info}" == "ON" ]; then msg_info "Done setting up bash environment..."; fi
+fi
+
+# git
+if [ "${log_debug}" == "ON" ]
+then
+	if [ "${log_info}" == "ON" ]; then msg_info "Setting up git environment..." ; fi
+	cmd "ln -s ${setup_dir}/git/gitconfig .gitconfig"
+	cmd "ln -s ${setup_dir}/git/gitignore .gitignore"
+	cmd "ln -s ${setup_dir}/git/tigrc .tigrc"
+	if [ "${log_info}" == "ON" ]; then msg_info "Done setting up git environment..." ; fi
+else
+	if [ "${log_info}" == "ON" ]; then msg_info "Setting up git environment..." ; fi
+	ln -s "${setup_dir}"/git/gitconfig .gitconfig
+	ln -s "${setup_dir}"/git/gitignore .gitignore
+	ln -s "${setup_dir}"/git/tigrc .tigrc
+	if [ "${log_info}" == "ON" ]; then msg_info "Done setting up git environment..." ; fi
 fi
 
 popd
 
 exit 0
-
-# git
-ln -s "${setup_dir}"/Git/ax_gitconfig .gitconfig
-ln -s "${setup_dir}"/Git/ax_gitignore .gitignore
-ln -s "${setup_dir}"/Git/ax_tigrc .tigrc
 
 # vim
 mkdir -p .vim/{colors,syntax}
