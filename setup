@@ -21,6 +21,9 @@ then
     log_debug="ON"
 fi
 
+# GATEKEEPER - comment out to add a condition so skip code. add a closing fi
+# if [ -n "${GATE}" ]
+# then
 # bash
 if [ "${log_debug}" == "ON" ]
 then
@@ -67,17 +70,45 @@ else
 	if [ "${log_info}" == "ON" ]; then msg_info "Done setting up git environment..." ; fi
 fi
 
-popd
-
-exit 0
-
 # vim
-mkdir -p .vim/{colors,syntax}
-ln -s "${setup_dir}"/Vim/ax_gvimrc .gvimrc
-ln -s "${setup_dir}"/Vim/ax_vimrc .vimrc
-ln -s "${setup_dir}"/Vim/Colors/ax_solarized.vim .vim/colors/solarized.vim
-ln -s "${setup_dir}"/Vim/Syntax/ax_antlr3.vim .vim/syntax/antlr3.vim
-ln -s "${setup_dir}"/Vim/Syntax/ax_dtrace.vim .vim/syntax/dtrace.vim
+if [ "${log_debug}" == "ON" ]
+then
+	if [ "${log_info}" == "ON" ]; then msg_info "Setting up vim environment..." ; fi
+	cmd "mkdir -p .vim/colors"
+	cmd "mkdir -p .vim/syntax"
+	if [ -f "${HOME}"/.vimrc ]
+	then
+		if [ "${log_info}" == "ON" ]; then msg_info "Backing up .vimrc..." ; fi
+		cmd "mv ${HOME}/.vimrc ${HOME}/.vimrc.original"
+		if [ "${log_info}" == "ON" ]; then msg_info "Done backing up .vimrc..." ; fi
+	fi
+	cmd "ln -s ${setup_dir}/vim/gvimrc .gvimrc"
+	cmd "ln -s ${setup_dir}/vim/vimrc .vimrc"
+	cmd "ln -s ${setup_dir}/vim/colors/solarized.vim .vim/colors/solarized.vim"
+	cmd "ln -s ${setup_dir}/vim/syntax/antlr3.vim .vim/syntax/antlr3.vim"
+	cmd "ln -s ${setup_dir}/vim/syntax/dtrace.vim .vim/syntax/dtrace.vim"
+	# TODO: sort out dependency stuff...
+	# ./dependencies/solarized-vim/colors/solarized.vim
+	# ./vim/colors/solarized.vim
+	if [ "${log_info}" == "ON" ]; then msg_info "Done setting up vim environment..." ; fi
+else
+	if [ "${log_info}" == "ON" ]; then msg_info "Setting up vim environment..." ; fi
+	mkdir -p .vim/{colors,syntax}
+	if [ -f "${HOME}"/.vimrc ]
+	then
+		if [ "${log_info}" == "ON" ]; then msg_info "Backing up .vimrc..." ; fi
+		cmd "mv ${HOME}/.vimrc ${HOME}/.vimrc.original"
+		if [ "${log_info}" == "ON" ]; then msg_info "Done backing up .vimrc..." ; fi
+	fi
+	ln -s "${setup_dir}"/vim/gvimrc .gvimrc
+	ln -s "${setup_dir}"/vim/vimrc .vimrc
+	ln -s "${setup_dir}"/vim/colors/solarized.vim .vim/colors/solarized.vim
+	ln -s "${setup_dir}"/vim/syntax/antlr3.vim .vim/syntax/antlr3.vim
+	ln -s "${setup_dir}"/vim/syntax/dtrace.vim .vim/syntax/dtrace.vim
+	if [ "${log_info}" == "ON" ]; then msg_info "Done setting up vim environment..." ; fi
+fi
+
+# fi # GATE
 
 # tmux
 ln -s "${setup_dir}"/tmux/ax_tmux.conf .tmux.conf
@@ -92,6 +123,10 @@ cp "${setup_dir}"/powerline/font/PowerlineSymbols.otf "${HOME}"/.fonts/
 sudo apt-get install fontconfig
 mkdir "${HOME}"/.config/powerline
 cp -r "${setup_dir}"/powerline/powerline/config_files/* "${HOME}"/.config/powerline/
+
+popd
+
+exit 0
 
 
 git checkout ${branch}
