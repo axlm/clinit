@@ -1,134 +1,99 @@
 #!/bin/bash
 
-
-# work of the latest release
-# branch=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
-# git checkout master
-# git pull origin master
-# git submodule update
-
-# set up configuration directiry
-
+# where am i?
 setup_dir=$(pwd)
 
-pushd ~
-
-log_info="OFF"
-log_debug="OFF"
-if [ -f "${setup_dir}"/bash/bsfl ]
+# import bash function library if it is available
+err_missing_bsfl=-1
+if  [ -f "${setup_dir}"/bash/bsfl ]
 then
     . "${setup_dir}"/bash/bsfl
-    log_info="ON"
-    log_debug="ON"
+else
+    echo "Missing dependency - bsfl"
+    exit ${err_missing_bsfl}
 fi
 
 # GATEKEEPER - comment out to add a condition so skip code. add a closing fi
-# if [ -n "${GATE}" ]
-# then
+if [ -n "${GATE}" ]
+then
+    # work of the latest release
+    err_dirty_git=-2
+    msg_info "Checking git status..."
+    if [ -n "$(git status --untracked-files=no --porcelain 2> /dev/null | tail -n1)" ]
+    then
+        msg_error "Dirty git repository. Please commit, reset, revert or stash changes and try again."
+        exit ${err_dirty_git}
+    fi
+    branch=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
+    msg_debug "Current git branch is ${branch}."
+    # git checkout master
+    # git pull origin master
+    # git submodule update
+fi # GATE
+
+pushd ~
+
+# set up configuration directiry
 
 # bash
-if [ "${log_debug}" == "ON" ]
-then
-	if [ "${log_info}" == "ON" ]; then msg_info "Setting up bash environment..."; fi
-	cmd "mv .profile .profile.original"
-	cmd "mv .bashrc .bashrc.original"
-	cmd "mv .bash_logout .bash_logout.original"
-	cmd "ln -s ${setup_dir}/bash/bash_aliases .bash_aliases"
-	cmd "ln -s ${setup_dir}/bash/bash_colors .bash_colors"
-	cmd "ln -s ${setup_dir}/bash/bash_logout .bash_logout"
-	cmd "ln -s ${setup_dir}/bash/bash_prompt .bash_prompt"
-	cmd "ln -s ${setup_dir}/bash/bashrc .bashrc"
-	cmd "ln -s ${setup_dir}/common/inputrc .inputrc"
-	cmd "ln -s ${setup_dir}/common/profile .profile"
-	if [ "${log_info}" == "ON" ]; then msg_info "Done setting up bash environment..."; fi
-else
-	if [ "${log_info}" == "ON" ]; then msg_info "Setting up bash environment..."; fi
-	mv .profile .profile.original
-	mv .bashrc .bashrc.original
-	mv .bash_logout .bash_logout.original
-	ln -s "${setup_dir}"/bash/bash_aliases .bash_aliases
-	ln -s "${setup_dir}"/bash/bash_colors .bash_colors
-	ln -s "${setup_dir}"/bash/bash_logout .bash_logout
-	ln -s "${setup_dir}"/bash/bash_prompt .bash_prompt
-	ln -s "${setup_dir}"/bash/bashrc .bashrc
-	ln -s "${setup_dir}"/common/inputrc .inputrc
-	ln -s "${setup_dir}"/common/profile .profile
-	if [ "${log_info}" == "ON" ]; then msg_info "Done setting up bash environment..."; fi
-fi
+msg_info "Setting up bash environment..."
+cmd "mv .profile .profile.original"
+cmd "mv .bashrc .bashrc.original"
+cmd "mv .bash_logout .bash_logout.original"
+cmd "ln -s ${setup_dir}/bash/bash_aliases .bash_aliases"
+cmd "ln -s ${setup_dir}/bash/bash_colors .bash_colors"
+cmd "ln -s ${setup_dir}/bash/bash_logout .bash_logout"
+cmd "ln -s ${setup_dir}/bash/bash_prompt .bash_prompt"
+cmd "ln -s ${setup_dir}/bash/bashrc .bashrc"
+cmd "ln -s ${setup_dir}/common/inputrc .inputrc"
+cmd "ln -s ${setup_dir}/common/profile .profile"
+msg_info "Done setting up bash environment..."
 
 # git
-if [ "${log_debug}" == "ON" ]
-then
-	if [ "${log_info}" == "ON" ]; then msg_info "Setting up git environment..." ; fi
-	cmd "ln -s ${setup_dir}/git/gitconfig .gitconfig"
-	cmd "ln -s ${setup_dir}/git/gitignore .gitignore"
-	cmd "ln -s ${setup_dir}/git/tigrc .tigrc"
-	if [ "${log_info}" == "ON" ]; then msg_info "Done setting up git environment..." ; fi
-else
-	if [ "${log_info}" == "ON" ]; then msg_info "Setting up git environment..." ; fi
-	ln -s "${setup_dir}"/git/gitconfig .gitconfig
-	ln -s "${setup_dir}"/git/gitignore .gitignore
-	ln -s "${setup_dir}"/git/tigrc .tigrc
-	if [ "${log_info}" == "ON" ]; then msg_info "Done setting up git environment..." ; fi
-fi
+msg_info "Setting up git environment..." 
+cmd "ln -s ${setup_dir}/git/gitconfig .gitconfig"
+cmd "ln -s ${setup_dir}/git/gitignore .gitignore"
+cmd "ln -s ${setup_dir}/git/tigrc .tigrc"
+msg_info "Done setting up git environment..." 
 
 # vim
-if [ "${log_debug}" == "ON" ]
+msg_info "Setting up vim environment..." 
+cmd "mkdir -p .vim/colors"
+cmd "mkdir -p .vim/syntax"
+if file_exists "${HOME}"/.vimrc
 then
-	if [ "${log_info}" == "ON" ]; then msg_info "Setting up vim environment..." ; fi
-	cmd "mkdir -p .vim/colors"
-	cmd "mkdir -p .vim/syntax"
-	if [ -f "${HOME}"/.vimrc ]
-	then
-		if [ "${log_info}" == "ON" ]; then msg_info "Backing up .vimrc..." ; fi
-		cmd "mv ${HOME}/.vimrc ${HOME}/.vimrc.original"
-		if [ "${log_info}" == "ON" ]; then msg_info "Done backing up .vimrc..." ; fi
-	fi
-	cmd "ln -s ${setup_dir}/vim/gvimrc .gvimrc"
-	cmd "ln -s ${setup_dir}/vim/vimrc .vimrc"
-	cmd "ln -s ${setup_dir}/vim/colors/solarized.vim .vim/colors/solarized.vim"
-	cmd "ln -s ${setup_dir}/vim/syntax/antlr3.vim .vim/syntax/antlr3.vim"
-	cmd "ln -s ${setup_dir}/vim/syntax/dtrace.vim .vim/syntax/dtrace.vim"
-	# TODO: sort out dependency stuff...
-	# ./dependencies/solarized-vim/colors/solarized.vim
-	# ./vim/colors/solarized.vim
-	if [ "${log_info}" == "ON" ]; then msg_info "Done setting up vim environment..." ; fi
-else
-	if [ "${log_info}" == "ON" ]; then msg_info "Setting up vim environment..." ; fi
-	mkdir -p .vim/{colors,syntax}
-	if [ -f "${HOME}"/.vimrc ]
-	then
-		if [ "${log_info}" == "ON" ]; then msg_info "Backing up .vimrc..." ; fi
-		cmd "mv ${HOME}/.vimrc ${HOME}/.vimrc.original"
-		if [ "${log_info}" == "ON" ]; then msg_info "Done backing up .vimrc..." ; fi
-	fi
-	ln -s "${setup_dir}"/vim/gvimrc .gvimrc
-	ln -s "${setup_dir}"/vim/vimrc .vimrc
-	ln -s "${setup_dir}"/vim/colors/solarized.vim .vim/colors/solarized.vim
-	ln -s "${setup_dir}"/vim/syntax/antlr3.vim .vim/syntax/antlr3.vim
-	ln -s "${setup_dir}"/vim/syntax/dtrace.vim .vim/syntax/dtrace.vim
-	if [ "${log_info}" == "ON" ]; then msg_info "Done setting up vim environment..." ; fi
+    msg_info "Backing up .vimrc..." 
+    cmd "mv ${HOME}/.vimrc ${HOME}/.vimrc.original"
+    msg_info "Done backing up .vimrc..." 
 fi
+cmd "ln -s ${setup_dir}/vim/gvimrc .gvimrc"
+cmd "ln -s ${setup_dir}/vim/vimrc .vimrc"
+cmd "ln -s ${setup_dir}/vim/colors/solarized.vim .vim/colors/solarized.vim"
+cmd "ln -s ${setup_dir}/vim/syntax/antlr3.vim .vim/syntax/antlr3.vim"
+cmd "ln -s ${setup_dir}/vim/syntax/dtrace.vim .vim/syntax/dtrace.vim"
+# TODO: sort out dependency stuff...
+# ./dependencies/solarized-vim/colors/solarized.vim
+# ./vim/colors/solarized.vim
+msg_info "Done setting up vim environment..." 
 
-# fi # GATE
+# GATEKEEPER - comment out to add a condition so skip code. add a closing fi
+if [ -n "${GATE}" ]
+then
+    # tmux
+    ln -s "${setup_dir}"/tmux/ax_tmux.conf .tmux.conf
 
-# tmux
-ln -s "${setup_dir}"/tmux/ax_tmux.conf .tmux.conf
-
-if [ "${log_info}" == "ON" ]; then msg_info "Configuring powerline..."; fi
-# powerline
-mkdir "${HOME}"/.fonts.conf.d
-cp "${setup_dir}"/powerline/font/10-powerline-symbols.conf "${HOME}"/.fonts.conf.d/
-mkdir "${HOME}"/.fonts
-cp "${setup_dir}"/powerline/font/PowerlineSymbols.otf "${HOME}"/.fonts/
-# TODO: `apt-get install fontconfig` if it does not exist
-sudo apt-get install fontconfig
-mkdir "${HOME}"/.config/powerline
-cp -r "${setup_dir}"/powerline/powerline/config_files/* "${HOME}"/.config/powerline/
+    msg_info "Configuring powerline..."
+    # powerline
+    mkdir "${HOME}"/.fonts.conf.d
+    cp "${setup_dir}"/powerline/font/10-powerline-symbols.conf "${HOME}"/.fonts.conf.d/
+    mkdir "${HOME}"/.fonts
+    cp "${setup_dir}"/powerline/font/PowerlineSymbols.otf "${HOME}"/.fonts/
+    # TODO: `apt-get install fontconfig` if it does not exist
+    sudo apt-get install fontconfig
+    mkdir "${HOME}"/.config/powerline
+    cp -r "${setup_dir}"/powerline/powerline/config_files/* "${HOME}"/.config/powerline/
+fi # GATE
 
 popd
-
-exit 0
-
 
 git checkout ${branch}
