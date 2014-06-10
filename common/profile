@@ -2,18 +2,13 @@
 # System-wide enironment variables, paths and functions for the current logged
 # in user. To modify behaviour for all users, modify /etc/profile.
 
-
-################################################################################
-# VARIABLES
+## VARIABLES ###################################################################
 ## SYSTEM VARIABLES ------------------------------------------------------------
 EDITOR=/usr/bin/vim; export EDITOR
 VISUAL=/usr/bin/vim; export VISUAL
 PAGER=/usr/bin/less; export PAGER
 
-
-
-################################################################################
-# FUNCTIONS
+# FUNCTIONS ####################################################################
 ## PATH MANIPULATION FUNCTIONS -------------------------------------------------
 
 # Remove a sub-path from a path.
@@ -48,7 +43,6 @@ function pathappend {
 }
 
 export -f pathremove pathprepend pathappend
-
 
 ## LOGGER FUNCTIONS ------------------------------------------------------------
 
@@ -86,9 +80,7 @@ function ldebug {
 
 export -f __pcfn linfo ldebug
 
-
-################################################################################
-# PATHS
+# PATHS ########################################################################
 if [[ ${EUID} -ge 1000 ]]; then
     if [[ -d ${HOME}/bin && -z $(echo ${PATH} | grep -o ${HOME}/bin) ]]; then
         pathprepend ${HOME}/bin
@@ -98,9 +90,7 @@ fi
 
 export PATH
 
-
-################################################################################
-# SCRIPTS
+## SCRIPTS #####################################################################
 ## BASHRC ----------------------------------------------------------------------
 if [ -n "${BASH_VERSION}" ]; then
     if [ -f "${HOME}/.bashrc" ]; then
@@ -108,9 +98,7 @@ if [ -n "${BASH_VERSION}" ]; then
     fi
 fi
 
-
-################################################################################
-# COLORS
+## COLORS ######################################################################
 if [ -f "${HOME}/.dir_colors" ]; then
     eval $(dircolors ${HOME}/.dir_colors)
 fi
