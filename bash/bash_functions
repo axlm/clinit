@@ -1,4 +1,42 @@
-#!/bin/bash
-function swhich-java {
-    update-alternatives --config java
+#! /bin/sh
+
+_clearfscache () {
+    sync
+    echo 1 > /proc/sys/vm/drop_caches
 }
+
+_forcefsck () {
+    touch /forcefsck
+}
+
+_lsps () {
+    if [ ! -z "${1}" ]
+    then
+        LSPS="ps -e -o pid,pcpu,cpu,state,args --sort -pcpu | grep -i ${1} | grep -v lsps | grep -v grep"
+    else
+        LSPS="ps -e -o pid,pcpu,cpu,state,args --sort -pcpu | grep -v lsps | grep -v grep"
+    fi
+
+    eval ${LSPS}
+}
+
+_mkfile () {
+    if [ ! -z "${1}" && "${2}" ]
+    then
+        echo "Fokop!"
+        exit -1
+    fi
+    truncate -s ${2} ${1}
+}
+
+_mkrndfile () {
+    dd if=/dev/urandom of="${1}" bs=1 count=${2}
+}
+
+_mkramdrive () {
+    mkdir -p /var/ramdrive
+    mount -t tmpfs -o size=${1:-500}${2:-M},mode=${3:-0777} tmpfs /var/ramdrive
+}
+
+
+#gnome-terminal -e "${1}" --hide-menubar --geometry=${2:-120}x${3:-68} --title=${4:-Terminal}

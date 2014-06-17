@@ -41,6 +41,14 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [ -f ${ENVCFG_HOME}/bash/bsfl ]; then
+    . ${ENVCFG_HOME}/bash/bsfl
+fi
+
+if [ -f ${ENVCFG_HOME}/bash/bash_functions ]; then
+    . ${ENVCFG_HOME}/bash/bash_functions
+fi
+
 # prompt
 if [ -d ${ENVCFG_HOME}/bash/powerline.sh ]; then
     # powerline
