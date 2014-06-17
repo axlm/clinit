@@ -1,0 +1,99 @@
+#!/bin/bash
+
+# where am i?
+setup_dir=$(pwd)
+
+# import bash function library if it is available
+err_missing_bsfl=-1
+if  [ -f "${setup_dir}"/bash/bsfl ]
+then
+    . "${setup_dir}"/bash/bsfl
+else
+    echo "Missing dependency - bsfl"
+    exit ${err_missing_bsfl}
+fi
+
+# GATEKEEPER - comment out to add a condition so skip code. add a closing fi
+if [ -n "${GATE}" ]
+then
+    # work of the latest release
+    err_dirty_git=-2
+    msg_info "Checking git status..."
+    if [ -n "$(git status --untracked-files=no --porcelain 2> /dev/null | tail -n1)" ]
+    then
+        msg_error "Dirty git repository. Please commit, reset, revert or stash changes and try again."
+        exit ${err_dirty_git}
+    fi
+    branch=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
+    msg_debug "Current git branch is ${branch}."
+    # git checkout master
+    # git pull origin master
+    # git submodule update
+fi # GATE
+
+pushd ~
+
+# set up configuration directiry
+
+# bash
+msg_info "Setting up bash environment..."
+cmd "mv .profile .profile.original"
+cmd "mv .bashrc .bashrc.original"
+cmd "mv .bash_logout .bash_logout.original"
+cmd "ln -s ${setup_dir}/bash/bash_aliases .bash_aliases"
+cmd "ln -s ${setup_dir}/bash/bash_colors .bash_colors"
+cmd "ln -s ${setup_dir}/bash/bash_logout .bash_logout"
+cmd "ln -s ${setup_dir}/bash/bash_prompt .bash_prompt"
+cmd "ln -s ${setup_dir}/bash/bashrc .bashrc"
+cmd "ln -s ${setup_dir}/common/inputrc .inputrc"
+cmd "ln -s ${setup_dir}/common/profile .profile"
+msg_info "Done setting up bash environment..."
+
+# git
+msg_info "Setting up git environment..." 
+cmd "ln -s ${setup_dir}/git/gitconfig .gitconfig"
+cmd "ln -s ${setup_dir}/git/gitignore .gitignore"
+cmd "ln -s ${setup_dir}/git/tigrc .tigrc"
+msg_info "Done setting up git environment..." 
+
+# vim
+msg_info "Setting up vim environment..." 
+cmd "mkdir -p .vim/colors"
+cmd "mkdir -p .vim/syntax"
+if file_exists "${HOME}"/.vimrc
+then
+    msg_info "Backing up .vimrc..." 
+    cmd "mv ${HOME}/.vimrc ${HOME}/.vimrc.original"
+    msg_info "Done backing up .vimrc..." 
+fi
+cmd "ln -s ${setup_dir}/vim/gvimrc .gvimrc"
+cmd "ln -s ${setup_dir}/vim/vimrc .vimrc"
+cmd "ln -s ${setup_dir}/vim/colors/solarized.vim .vim/colors/solarized.vim"
+cmd "ln -s ${setup_dir}/vim/syntax/antlr3.vim .vim/syntax/antlr3.vim"
+cmd "ln -s ${setup_dir}/vim/syntax/dtrace.vim .vim/syntax/dtrace.vim"
+# TODO: sort out dependency stuff...
+# ./dependencies/solarized-vim/colors/solarized.vim
+# ./vim/colors/solarized.vim
+msg_info "Done setting up vim environment..." 
+
+# GATEKEEPER - comment out to add a condition so skip code. add a closing fi
+if [ -n "${GATE}" ]
+then
+    # tmux
+    ln -s "${setup_dir}"/tmux/ax_tmux.conf .tmux.conf
+
+    msg_info "Configuring powerline..."
+    # powerline
+    mkdir "${HOME}"/.fonts.conf.d
+    cp "${setup_dir}"/powerline/font/10-powerline-symbols.conf "${HOME}"/.fonts.conf.d/
+    mkdir "${HOME}"/.fonts
+    cp "${setup_dir}"/powerline/font/PowerlineSymbols.otf "${HOME}"/.fonts/
+    # TODO: `apt-get install fontconfig` if it does not exist
+    sudo apt-get install fontconfig
+    mkdir "${HOME}"/.config/powerline
+    cp -r "${setup_dir}"/powerline/powerline/config_files/* "${HOME}"/.config/powerline/
+fi # GATE
+
+popd
+
+git checkout ${branch}

@@ -1,0 +1,60 @@
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
+# Source global completions
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# shell options
+set -o vi
+shopt -s cdable_vars
+shopt -s checkwinsize
+shopt -s histappend
+shopt -s cdspell
+shopt -s cmdhist
+shopt -s extglob
+HISTFILESIZE=1000
+HISTSIZE=250
+HISTCONTROL=ignoreboth:erasedups
+export HISTIGNORE="I*:clear:ls*:fg:exit:history*:[ \t]*:&"
+
+# exports
+TERM=xterm-256color
+export TERM
+
+
+# echo "Session name [main]: "
+# read name
+# [[ -z "${TMUX}" ]] && exec $(tmux new-session -s ${name})
+
+# aliases
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+if [ -f ${ENVCFG_HOME}/bash/bsfl ]; then
+    . ${ENVCFG_HOME}/bash/bsfl
+fi
+
+if [ -f ${ENVCFG_HOME}/bash/bash_functions ]; then
+    . ${ENVCFG_HOME}/bash/bash_functions
+fi
+
+# prompt
+if [ -d ${ENVCFG_HOME}/bash/powerline.sh ]; then
+    # powerline
+    . ~/.envcfg/init.d/bash/powerline.sh
+elif [ -f ~/.bash_colors ]; then
+    # colors prompts
+    . ~/.bash_prompt
+fi
+
