@@ -1,0 +1,27 @@
+#! /bin/bash
+
+setup_home=$(pwd)
+
+if [ -f "${setup_home}"/bash/bsfl ]
+then
+    . "${setup_home}"/bash/bsfl
+else
+    echo "Missing dependency - bsfl..."
+    exit -1
+fi
+
+cmd "rm ${HOME}/.bash_aliases"
+cmd "rm ${HOME}/.bash_colors"
+cmd "rm ${HOME}/.bash_logout"
+cmd "rm ${HOME}/.bash_prompt"
+cmd "rm ${HOME}/.bashrc"
+cmd "rm ${HOME}/.gitconfig"
+cmd "rm ${HOME}/.gitignore"
+cmd "rm ${HOME}/.inputrc"
+cmd "rm ${HOME}/.profile"
+cmd "rm ${HOME}/.tigrc"
+cmd "rm ${HOME}/.vimrc"
+cmd "rm ${HOME}/.gvimrc"
+cmd "rm -fr ${HOME}/.vim"
+cmd "rm -rf ${HOME}/.clinit.d"
+
