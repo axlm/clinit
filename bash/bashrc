@@ -28,8 +28,8 @@ HISTCONTROL=ignoreboth:erasedups
 export HISTIGNORE="I*:clear:ls*:fg:exit:history*:[ \t]*:&"
 
 # exports
-TERM=xterm-256color
-export TERM
+export TERM=xterm-256color
+export CLINIT_HOME="${HOME}"/.clinit.d
 
 
 # echo "Session name [main]: "

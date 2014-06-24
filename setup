@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # where am i?
-setup_home=$(pwd)
-clinit_home=${HOME}/.clinit.d
+setup_home="$(pwd)"
+clinit_home="${HOME}"/.clinit.d
+now="$(date +%Y%m%d%H%M)"
 
 # import bash function library if it is available
 err_missing_bsfl=-1
@@ -84,15 +85,15 @@ msg_info "Done creating command line initialization directory..."
 msg_info "Backing up files..."
 if file_exists "${HOME}"/.profile
 then
-    cmd "mv ${HOME}/.profile ${clinit_home}/backup/profile.$(date +%Y%m%d%H%M)"
+    cmd "mv ${HOME}/.profile ${clinit_home}/backup/profile.${now}"
 fi
 if file_exists "${HOME}"/.bashrc
 then
-    cmd "mv ${HOME}/.bashrc ${clinit_home}/backup/bashrc.$(date +%Y%m%d%H%M)"
+    cmd "mv ${HOME}/.bashrc ${clinit_home}/backup/bashrc.${now}"
 fi
 if file_exists "${HOME}"/.bash_logout
 then
-    cmd "mv ${HOME}/.bash_logout ${clinit_home}/backup/bash_logout.$(date +%Y%m%d%H%M)"
+    cmd "mv ${HOME}/.bash_logout ${clinit_home}/backup/bash_logout.${now}"
 fi
 msg_info "Done backing up files..."
 msg_info "Setting up bash environment..."
@@ -119,7 +120,7 @@ cmd "mkdir -p .vim/syntax"
 if file_exists "${HOME}"/.vimrc
 then
     msg_info "Backing up .vimrc..." 
-    cmd "mv ${HOME}/.vimrc ${clinit_home}/backup/vimrc.$(date +%Y%m%d%H%M)"
+    cmd "mv ${HOME}/.vimrc ${clinit_home}/backup/vimrc.${now}"
     msg_info "Done backing up .vimrc..." 
 fi
 cmd "ln -s ${clinit_home}/vim/gvimrc .gvimrc"
@@ -128,6 +129,17 @@ pushd .vim
 cmd "ln -s ${clinit_home}/dependencies/solarized/vim/colors/solarized.vim colors/solarized.vim"
 popd
 msg_info "Done setting up vim environment..." 
+
+# tmux
+msg_info "Setting up tmux environment..." 
+if file_exists "${HOME}"/.tmux.conf
+then
+    msg_info "Backing up .tmux.conf..." 
+    cmd "mv ${HOME}/.tmux.conf ${clinit_home}/backup/tmux.conf.${now}"
+    msg_info "Done backing up .tmux.conf..." 
+fi
+cmd "ln -s ${clinit_home}/tmux/tmux.conf .tmux.conf"
+msg_info "Done setting up tmux environment..." 
 
 # GATEKEEPER - comment out to add a condition so skip code. add a closing fi
 if [ -n "${GATE}" ]

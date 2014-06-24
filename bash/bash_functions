@@ -38,5 +38,8 @@ _mkramdrive () {
     mount -t tmpfs -o size=${1:-500}${2:-M},mode=${3:-0777} tmpfs /var/ramdrive
 }
 
+_synctime () {
+    ntpdate 0.za.pool.ntp.org
+}
 
 #gnome-terminal -e "${1}" --hide-menubar --geometry=${2:-120}x${3:-68} --title=${4:-Terminal}
