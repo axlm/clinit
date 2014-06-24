@@ -30,31 +30,24 @@ export HISTIGNORE="I*:clear:ls*:fg:exit:history*:[ \t]*:&"
 # exports
 export TERM=xterm-256color
 export CLINIT_HOME="${HOME}"/.clinit.d
+export POWERLINE="OFF"
 
 
 # echo "Session name [main]: "
 # read name
 # [[ -z "${TMUX}" ]] && exec $(tmux new-session -s ${name})
 
-# aliases
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-if [ -f ${ENVCFG_HOME}/bash/bsfl ]; then
-    . ${ENVCFG_HOME}/bash/bsfl
-fi
-
-if [ -f ${ENVCFG_HOME}/bash/bash_functions ]; then
-    . ${ENVCFG_HOME}/bash/bash_functions
-fi
+. "${CLINIT_HOME}"/bash/bsfl
+. "${CLINIT_HOME}"/bash/bash_aliases
+. "${CLINIT_HOME}"/bash/bash_functions
+. "${CLINIT_HOME}"/bash/bash_colors
 
 # prompt
 if [ -d ${ENVCFG_HOME}/bash/powerline.sh ]; then
     # powerline
     . ~/.envcfg/init.d/bash/powerline.sh
-elif [ -f ~/.bash_colors ]; then
+elif file_exists "${CLINIT_HOME}"/bash/bash_prompt ; then
     # colors prompts
-    . ~/.bash_prompt
+     . "${CLINIT_HOME}"/bash/bash_prompt
 fi
 

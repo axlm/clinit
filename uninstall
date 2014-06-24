@@ -10,18 +10,15 @@ else
     exit -1
 fi
 
-cmd "rm ${HOME}/.bash_aliases"
-cmd "rm ${HOME}/.bash_colors"
-cmd "rm ${HOME}/.bash_logout"
-cmd "rm ${HOME}/.bash_prompt"
 cmd "rm ${HOME}/.bashrc"
+cmd "rm ${HOME}/.bash_logout"
 cmd "rm ${HOME}/.gitconfig"
 cmd "rm ${HOME}/.gitignore"
+cmd "rm ${HOME}/.gvimrc"
 cmd "rm ${HOME}/.inputrc"
 cmd "rm ${HOME}/.profile"
 cmd "rm ${HOME}/.tigrc"
+cmd "rm ${HOME}/.tmux.conf"
 cmd "rm ${HOME}/.vimrc"
-cmd "rm ${HOME}/.gvimrc"
+cmd "rm -fr ${HOME}/.clinit.d"
 cmd "rm -fr ${HOME}/.vim"
-cmd "rm -rf ${HOME}/.clinit.d"
-
