@@ -248,4 +248,7 @@ endfunction
 :map <F5> :setlocal spell! spelllang=en_uk<CR>
 
 
-set rtp+=~/.environment/powerline/powerline/bindings/vim
+if $POWERLINE == "ON"
+    set rtp+=$CLINIT_HOME/dependencies/powerline/powerline/bindings/vim
+endif
+
