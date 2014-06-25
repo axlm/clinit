@@ -97,13 +97,13 @@ then
 fi
 msg_info "Done backing up files..."
 msg_info "Setting up bash environment..."
-cmd "ln -s ${clinit_home}/bash/bash_aliases .bash_aliases"
-cmd "ln -s ${clinit_home}/bash/bash_colors  .bash_colors"
-cmd "ln -s ${clinit_home}/bash/bash_logout  .bash_logout"
-cmd "ln -s ${clinit_home}/bash/bash_prompt  .bash_prompt"
-cmd "ln -s ${clinit_home}/bash/bashrc       .bashrc"
-cmd "ln -s ${clinit_home}/common/inputrc    .inputrc"
 cmd "ln -s ${clinit_home}/common/profile    .profile"
+cmd "ln -s ${clinit_home}/common/inputrc    .inputrc"
+cmd "ln -s ${clinit_home}/bash/bashrc       .bashrc"
+cmd "ln -s ${clinit_home}/bash/bash_logout  .bash_logout"
+# cmd "ln -s ${clinit_home}/bash/bash_aliases .bash_aliases"
+# cmd "ln -s ${clinit_home}/bash/bash_colors  .bash_colors"
+# cmd "ln -s ${clinit_home}/bash/bash_prompt  .bash_prompt"
 msg_info "Done setting up bash environment..."
 
 # git

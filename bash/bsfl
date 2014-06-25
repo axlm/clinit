@@ -28,7 +28,6 @@ BSFL_VERSION="2.00-beta-2"
 #
 
 init () {
-
     #
     # Debug mode shows more verbose output to screen and log files.
     # Value: yes or no (y / n)
@@ -95,7 +94,7 @@ init () {
 
 }
 
-function defined {
+defined () {
     [[ ${!1-X} == ${!1-Y} ]]
 }
 
@@ -103,7 +102,7 @@ function defined {
 # returns 0 if a variable is defined (set) and value's length > 0
 # returns 1 otherwise
 #
-function has_value {
+has_value () {
     if defined $1; then
         if [[ -n ${!1} ]]; then
             return 0
@@ -116,7 +115,7 @@ function has_value {
 # returns 0 if a directory exists
 # returns 1 otherwise
 #
-function directory_exists {
+directory_exists () {
     if [[ -d "$1" ]]; then
         return 0
     fi
@@ -127,7 +126,7 @@ function directory_exists {
 # returns 0 if a (regular) file exists
 # returns 1 otherwise
 #
-function file_exists {
+file_exists () {
     if [[ -f "$1" ]]; then
         return 0
     fi
@@ -137,21 +136,21 @@ function file_exists {
 #
 # returns lowercase string
 #
-function tolower {
+tolower () {
     echo "$1" | tr '[:upper:]' '[:lower:]'
 }
 
 #
 # returns uppercase string
 #
-function toupper {
+toupper () {
     echo "$1" | tr '[:lower:]' '[:upper:]'
 }
 
 #
 # Only returns the first part of a string, delimited by tabs or spaces
 #
-function trim {
+trim () {
     echo $1
 }
 
@@ -160,7 +159,6 @@ function trim {
 # Override this function if required.
 #
 show_usage () {
-   
     MESSAGE="$1" 
     echo "$MESSAGE"
     exit 1
@@ -171,7 +169,6 @@ show_usage () {
 # Usefull for detecting if a configurable option is set or not.
 #
 option_enabled () {
-
     VAR="$1"
     VAR_VALUE=$(eval echo \$$VAR)
     if [[ "$VAR_VALUE" == "y" ]] || [[ "$VAR_VALUE" == "yes" ]]
@@ -188,7 +185,6 @@ option_enabled () {
 #
 
 log2syslog () {
-
     if option_enabled  SYSLOG_ENABLED
     then
        MESSAGE="$1"
@@ -202,7 +198,6 @@ log2syslog () {
 # 
 
 log () {
-    
     if option_enabled LOG_ENABLED || option_enabled SYSLOG_ENABLED 
     then
         LOG_MESSAGE="$1" 
@@ -240,7 +235,6 @@ log () {
 # The second argument is the text color.
 
 msg () {
-
     MESSAGE="$1"
     COLOR="$2"
 
@@ -270,7 +264,6 @@ msg () {
 # OK or FAIL
 #
 msg_status () {
-
     MESSAGE="$1"
     STATUS="$2"
 
@@ -290,35 +283,30 @@ msg_status () {
 
 
 msg_emergency () {
-
     MESSAGE="$1"
     STATUS="EMERGENCY"
     msg_status "$MESSAGE" "$STATUS"
 }
 
 msg_alert () {
-
     MESSAGE="$1"
     STATUS="ALERT"
     msg_status "$MESSAGE" "$STATUS"
 }
 
 msg_critical () {
-
     MESSAGE="$1"
     STATUS="CRITICAL"
     msg_status "$MESSAGE" "$STATUS"
 }
 
 msg_error () {
-
     MESSAGE="$1"
     STATUS="ERROR"
     msg_status "$MESSAGE" "$STATUS"
 }
 
 msg_warning () {
-
     MESSAGE="$1"
     STATUS="WARNING"
     msg_status "$MESSAGE" "$STATUS"
@@ -343,21 +331,18 @@ msg_debug () {
 }
 
 msg_ok () {
-
     MESSAGE="$1"
     STATUS="OK"
     msg_status "$MESSAGE" "$STATUS"
 }
 
 msg_not_ok () {
-
     MESSAGE="$1"
     STATUS="NOT_OK"
     msg_status "$MESSAGE" "$STATUS"
 }
 
 msg_fail () {
-
     MESSAGE="$1"
     STATUS="FAILED"
     msg_status "$MESSAGE" "$STATUS"
@@ -376,7 +361,6 @@ msg_passed () {
 }
 
 check_status () {
-
     CMD="$1"
     STATUS="$2"
 
@@ -402,7 +386,6 @@ check_status () {
 # ARG2 = The color in which the status is displayed.
 #
 raw_status () {
-
     STATUS="$1"
     COLOR="$2"
 
@@ -428,8 +411,6 @@ raw_status () {
 # This function converts a status message to a particular color.
 #
 display_status () {
-
-
     STATUS="$1"
 
     case $STATUS in 
@@ -505,7 +486,6 @@ display_status () {
 # Exit with error status 
 #
 bail () {
-
     ERROR="$?"
     MSG="$1"
     if [ ! "$ERROR" = "0" ]
@@ -520,7 +500,6 @@ bail () {
 # The function then displays if the command succeeded or not.
 #
 cmd () {
-
     COMMAND="$1"
     msg "Executing: $COMMAND"
 
@@ -551,12 +530,10 @@ cmd () {
 # execute.
 #
 now () {
-
    echo $(date +%s)
 }
 
 elapsed () {
-    
     START="$1"
     STOP="$2"
 
@@ -567,7 +544,7 @@ elapsed () {
 # Prints an error message ($2) to stderr and exits with the return code ($1).
 # The message is also logged.
 #
-function die {
+die () {
     local -r err_code="$1"
     local -r err_msg="$2"
     local -r err_caller="${3:-$(caller 0)}"
@@ -585,7 +562,7 @@ function die {
 #
 # Die if error code is false.
 #
-function die_if_false {
+die_if_false () {
     local -r err_code=$1
     local -r err_msg=$2
     local -r err_caller=$(caller 0)
@@ -599,7 +576,7 @@ function die_if_false {
 #
 # Dies when error code is true
 #
-function die_if_true {
+die_if_true () {
     local -r err_code=$1
     local -r err_msg=$2
     local -r err_caller=$(caller 0)
@@ -613,7 +590,7 @@ function die_if_true {
 #
 # Replace some text inside a string.
 #
-function str_replace () {
+str_replace () {
     local ORIG="$1"
     local DEST="$2"
     local DATA="$3"
@@ -629,7 +606,7 @@ function str_replace () {
 # arg2 = new string that replaces matched string
 # arg3 = file to operate on.
 #
-function str_replace_in_file () {
+str_replace_in_file () {
     local ORIG="$1"
     local DEST="$2"
     local FILE="$3"
