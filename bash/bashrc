@@ -29,6 +29,7 @@ export HISTIGNORE="I*:clear:ls*:fg:exit:history*:[ \t]*:&"
 
 # exports
 export TERM=xterm-256color
+export NCURSES_NO_UTF8_ACS=1
 export CLINIT_HOME="${HOME}"/.clinit.d
 export POWERLINE="OFF"
 
