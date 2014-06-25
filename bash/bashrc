@@ -31,7 +31,8 @@ export HISTIGNORE="I*:clear:ls*:fg:exit:history*:[ \t]*:&"
 export TERM=xterm-256color
 export NCURSES_NO_UTF8_ACS=1
 export CLINIT_HOME="${HOME}"/.clinit.d
-export POWERLINE="OFF"
+# TODO: add setup functionality to ask if powerline should be on or off
+export POWERLINE="ON"
 
 
 # echo "Session name [main]: "
@@ -44,11 +45,14 @@ export POWERLINE="OFF"
 . "${CLINIT_HOME}"/bash/bash_colors
 
 # prompt
-if [ -d ${ENVCFG_HOME}/bash/powerline.sh ]; then
+if option_enabled "${POWERLINE}"
+then
     # powerline
-    . ~/.envcfg/init.d/bash/powerline.sh
-elif file_exists "${CLINIT_HOME}"/bash/bash_prompt ; then
+    . "${CLINIT_HOME}"/dependencies/powerline/powerline/bindings/bash/powerline.sh
+elif file_exists "${CLINIT_HOME}"/bash/bash_prompt
+then
     # colors prompts
      . "${CLINIT_HOME}"/bash/bash_prompt
 fi
+
 
