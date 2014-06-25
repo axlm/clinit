@@ -168,10 +168,15 @@ show_usage () {
 # Checks if a variable is set to "y" or "yes".
 # Usefull for detecting if a configurable option is set or not.
 #
+# TODO: check if the option is in an array
 option_enabled () {
-    VAR="$1"
-    VAR_VALUE=$(eval echo \$$VAR)
-    if [[ "$VAR_VALUE" == "y" ]] || [[ "$VAR_VALUE" == "yes" ]]
+    VAR="${1}"
+    VAR_VALUE=$(eval echo \$VAR)
+    if  [[ "${VAR_VALUE}" == "y"   ]] || \
+        [[ "${VAR_VALUE}" == "yes" ]] || \
+        [[ "${VAR_VALUE}" == "YES" ]] || \
+        [[ "${VAR_VALUE}" == "on"  ]] || \
+        [[ "${VAR_VALUE}" == "ON"  ]]
     then
         return 0
     else

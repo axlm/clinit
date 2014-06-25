@@ -43,9 +43,6 @@ cmd "mkdir ${clinit_home}/backup"
 cmd "mkdir ${clinit_home}/bash"
 cmd "mkdir ${clinit_home}/dependencies"
 cmd "mkdir ${clinit_home}/dependencies/powerline"
-cmd "mkdir ${clinit_home}/dependencies/powerline/bash"
-cmd "mkdir ${clinit_home}/dependencies/powerline/tmux"
-cmd "mkdir ${clinit_home}/dependencies/powerline/vim"
 cmd "mkdir ${clinit_home}/dependencies/solarized"
 cmd "mkdir ${clinit_home}/dependencies/solarized/dircolors"
 cmd "mkdir ${clinit_home}/dependencies/solarized/gedit"
@@ -61,12 +58,9 @@ pushd ${clinit_home}
 cmd "cp -R ${setup_home}/common/* common/"
 cmd "cp -R ${setup_home}/bash/*   bash/"
 pushd dependencies
-pushd powerline
-cmd "cp -R ${setup_home}/dependencies/powerline/powerline/bindings/bash/* bash/"
-cmd "cp -R ${setup_home}/dependencies/powerline/powerline/bindings/tmux/* tmux/"
-cmd "cp -R ${setup_home}/dependencies/powerline/powerline/bindings/vim/*  vim/"
+# TODO: add option to change powerline appearance for bash
+cmd "cp -R ${setup_home}/dependencies/powerline/* powerline/"
 # add ipython and zsh later...
-popd
 pushd solarized
 cmd "cp -R ${setup_home}/dependencies/solarized-dircolors/dircolors.256dark dircolors/"
 cmd "cp -R ${setup_home}/dependencies/solarized-gedit/*.xml                 gedit/"
@@ -101,9 +95,6 @@ cmd "ln -s ${clinit_home}/common/profile    .profile"
 cmd "ln -s ${clinit_home}/common/inputrc    .inputrc"
 cmd "ln -s ${clinit_home}/bash/bashrc       .bashrc"
 cmd "ln -s ${clinit_home}/bash/bash_logout  .bash_logout"
-# cmd "ln -s ${clinit_home}/bash/bash_aliases .bash_aliases"
-# cmd "ln -s ${clinit_home}/bash/bash_colors  .bash_colors"
-# cmd "ln -s ${clinit_home}/bash/bash_prompt  .bash_prompt"
 msg_info "Done setting up bash environment..."
 
 # git
