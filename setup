@@ -6,7 +6,7 @@ clinit_home="${HOME}"/.clinit.d
 now="$(date +%Y%m%d%H%M)"
 
 # import bash function library if it is available
-err_missing_bsfl=-1
+err_missing_bsfl=100
 if  [ -f "${setup_home}"/bash/bsfl ]
 then
     . "${setup_home}"/bash/bsfl
@@ -15,19 +15,23 @@ else
     exit ${err_missing_bsfl}
 fi
 
-# work of the latest release
-err_dirty_git=-2
+# get the latest release
+err_dirty_git=101
+msg_info "Getting latest changes..."
 msg_info "Checking git status..."
 if [ -n "$(git status --untracked-files=no --porcelain 2> /dev/null | tail -n1)" ]
 then
     msg_error "Dirty git repository. Please commit, reset, revert or stash changes and try again."
     exit ${err_dirty_git}
 fi
+msg_info "Done checking git status..."
 branch=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
 msg_debug "Current git branch is ${branch}."
-# git checkout master
-# git pull origin master
-# git submodule update
+cmd "git checkout master"
+cmd "git pull origin master"
+cmd "git submodule init"
+cmd "git submodule update"
+msg_info "Done getting latest changes..."
 
 pushd ~
 
@@ -129,26 +133,8 @@ fi
 cmd "ln -s ${clinit_home}/tmux/tmux.conf .tmux.conf"
 msg_info "Done setting up tmux environment..." 
 
-# GATEKEEPER - comment out to add a condition so skip code. add a closing fi
-if [ -n "${GATE}" ]
-then
-    # tmux
-    ln -s "${clinit_home}"/tmux/ax_tmux.conf .tmux.conf
-
-    msg_info "Configuring powerline..."
-    # powerline
-    mkdir "${HOME}"/.fonts.conf.d
-    cp "${clinit_home}"/powerline/font/10-powerline-symbols.conf "${HOME}"/.fonts.conf.d/
-    mkdir "${HOME}"/.fonts
-    cp "${clinit_home}"/powerline/font/PowerlineSymbols.otf "${HOME}"/.fonts/
-    # TODO: `apt-get install fontconfig` if it does not exist
-    sudo apt-get install fontconfig
-    mkdir "${HOME}"/.config/powerline
-    cp -r "${clinit_home}"/powerline/powerline/config_files/* "${HOME}"/.config/powerline/
-
-    git checkout ${branch}
-fi # GATE
-
 popd
+
+cmd "git checkout ${branch}"
 
 
