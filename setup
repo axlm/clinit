@@ -15,23 +15,19 @@ else
     exit ${err_missing_bsfl}
 fi
 
-# GATEKEEPER - comment out to add a condition so skip code. add a closing fi
-if [ -n "${GATE}" ]
+# work of the latest release
+err_dirty_git=-2
+msg_info "Checking git status..."
+if [ -n "$(git status --untracked-files=no --porcelain 2> /dev/null | tail -n1)" ]
 then
-    # work of the latest release
-    err_dirty_git=-2
-    msg_info "Checking git status..."
-    if [ -n "$(git status --untracked-files=no --porcelain 2> /dev/null | tail -n1)" ]
-    then
-        msg_error "Dirty git repository. Please commit, reset, revert or stash changes and try again."
-        exit ${err_dirty_git}
-    fi
-    branch=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
-    msg_debug "Current git branch is ${branch}."
-    # git checkout master
-    # git pull origin master
-    # git submodule update
-fi # GATE
+    msg_error "Dirty git repository. Please commit, reset, revert or stash changes and try again."
+    exit ${err_dirty_git}
+fi
+branch=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
+msg_debug "Current git branch is ${branch}."
+# git checkout master
+# git pull origin master
+# git submodule update
 
 pushd ~
 
@@ -95,6 +91,7 @@ cmd "ln -s ${clinit_home}/common/profile    .profile"
 cmd "ln -s ${clinit_home}/common/inputrc    .inputrc"
 cmd "ln -s ${clinit_home}/bash/bashrc       .bashrc"
 cmd "ln -s ${clinit_home}/bash/bash_logout  .bash_logout"
+cmd "${setup_home}/scripts/modifyBashPowerlineTheme"
 msg_info "Done setting up bash environment..."
 
 # git

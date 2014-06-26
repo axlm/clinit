@@ -4,3 +4,4 @@ First release of Command Line Environment Intialization (clenvinit).
 0.08.1 - Fixed tig graph display issue in UTF8 localles.
 0.08.002 - Added aliases for git flow.
 0.09.000 - Added powerline functionality to bash, vim and tmux.
+0.09.001 - Added functionality to modify default bash powerline theme during setup.
