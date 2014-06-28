@@ -109,6 +109,8 @@ msg_info "Done setting up git environment..."
 msg_info "Setting up vim environment..." 
 cmd "mkdir -p .vim/colors"
 cmd "mkdir -p .vim/syntax"
+cmd "mkdir -p .vim/bundle"
+cmd "mkdir -p .vim/autoload"
 if file_exists "${HOME}"/.vimrc
 then
     msg_info "Backing up .vimrc..." 
@@ -119,6 +121,11 @@ cmd "ln -s ${clinit_home}/vim/gvimrc .gvimrc"
 cmd "ln -s ${clinit_home}/vim/vimrc  .vimrc"
 pushd .vim
 cmd "ln -s ${clinit_home}/dependencies/solarized/vim/colors/solarized.vim colors/solarized.vim"
+pushd bundle
+cmd "curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim"
+cmd "git clone git://github.com/tpope/vim-fugitive.git"
+cmd "git clone git://github.com/tpope/vim-surround.git"
+popd
 popd
 msg_info "Done setting up vim environment..." 
 
