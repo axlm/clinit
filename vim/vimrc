@@ -247,6 +247,7 @@ endfunction
 
 :map <F5> :setlocal spell! spelllang=en_uk<CR>
 
+execute pathogen#infect()
 
 if $POWERLINE == "ON"
     set rtp+=$CLINIT_HOME/dependencies/powerline/powerline/bindings/vim
