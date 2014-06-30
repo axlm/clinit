@@ -7,3 +7,4 @@ First release of Command Line Environment Intialization (clenvinit).
 0.09.001 - Added functionality to modify default bash powerline theme during setup.
 0.09.002 - Modified setup to work of main branch.
 0.09.003 - Added useful bundles to vim.
+0.09.004 - .profile was bash, specific. Fixed bash-specific syntax.
