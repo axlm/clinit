@@ -121,11 +121,10 @@ cmd "ln -s ${clinit_home}/vim/gvimrc .gvimrc"
 cmd "ln -s ${clinit_home}/vim/vimrc  .vimrc"
 pushd .vim
 cmd "ln -s ${clinit_home}/dependencies/solarized/vim/colors/solarized.vim colors/solarized.vim"
-pushd bundle
-cmd "curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim"
+cmd "curl -LSso autoload/pathogen.vim https://tpo.pe/pathogen.vim"
 cmd "git clone git://github.com/tpope/vim-fugitive.git"
 cmd "git clone git://github.com/tpope/vim-surround.git"
-popd
+cmd "git clone https://github.com/scrooloose/nerdtree.git"
 popd
 msg_info "Done setting up vim environment..." 
 
@@ -140,8 +139,17 @@ fi
 cmd "ln -s ${clinit_home}/tmux/tmux.conf .tmux.conf"
 msg_info "Done setting up tmux environment..." 
 
+# powerline
+msg_info "Settting up powerline fonts..."
+if ! directory_exists "${HOME}"/.fonts
+then
+    cmd "mkdir ${HOME}/.fonts"
+fi
+find ${setup_home}/dependencies/powerline-fonts -type f -iname '*.ttf' -exec cp "{}" .fonts/ \;
+cmd "fc-cache -vf .fonts"
+msg_info "Done setting up powerline fonts..."
+
 popd
 
 cmd "git checkout ${branch}"
-
 

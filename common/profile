@@ -13,7 +13,7 @@ PAGER=/usr/bin/less; export PAGER
 
 # Remove a sub-path from a path.
 # ${2} the name of the path variable to be modified (default: PATH)
-function pathremove {
+pathremove () {
     local IFS=':'
     local NEWPATH
     local DIR
@@ -28,7 +28,7 @@ function pathremove {
 
 # Add a path at the beginning of another path.
 # ${2} the name of the path variable to be modified (default: PATH)
-function pathprepend {
+pathprepend () {
     pathremove $1 $2
     local PATHVARIABLE=${2:-PATH}
     export $PATHVARIABLE="$1${!PATHVARIABLE:+:${!PATHVARIABLE}}"
@@ -36,19 +36,19 @@ function pathprepend {
 
 # Add a path at the end of another path.
 # ${2} the name of the path variable to be modified (default: PATH)
-function pathappend {
+pathappend () {
     pathremove $1 $2
     local PATHVARIABLE=${2:-PATH}
     export $PATHVARIABLE="${!PATHVARIABLE:+${!PATHVARIABLE}:}$1"
 }
 
-export -f pathremove pathprepend pathappend
+export pathremove pathprepend pathappend
 
 ## LOGGER FUNCTIONS ------------------------------------------------------------
 
 # Get the current base file name.
 # ${1} - the file to get the base name of
-function __pcfn {
+__pcfn () {
     # TODO: what if there is no parameter passed in?
     local __result="$(basename $(test -L ${1} && readlink ${1} || echo ${1}))"
     echo "${__result}"
@@ -57,7 +57,7 @@ function __pcfn {
 # Custom logging to /var/logs/sysadmin.log.
 # ${1} - the tag of the log entry, usually the file name
 # ${2} - the message of the log entry
-function linfo {
+linfo () {
     # TODO: what if there is no arguments?
     # TODO: what if there is only one argument?
     # NOTE: isn't log ${0} "Your message goes here" - a better option?
@@ -69,7 +69,7 @@ function linfo {
 # Custom logging to /var/logs/sysadmin.log.
 # ${1} - the tag of the log entry, usually the file name
 # ${2} - the message of the log entry
-function ldebug {
+ldebug () {
     # TODO: what if there is no arguments?
     # TODO: what if there is only one argument?
     # NOTE: isn't log ${0} "Your message goes here" - a better option?
@@ -78,7 +78,7 @@ function ldebug {
     logger -i -t ${__tag} -p local7.debug ${@}
 }
 
-export -f __pcfn linfo ldebug
+export __pcfn linfo ldebug
 
 # PATHS ########################################################################
 if [[ ${EUID} -ge 1000 ]]; then
