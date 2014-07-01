@@ -1,8 +1,10 @@
 :set lines=70
 :set columns=110
-:set gfn=Ubuntu\ Mono\ 10
+:set gfn=Ubuntu\ Mono\ derivative\ Powerline\ 10
+" :set gfn=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
 :set background=dark
+:set guioptions-=m
 :set guioptions-=r
 :set guioptions-=T
-:colorscheme golden
+:colorscheme solarized
 
