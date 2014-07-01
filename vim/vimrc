@@ -1,33 +1,26 @@
 " ---------------------------------------------------------------------------
-" first the disabled features due to security concerns
-set modelines=0         " no modelines [http://www.guninski.com/vim1.html]
-
-" ---------------------------------------------------------------------------
 " operational settings
 set cursorline                  " highlight current line
 set nocompatible                " vim defaults, not vi!
-syntax on                       " syntax on
 set hidden                      " allow editing multiple unsaved buffers
 set more                        " the 'more' prompt
-filetype on                     " automatic file type detection
 set autoread                    " watch for file changes by other programs
 set visualbell                  " visual beep
 set backup                      " produce *~ backup files
-set backupext=~                 " add ~ to the end of backup files
-":set patchmode=~                " only produce *~ if not there
 set noautowrite                 " don't automatically write on :next, etc
-let maplocalleader=','          " all my macros start with ,
 set wildmenu                    " : menu has tab completion, etc
 set scrolloff=5                 " keep at least 5 lines above/below cursor
 set sidescrolloff=5             " keep at least 5 columns left/right of cursor
 set history=200                 " remember the last 200 commands
+filetype on                     " automatic file type detection
+syntax enable
+" syntax on                       " syntax on
 
 " ---------------------------------------------------------------------------
 " window spacing
 set cmdheight=2                 " make command line two lines high
 set lazyredraw                  " don't redraw when running macros
 set number                      " show line number on each line
-set statusline=%<%f\ %y\ %h%m%r%=%-14.([%n]\ %l,%c%V%)\ %P
 set laststatus=2
 
 " ---------------------------------------------------------------------------
@@ -60,39 +53,14 @@ set linebreak
 
 " ---------------------------------------------------------------------------
 " searching...
-set hlsearch                   " enable search highlight globally
 set incsearch                  " show matches as soon as possible
+set hlsearch                   " enable search highlight globally
 set showmatch                  " show matching brackets when typing
-" disable last one highlight
-nmap <LocalLeader>nh :nohlsearch<cr>
 
 set diffopt=filler,iwhite       " ignore all whitespace and sync
 
 " ---------------------------------------------------------------------------
-" spelling...
-if v:version >= 700
-    let b:lastspelllang='en'
-    function! ToggleSpell()
-        if &spell == 1
-            let b:lastspelllang=&spelllang
-            setlocal spell!
-        elseif b:lastspelllang
-            setlocal spell spelllang=b:lastspelllang
-        else
-            setlocal spell spelllang=en
-        endif
-    endfunction
-
-    nmap <LocalLeader>ss :call ToggleSpell()<CR>
-
-    setlocal spell spelllang=en
-    setlocal nospell
-endif
-
-" ---------------------------------------------------------------------------
 " some useful mappings
-" disable yankring
-let loaded_yankring = 22
 " Y yanks from cursor to $
 map Y y$
 " word swapping
@@ -102,15 +70,6 @@ nmap <silent> gc xph
 
 "set foldmethod=expr
 set foldmethod=syntax
-
-" ---------------------------------------------------------------------------
-"  buffer management, note 'set hidden' above
-" Move to next buffer
-map <LocalLeader>bn :bn<cr>
-" Move to previous buffer
-map <LocalLeader>bp :bp<cr>
-" List open buffers
-map <LocalLeader>bb :ls<cr>
 
 
 if $TERM =~ '^xterm'
@@ -125,131 +84,23 @@ else
     set t_Co=16
 endif
 
-syntax enable
 set background=dark
 colorscheme solarized
-
-" ---------------------------------------------------------------------------
-" Folding for unified diffs
-" http://pastey.net/1483, mgedmin on #vim
-function! DiffFoldLevel(lineno)
-    let line = getline(a:lineno)
-    if line =~ '^Index:'
-        return '>1'
-    elseif line =~ '^===' || line =~ '^RCS file: ' || line =~ '^retrieving revision '
-        let lvl = foldlevel(a:lineno - 1)
-        return lvl >= 0 ? lvl : '='
-    elseif line =~ '^diff'
-        return getline(a:lineno - 1) =~ '^retrieving revision ' ? '=' : '>1'
-    elseif line =~ '^--- ' && getline(a:lineno - 1) !~ '^diff\|^==='
-        return '>1'
-    elseif line =~ '^@'
-        return '>2'
-    elseif line =~ '^[- +\\]'
-        let lvl = foldlevel(a:lineno - 1)
-        return lvl >= 0 ? lvl : '='
-    else
-        return '0'
-    endif
-endf
-
-function! FT_Diff()
-    if v:version >= 600
-        setlocal foldmethod=expr
-        setlocal foldexpr=DiffFoldLevel(v:lnum)
-    else
-    endif
-endf
-
-" ---------------------------------------------------------------------------
-" no folds in vimdiff
-function! NoFoldsInDiffMode()
-    if &diff
-        :silent! :%foldopen!
-    endif
-endf
-
-augroup Diffs
-    autocmd!
-    autocmd BufRead,BufNewFile *.patch :setf diff
-    autocmd BufEnter           *       :call NoFoldsInDiffMode()
-    autocmd FileType           diff    :call FT_Diff()
-augroup END
-
-" ---------------------------------------------------------------------------
-" auto load extensions for different file types
-if has('autocmd')
-    filetype plugin indent on
-    syntax on
-
-    " jump to last line edited in a given file (based on .viminfo)
-    "autocmd BufReadPost *
-    "       \ if !&diff && line("'\"") > 0 && line("'\"") <= line("$") |
-    "       \       exe "normal g`\"" |
-    "       \ endif
-    autocmd BufReadPost *
-                \ if line("'\"") > 0|
-                \       if line("'\"") <= line("$")|
-                \               exe("norm '\"")|
-                \       else|
-                \               exe "norm $"|
-                \       endif|
-                \ endif
-
-    " improve legibility
-    au BufRead quickfix setlocal nobuflisted wrap number
-
-    " configure various extenssions
-    let git_diff_spawn_mode=2
-
-    " improved formatting for markdown
-    " http://plasticboy.com/markdown-vim-mode/
-    autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:>
-    autocmd BufRead ~/.blog/entries/*  set ai formatoptions=tcroqn2 comments=n:>
-endif
-
-" ---------------------------------------------------------------------------
-"import other files...
-":source ~/.vim/bk.vim      " does anyone actualy use bk anymore?
 
 let $kernel_version=system('uname -r | tr -d "\n"')
 set tags=./tags,tags,../tags,../../tags,../../../tags,../../../../tags,/lib/modules/$kernel_version/build/tags,/usr/include/tags
 
-"helptags ~/.vim/doc
 
 set dictionary=/usr/share/dict/words            " used with CTRL-X CTRL-K
-
-" ---------------------------------------------------------------------------
-"run the import script that looks for localized configuration changes
-"source ~/.vim/localized_vimrc.vim
-
-" ---------------------------------------------------------------------------
-"configure other scripts
-
-" enable autoinstall of scripts w/o markup
-" see :h :GLVS
-let g:GetLatestVimScripts_allowautoinstall=1
-
-" dynamic-explorer.vim (script 1890)
-nmap <silent> <LocalLeader>f :FilesystemExplorer<CR>
-nmap <silent> <LocalLeader>b :BufferExplorer<CR>
-
-" ---------------------------------------------------------------------------
-"  configure calendar
-let g:calendar_monday = 1
-
-" advanced incrementing (really useful)
-let g:I=0
-function! INC(increment)
-    let g:I =g:I + a:increment
-    return g:I
-endfunction
-
 :map <F5> :setlocal spell! spelllang=en_uk<CR>
 
 execute pathogen#infect()
 
+if $POWERLINE != "ON"
+    set statusline=%<%f\ %y\ %h%m%r%=%-14.([%n]\ %l,%c%V%)\ %P
+endif
 if $POWERLINE == "ON"
     set rtp+=$CLINIT_HOME/dependencies/powerline/powerline/bindings/vim
 endif
+
 

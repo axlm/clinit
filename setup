@@ -139,6 +139,15 @@ fi
 cmd "ln -s ${clinit_home}/tmux/tmux.conf .tmux.conf"
 msg_info "Done setting up tmux environment..." 
 
+# gedit
+msg_info "Setting up gedit environment..."
+cmd "mkdir -p ${HOME}/.gnome2/gedit/styles"
+pushd "${HOME}"/.gnome2/gedit/styles
+cmd "ln -s ${clinit_home}/dependencies/solarized/gedit/solarized-dark.xml solarized-dark.xml"
+cmd "ln -s ${clinit_home}/dependencies/solarized/gedit/solarized-light.xml solarized-light.xml"
+popd
+msg_info "Done setting up gedit environment..."
+
 # powerline
 msg_info "Settting up powerline fonts..."
 if ! directory_exists "${HOME}"/.fonts
