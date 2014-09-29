@@ -1,5 +1,14 @@
 #!/bin/bash
 
+__is_installed() {
+    if dpkg-query -Wf'${db:Status-abbrev}' "${1}" 2>/dev/null | grep  -q '^i'
+    then
+        echo "INSTALLED"
+    else
+        echo "ABSENT"
+    fi
+}
+
 # where am i?
 setup_home="$(pwd)"
 clinit_home="${HOME}"/.clinit.d
@@ -126,6 +135,11 @@ pushd .vim
 cmd "ln -s ${clinit_home}/dependencies/solarized/vim/colors/solarized.vim colors/solarized.vim"
 cmd "curl -LSso autoload/pathogen.vim https://tpo.pe/pathogen.vim"
 pushd bundle
+msg_info "Check if exuberant-ctags is installed..."
+if [ $(__is_installed "exuberant-ctags") == "ABSENT" ]
+then
+    cmd "sudo apt-get install exuberant-ctags"
+fi
 cmd "git clone git://github.com/tpope/vim-fugitive.git          fugitive"
 cmd "git clone git://github.com/tpope/vim-surround.git          surround"
 cmd "git clone https://github.com/elixir-lang/vim-elixir.git    elixir"
