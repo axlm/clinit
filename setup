@@ -27,10 +27,13 @@ fi
 msg_info "Done checking git status..."
 branch=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
 msg_debug "Current git branch is ${branch}."
+msg_info "Switching to main branch..."
 cmd "git checkout master"
 cmd "git pull origin master"
 cmd "git submodule init"
 cmd "git submodule update"
+msg_info "Switching back to original branch..."
+cmd "git checkout ${branch}"
 msg_info "Done getting latest changes..."
 
 pushd ~
@@ -91,10 +94,10 @@ then
 fi
 msg_info "Done backing up files..."
 msg_info "Setting up bash environment..."
-cmd "ln -s ${clinit_home}/common/profile    .profile"
-cmd "ln -s ${clinit_home}/common/inputrc    .inputrc"
-cmd "ln -s ${clinit_home}/bash/bashrc       .bashrc"
 cmd "ln -s ${clinit_home}/bash/bash_logout  .bash_logout"
+cmd "ln -s ${clinit_home}/bash/bashrc       .bashrc"
+cmd "ln -s ${clinit_home}/common/inputrc    .inputrc"
+cmd "ln -s ${clinit_home}/common/profile    .profile"
 cmd "${setup_home}/scripts/modifyBashPowerlineTheme"
 msg_info "Done setting up bash environment..."
 
@@ -107,10 +110,10 @@ msg_info "Done setting up git environment..."
 
 # vim
 msg_info "Setting up vim environment..." 
+cmd "mkdir -p .vim/autoload"
+cmd "mkdir -p .vim/bundle"
 cmd "mkdir -p .vim/colors"
 cmd "mkdir -p .vim/syntax"
-cmd "mkdir -p .vim/bundle"
-cmd "mkdir -p .vim/autoload"
 if file_exists "${HOME}"/.vimrc
 then
     msg_info "Backing up .vimrc..." 
@@ -122,9 +125,17 @@ cmd "ln -s ${clinit_home}/vim/vimrc  .vimrc"
 pushd .vim
 cmd "ln -s ${clinit_home}/dependencies/solarized/vim/colors/solarized.vim colors/solarized.vim"
 cmd "curl -LSso autoload/pathogen.vim https://tpo.pe/pathogen.vim"
-cmd "git clone git://github.com/tpope/vim-fugitive.git"
-cmd "git clone git://github.com/tpope/vim-surround.git"
-cmd "git clone https://github.com/scrooloose/nerdtree.git"
+pushd bundle
+cmd "git clone git://github.com/tpope/vim-fugitive.git          fugitive"
+cmd "git clone git://github.com/tpope/vim-surround.git          surround"
+cmd "git clone https://github.com/elixir-lang/vim-elixir.git    elixir"
+cmd "git clone https://github.com/jimenezrick/vimerl.git        erlang"
+cmd "git clone https://github.com/kien/ctrlp.vim.git            ctrlp"
+cmd "git clone https://github.com/majutsushi/tagbar             tagbar"
+cmd "git clone https://github.com/scrooloose/nerdcommenter.git  nerdcommenter"
+cmd "git clone https://github.com/scrooloose/nerdtree.git       nerdtree"
+cmd "git clone https://github.com/scrooloose/syntastic.git      syntastic"
+popd
 popd
 msg_info "Done setting up vim environment..." 
 
