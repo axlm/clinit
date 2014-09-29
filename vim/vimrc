@@ -1,5 +1,6 @@
 " ---------------------------------------------------------------------------
 " operational settings
+set modeline                    " turn on modeline
 set cursorline                  " highlight current line
 set nocompatible                " vim defaults, not vi!
 set hidden                      " allow editing multiple unsaved buffers
@@ -12,9 +13,9 @@ set wildmenu                    " : menu has tab completion, etc
 set scrolloff=5                 " keep at least 5 lines above/below cursor
 set sidescrolloff=5             " keep at least 5 columns left/right of cursor
 set history=200                 " remember the last 200 commands
-filetype on                     " automatic file type detection
+filetype indent plugin on       " automatic file type detection
 syntax enable
-" syntax on                       " syntax on
+syntax on                       " syntax on
 
 " ---------------------------------------------------------------------------
 " window spacing
@@ -67,6 +68,10 @@ map Y y$
 nmap <silent> gw "_yiw:s/\(\%#\w\+\)\(\W\+\)\(\w\+\)/\3\2\1/<cr><c-o><c-l>
 " char swapping
 nmap <silent> gc xph
+" yep, toggle NERDTree...
+nmap <F9> :NERDTreeToggle<CR>
+" and TagBar too...
+nmap <F10> :TagbarToggle<CR>
 
 "set foldmethod=expr
 set foldmethod=syntax
@@ -89,6 +94,8 @@ colorscheme solarized
 
 let $kernel_version=system('uname -r | tr -d "\n"')
 set tags=./tags,tags,../tags,../../tags,../../../tags,../../../../tags,/lib/modules/$kernel_version/build/tags,/usr/include/tags
+
+let erlang_folding = 1
 
 
 set dictionary=/usr/share/dict/words            " used with CTRL-X CTRL-K
