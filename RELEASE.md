@@ -10,3 +10,4 @@ First release of Command Line Environment Intialization (clenvinit).
 0.09.004 - .profile was bash, specific. Fixed bash-specific syntax.
 0.09.005 - Cleaned up .vimrc, added powerline to gvim, configured solarized for GEdit.
 0.09.006 - Brought clinit up to date with external changes.
+0.09.007 - Updated setup script.
