@@ -1,3 +1,8 @@
+filetype off
+
+execute pathogen#infect()
+execute pathogen#helptags()
+
 " ---------------------------------------------------------------------------
 " operational settings
 set modeline                    " turn on modeline
@@ -16,6 +21,12 @@ set history=200                 " remember the last 200 commands
 filetype indent plugin on       " automatic file type detection
 syntax enable
 syntax on                       " syntax on
+
+" ---------------------------------------------------------------------------
+" backup settings
+set backupdir=~/.vimbackup,.
+set directory=~/.vimbackup,.
+au BufWritePre * let &bex = '@' . strftime("%Y-%m-%dT%H:%M:%S")
 
 " ---------------------------------------------------------------------------
 " window spacing
