@@ -41,8 +41,6 @@ cmd "git checkout master"
 cmd "git pull origin master"
 cmd "git submodule init"
 cmd "git submodule update"
-msg_info "Switching back to original branch..."
-cmd "git checkout ${branch}"
 msg_info "Done getting latest changes..."
 
 pushd ~
@@ -66,24 +64,24 @@ cmd "mkdir ${clinit_home}/git"
 cmd "mkdir ${clinit_home}/tmux"
 cmd "mkdir ${clinit_home}/vim"
 msg_info "Copying initialization files..."
-pushd ${clinit_home}
+pushd ${clinit_home}        # ~/.clinit.d
 cmd "cp -R ${setup_home}/common/* common/"
 cmd "cp -R ${setup_home}/bash/*   bash/"
-pushd dependencies
+pushd dependencies          # ~/.clinit.d/dependencies
 # TODO: add option to change powerline appearance for bash
 cmd "cp -R ${setup_home}/dependencies/powerline/* powerline/"
 # add ipython and zsh later...
-pushd solarized
+pushd solarized             # ~/.clinit.d/dependencies/solarized
 cmd "cp -R ${setup_home}/dependencies/solarized-dircolors/dircolors.256dark dircolors/"
 cmd "cp -R ${setup_home}/dependencies/solarized-gedit/*.xml                 gedit/"
 cmd "cp -R ${setup_home}/dependencies/solarized-tmux/*.conf                 tmux/"
 cmd "cp -R ${setup_home}/dependencies/solarized-vim/colors/solarized.vim    vim/colors/"
-popd
-popd
+popd                        # ~/.clinit.d/dependencies
+popd                        # ~/.clinit.d
 cmd "cp -R ${setup_home}/git/*  git/"
 cmd "cp -R ${setup_home}/tmux/* tmux/"
 cmd "cp -R ${setup_home}/vim/*  vim/"
-popd
+popd                        # ~
 msg_info "Done copying initialization files..."
 msg_info "Done creating command line initialization directory..."
 
@@ -122,7 +120,7 @@ msg_info "Setting up vim environment..."
 cmd "mkdir -p .vim/autoload"
 cmd "mkdir -p .vim/bundle"
 cmd "mkdir -p .vim/colors"
-cmd "mkdir -p .vim/syntax"
+cmd "mkdkr -p .vimbackup"
 if file_exists "${HOME}"/.vimrc
 then
     msg_info "Backing up .vimrc..." 
@@ -131,26 +129,38 @@ then
 fi
 cmd "ln -s ${clinit_home}/vim/gvimrc .gvimrc"
 cmd "ln -s ${clinit_home}/vim/vimrc  .vimrc"
-pushd .vim
+pushd .vim                  # ~/.vim
 cmd "ln -s ${clinit_home}/dependencies/solarized/vim/colors/solarized.vim colors/solarized.vim"
 cmd "curl -LSso autoload/pathogen.vim https://tpo.pe/pathogen.vim"
-pushd bundle
+pushd bundle                # ~/.vim/bundle
 msg_info "Check if exuberant-ctags is installed..."
-if [ $(__is_installed "exuberant-ctags") == "ABSENT" ]
+if [ "$(__is_installed "exuberant-ctags")" == "ABSENT" ]
 then
     cmd "sudo apt-get install exuberant-ctags"
 fi
-cmd "git clone git://github.com/tpope/vim-fugitive.git          fugitive"
-cmd "git clone git://github.com/tpope/vim-surround.git          surround"
-cmd "git clone https://github.com/elixir-lang/vim-elixir.git    elixir"
-cmd "git clone https://github.com/jimenezrick/vimerl.git        erlang"
-cmd "git clone https://github.com/kien/ctrlp.vim.git            ctrlp"
-cmd "git clone https://github.com/majutsushi/tagbar             tagbar"
-cmd "git clone https://github.com/scrooloose/nerdcommenter.git  nerdcommenter"
-cmd "git clone https://github.com/scrooloose/nerdtree.git       nerdtree"
-cmd "git clone https://github.com/scrooloose/syntastic.git      syntastic"
-popd
-popd
+# utilities
+cmd "git clone https://github.com/kien/ctrlp.vim.git                ctrlp"
+cmd "git clone git://github.com/tpope/vim-fugitive.git              fugitive"
+cmd "git clone https://github.com/scrooloose/nerdcommenter.git      nerdcommenter"
+cmd "git clone https://github.com/scrooloose/nerdtree.git           nerdtree"
+cmd "git clone https://github.com/garbas/vim-snipmate.git           snipmate"
+cmd "git clone https://github.com/honza/vim-snippets.git            snippets" # TODO: sort out elixir
+cmd "git clone git://github.com/tpope/vim-surround.git              surround"
+cmd "git clone https://github.com/scrooloose/syntastic.git          syntastic"
+cmd "git clone https://github.com/majutsushi/tagbar                 tagbar"
+cmd "git clone https://github.com/tomtom/tlib_vim.git               tlib"
+cmd "git clone https://github.com/MarcWeber/vim-addon-mw-utils.git  vamwu"
+
+# languages
+cmd "git clone https://github.com/elixir-lang/vim-elixir.git        elixir"
+cmd "git clone https://github.com/jimenezrick/vimerl.git            erlang"
+cmd "git clone https://github.com/klen/python-mode.git              python"
+
+# scripts
+cmd "cp ${clinit_home}/vim/update ."
+
+popd                        # ~/.vim
+popd                        # ~
 msg_info "Done setting up vim environment..." 
 
 # tmux
@@ -170,7 +180,7 @@ cmd "mkdir -p ${HOME}/.gnome2/gedit/styles"
 pushd "${HOME}"/.gnome2/gedit/styles
 cmd "ln -s ${clinit_home}/dependencies/solarized/gedit/solarized-dark.xml solarized-dark.xml"
 cmd "ln -s ${clinit_home}/dependencies/solarized/gedit/solarized-light.xml solarized-light.xml"
-popd
+popd                        # ~
 msg_info "Done setting up gedit environment..."
 
 # powerline
@@ -183,7 +193,8 @@ find ${setup_home}/dependencies/powerline-fonts -type f -iname '*.ttf' -exec cp 
 cmd "fc-cache -vf .fonts"
 msg_info "Done setting up powerline fonts..."
 
-popd
+popd                        # ${clinit_home}
 
+msg_info "Switching back to original branch..."
 cmd "git checkout ${branch}"
 
