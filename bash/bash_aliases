@@ -76,9 +76,12 @@ alias tmux-kill='tmux kill-session -t '
 alias tmux-list='tmux list-sessions '
 alias tmux-session='tmux new-session -s '
 alias tma='tmux attach-session -t '
+alias tmd='~/.clinit.d/tmux/tmd '
 alias tmk='tmux kill-session -t '
 alias tml='tmux list-sessions '
 alias tms='tmux new-session -s '
+alias tmvim='TERM=screen-256color vim '
+alias tmtop='TERM=screen-256color top '
 # incognito
 alias I=' ' # everything prepended with I, followed by a space will not show up in history!
 
