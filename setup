@@ -120,7 +120,6 @@ msg_info "Setting up vim environment..."
 cmd "mkdir -p .vim/autoload"
 cmd "mkdir -p .vim/bundle"
 cmd "mkdir -p .vim/colors"
-cmd "mkdir -p .vim/syntax"
 cmd "mkdkr -p .vimbackup"
 if file_exists "${HOME}"/.vimrc
 then
@@ -156,6 +155,9 @@ cmd "git clone https://github.com/MarcWeber/vim-addon-mw-utils.git  vamwu"
 cmd "git clone https://github.com/elixir-lang/vim-elixir.git        elixir"
 cmd "git clone https://github.com/jimenezrick/vimerl.git            erlang"
 cmd "git clone https://github.com/klen/python-mode.git              python"
+
+# scripts
+cmd "cp ${clinit_home}/vim/update ."
 
 popd                        # ~/.vim
 popd                        # ~
