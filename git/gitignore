@@ -1,8 +1,10 @@
+# files
 *.7z
 *.[Gg]?[Zz]
 *.[ao]
-*.beam
 *.[bejrstw]ar
+*.[oO]
+*.beam
 *.bz2
 *.class
 *.db4o
@@ -11,23 +13,29 @@
 *.gz
 *.ignore
 *.log
-*.[oO]
 *.odb
-*.pyc
 *.pidb
+*.pyc
 *.swp
 *.userprefs
 *.zip
 *~
+.classpath
 .coverage
-_[Tt][Oo][Dd][Oo]
+.project
 _INFO
+_[Tt][Oo][Dd][Oo]
+mix.lock
+
+# directories
+.idea/
+.settings/
 bin/
 build/
 classes/
 d[i]st/
 doc/
-target/
-t[e]mp/
 private/
+t[e]mp/
+target/
 .idea/
