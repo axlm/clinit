@@ -8,6 +8,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias colorgrep='egrep --color=auto '
     alias colorfgrep='GREP_COLORS=fn=93:ln=96:se=93 fgrep --color=auto '
     alias colorrgrep='rgrep --color=auto '
+    alias colorpgrep='pcregrep --color=auto '
 fi
 
 # aliases
@@ -47,6 +48,7 @@ alias fgrep='colorfgrep '
 alias grep='colorgrep '
 alias ngrep='grep -v '
 alias rgrep='colorrgrep '
+alias pgrep='colorpgrep '
 # list
 alias l1='ls -1 '
 alias l='l1 '
