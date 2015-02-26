@@ -12,3 +12,5 @@ First release of Command Line Environment Intialization (clenvinit).
 0.09.006 - Brought clinit up to date with external changes.
 0.09.007 - Updated setup script.
 0.09.008 - General cleanup and enhancements.
+0.09.009 - Removed uneccesary dependencies.
+           Synched files that drifted apart.
