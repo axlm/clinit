@@ -70,6 +70,9 @@ alias matrix-green='MATRIX_COLOR="${GREEN_MATRIX}" matrix '
 alias matrix-red='MATRIX_COLOR="${RED_MATRIX}" matrix '
 # python
 alias python='python3 '
+# ruby
+alias ruby='ruby2.0 '
+alias irb='irb2.0 '
 # r?
 alias r='fc -s '
 # tmux
