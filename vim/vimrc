@@ -23,9 +23,16 @@ syntax enable
 syntax on                       " syntax on
 
 " ---------------------------------------------------------------------------
+" syntastic settings
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list            = 1
+let g:syntastic_check_on_open            = 1
+let g:syntastic_check_on_wq              = 0
+
+" ---------------------------------------------------------------------------
 " backup settings
-set backupdir=~/.vimbackup,.
-set directory=~/.vimbackup,.
+set backupdir=~/.vimbackups,.
+set directory=~/.vimbackups,.
 au BufWritePre * let &bex = '@' . strftime("%Y-%m-%dT%H:%M:%S")
 
 " ---------------------------------------------------------------------------
@@ -33,6 +40,7 @@ au BufWritePre * let &bex = '@' . strftime("%Y-%m-%dT%H:%M:%S")
 set cmdheight=2                 " make command line two lines high
 set lazyredraw                  " don't redraw when running macros
 set number                      " show line number on each line
+set relativenumber              " show relative line number
 set laststatus=2
 
 " ---------------------------------------------------------------------------
@@ -55,6 +63,7 @@ set autoindent smartindent      " turn on auto/smart indenting
 set expandtab                   " use spaces, not tabs
 set smarttab                    " make <tab> and <backspace> smarter
 set tabstop=4                   " tabstops of 4
+set softtabstop=4
 set shiftwidth=4                " indents of 4
 set backspace=eol,start,indent  " allow backspacing over indent, eol, & start
 set undolevels=100              " number of forgivable mistakes
@@ -83,6 +92,9 @@ nmap <silent> gc xph
 nmap <F9> :NERDTreeToggle<CR>
 " and TagBar too...
 nmap <F10> :TagbarToggle<CR>
+" toggle invisible characters
+set listchars=tab:▸\ ,eol:¬
+nmap <leader>l :set list!<CR>
 
 "set foldmethod=expr
 set foldmethod=syntax
@@ -118,7 +130,68 @@ if $POWERLINE != "ON"
     set statusline=%<%f\ %y\ %h%m%r%=%-14.([%n]\ %l,%c%V%)\ %P
 endif
 if $POWERLINE == "ON"
-    set rtp+=$CLINIT_HOME/dependencies/powerline/powerline/bindings/vim
+    set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim
 endif
 
 
+" Rename.vim  -  Rename a buffer within Vim and on the disk
+" Copyright June 2007-2011 by Christian J. Robinson <heptite@gmail.com>
+" Distributed under the terms of the Vim license.  See ":help license".
+"
+" Usage:
+" :Rename[!] {newname}
+
+command! -nargs=* -complete=file -bang Rename call Rename(<q-args>, '<bang>')
+
+function! Rename(name, bang)
+    let l:name    = a:name
+    let l:oldfile = expand('%:p')
+
+    if bufexists(fnamemodify(l:name, ':p'))
+        if (a:bang ==# '!')
+            silent exe bufnr(fnamemodify(l:name, ':p')) . 'bwipe!'
+        else
+            echohl ErrorMsg
+            echomsg 'A buffer with that name already exists (use ! to override).'
+            echohl None
+            return 0
+        endif
+    endif
+
+    let l:status = 1
+
+    let v:errmsg = ''
+    silent! exe 'saveas' . a:bang . ' ' . l:name
+
+    if v:errmsg =~# '^$\|^E329'
+        let l:lastbufnr = bufnr('$')
+
+        if expand('%:p') !=# l:oldfile && filewritable(expand('%:p'))
+            if fnamemodify(bufname(l:lastbufnr), ':p') ==# l:oldfile
+                silent exe l:lastbufnr . 'bwipe!'
+            else
+                echohl ErrorMsg
+                echomsg 'Could not wipe out the old buffer for some reason.'
+                echohl None
+                let l:status = 0
+            endif
+
+            if delete(l:oldfile) != 0
+                echohl ErrorMsg
+                echomsg 'Could not delete the old file: ' . l:oldfile
+                echohl None
+                let l:status = 0
+            endif
+        else
+            echohl ErrorMsg
+            echomsg 'Rename failed for some reason.'
+            echohl None
+            let l:status = 0
+        endif
+    else
+        echoerr v:errmsg
+        let l:status = 0
+    endif
+
+    return l:status
+endfunction

@@ -10,9 +10,3 @@
 [submodule "dependencies/solarized-tmux"]
 	path = dependencies/solarized-tmux
 	url = https://github.com/seebi/tmux-colors-solarized.git
-[submodule "dependencies/powerline"]
-	path = dependencies/powerline
-	url = https://github.com/Lokaltog/powerline.git
-[submodule "dependencies/powerline-fonts"]
-	path = dependencies/powerline-fonts
-	url = https://github.com/Lokaltog/powerline-fonts.git

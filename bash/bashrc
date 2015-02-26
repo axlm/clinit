@@ -48,11 +48,12 @@ export POWERLINE="ON"
 if option_enabled "${POWERLINE}"
 then
     # powerline
-    . "${CLINIT_HOME}"/dependencies/powerline/powerline/bindings/bash/powerline.sh
+    powerline-daemon -q
+    . /usr/local/lib/python2.7/dist-packages/powerline/bindings/bash/powerline.sh
+    # . "${CLINIT_HOME}"/dependencies/powerline/powerline/bindings/bash/powerline.sh
 elif file_exists "${CLINIT_HOME}"/bash/bash_prompt
 then
     # colors prompts
      . "${CLINIT_HOME}"/bash/bash_prompt
 fi
-
 

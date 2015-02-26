@@ -8,6 +8,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias colorgrep='egrep --color=auto '
     alias colorfgrep='GREP_COLORS=fn=93:ln=96:se=93 fgrep --color=auto '
     alias colorrgrep='rgrep --color=auto '
+    alias colorpgrep='pcregrep --color=auto '
 fi
 
 # aliases
@@ -47,6 +48,7 @@ alias fgrep='colorfgrep '
 alias grep='colorgrep '
 alias ngrep='grep -v '
 alias rgrep='colorrgrep '
+alias pgrep='colorpgrep '
 # list
 alias l1='ls -1 '
 alias l='l1 '
@@ -68,6 +70,9 @@ alias matrix-green='MATRIX_COLOR="${GREEN_MATRIX}" matrix '
 alias matrix-red='MATRIX_COLOR="${RED_MATRIX}" matrix '
 # python
 alias python='python3 '
+# ruby
+alias ruby='ruby2.0 '
+alias irb='irb2.0 '
 # r?
 alias r='fc -s '
 # tmux
@@ -76,9 +81,12 @@ alias tmux-kill='tmux kill-session -t '
 alias tmux-list='tmux list-sessions '
 alias tmux-session='tmux new-session -s '
 alias tma='tmux attach-session -t '
+alias tmd='~/.clinit.d/tmux/tmd '
 alias tmk='tmux kill-session -t '
 alias tml='tmux list-sessions '
 alias tms='tmux new-session -s '
+alias tmvim='TERM=screen-256color vim '
+alias tmtop='TERM=screen-256color top '
 # incognito
 alias I=' ' # everything prepended with I, followed by a space will not show up in history!
 
