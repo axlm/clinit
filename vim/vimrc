@@ -63,6 +63,7 @@ set autoindent smartindent      " turn on auto/smart indenting
 set expandtab                   " use spaces, not tabs
 set smarttab                    " make <tab> and <backspace> smarter
 set tabstop=4                   " tabstops of 4
+set softtabstop=4
 set shiftwidth=4                " indents of 4
 set backspace=eol,start,indent  " allow backspacing over indent, eol, & start
 set undolevels=100              " number of forgivable mistakes
@@ -91,6 +92,9 @@ nmap <silent> gc xph
 nmap <F9> :NERDTreeToggle<CR>
 " and TagBar too...
 nmap <F10> :TagbarToggle<CR>
+" toggle invisible characters
+set listchars=tab:▸\ ,eol:¬
+nmap <leader>l :set list!<CR>
 
 "set foldmethod=expr
 set foldmethod=syntax
