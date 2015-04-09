@@ -5,6 +5,7 @@ execute pathogen#helptags()
 
 " ---------------------------------------------------------------------------
 " operational settings
+filetype indent plugin on       " automatic file type detection
 set modeline                    " turn on modeline
 set cursorline                  " highlight current line
 set nocompatible                " vim defaults, not vi!
@@ -18,7 +19,7 @@ set wildmenu                    " : menu has tab completion, etc
 set scrolloff=5                 " keep at least 5 lines above/below cursor
 set sidescrolloff=5             " keep at least 5 columns left/right of cursor
 set history=200                 " remember the last 200 commands
-filetype indent plugin on       " automatic file type detection
+set shell=bash
 syntax enable
 syntax on                       " syntax on
 
@@ -66,6 +67,7 @@ set tabstop=4                   " tabstops of 4
 set softtabstop=4
 set shiftwidth=4                " indents of 4
 set backspace=eol,start,indent  " allow backspacing over indent, eol, & start
+set colorcolumn=90              " right margin at 90 columns
 set undolevels=100              " number of forgivable mistakes
 set updatecount=100             " write swap file to disk every 100 chars
 set complete=.,w,b,u,U,t,i,d    " do lots of scanning on tab completion
@@ -118,13 +120,13 @@ colorscheme solarized
 let $kernel_version=system('uname -r | tr -d "\n"')
 set tags=./tags,tags,../tags,../../tags,../../../tags,../../../../tags,/lib/modules/$kernel_version/build/tags,/usr/include/tags
 
+" erlang
 let erlang_folding = 1
+let erlang_skel_dir = "~/.vim/skeletons/erlang"
 
 
 set dictionary=/usr/share/dict/words            " used with CTRL-X CTRL-K
 :map <F5> :setlocal spell! spelllang=en_uk<CR>
-
-execute pathogen#infect()
 
 if $POWERLINE != "ON"
     set statusline=%<%f\ %y\ %h%m%r%=%-14.([%n]\ %l,%c%V%)\ %P
@@ -195,3 +197,4 @@ function! Rename(name, bang)
 
     return l:status
 endfunction
+
