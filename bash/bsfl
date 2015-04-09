@@ -395,7 +395,6 @@ raw_status () {
     COLOR="$2"
 
     function position_cursor () {
-
         let RES_COL=`tput cols`-12
         tput cuf $RES_COL
         tput cuu1
