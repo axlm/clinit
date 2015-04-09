@@ -14,3 +14,5 @@ First release of Command Line Environment Intialization (clenvinit).
 0.09.008 - General cleanup and enhancements.
 0.09.009 - Removed uneccesary dependencies.
            Synched files that drifted apart.
+0.09.010 - Added erlang templates.
+           Synched files that drifted apart.
