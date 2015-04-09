@@ -87,6 +87,8 @@ alias tml='tmux list-sessions '
 alias tms='tmux new-session -s '
 alias tmvim='TERM=screen-256color vim '
 alias tmtop='TERM=screen-256color top '
+# vim
+alias vimless='tmvim -u /usr/share/vim/vim74/macros/less.vim '
 # incognito
 alias I=' ' # everything prepended with I, followed by a space will not show up in history!
 
