@@ -2,9 +2,14 @@
 :set columns=130
 " :set gfn=Ubuntu\ Mono\ derivative\ Powerline\ 10
 :set gfn=DejaVu\ Sans\ Mono\ for\ Powerline\ 9 
-:set background=dark
 :set guioptions-=m
 :set guioptions-=r
 :set guioptions-=T
-:colorscheme solarized
+
+:set background=dark
+let g:solarized_termcolors=256
+let g:solarized_bold=1
+let g:solarized_italic=1
+let g:solarized_underline=0
+colorscheme solarized
 
