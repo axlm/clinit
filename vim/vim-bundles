@@ -18,3 +18,4 @@ https://github.com/scrooloose/nerdcommenter.git          /home/axl/.vim/bundle/n
 https://github.com/scrooloose/nerdtree.git               /home/axl/.vim/bundle/nerdtree
 https://github.com/scrooloose/syntastic.git              /home/axl/.vim/bundle/syntastic
 https://github.com/tomtom/tlib_vim.git                   /home/axl/.vim/bundle/tlib
+https://github.com/tpope/vim-pathogen                    /home/axl/.vim/bundle/pathogen
