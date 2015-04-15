@@ -16,3 +16,12 @@ First release of Command Line Environment Intialization (clenvinit).
            Synched files that drifted apart.
 0.09.010 - Added erlang templates.
            Synched files that drifted apart.
+0.09.011 - Cleaned up bash.
+           Added vim remote over ssh.
+           Added random character generation script.
+           Cleaned up vim.
+           Added functionality to vim startup scripts.
+           Added vim bundle.
+           Removed redundant submodules.
+           Updated erlang supervision template.
+           
