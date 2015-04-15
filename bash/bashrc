@@ -30,17 +30,11 @@ export HISTIGNORE="I*:clear:ls*:fg:exit:history*:[ \t]*:&"
 # exports
 export TERM=xterm-256color
 export NCURSES_NO_UTF8_ACS=1
-export CLINIT_HOME="${HOME}"/.clinit.d
 # TODO: add setup functionality to ask if powerline should be on or off
 export POWERLINE="ON"
-export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
-export LESS=' -R '
 
-
-# echo "Session name [main]: "
-# read name
-# [[ -z "${TMUX}" ]] && exec $(tmux new-session -s ${name})
-
+# clinit
+export CLINIT_HOME="${HOME}"/.clinit.d
 . "${CLINIT_HOME}"/bash/bsfl
 . "${CLINIT_HOME}"/bash/bash_aliases
 . "${CLINIT_HOME}"/bash/bash_functions
@@ -52,7 +46,6 @@ then
     # powerline
     powerline-daemon -q
     . /usr/local/lib/python2.7/dist-packages/powerline/bindings/bash/powerline.sh
-    # . "${CLINIT_HOME}"/dependencies/powerline/powerline/bindings/bash/powerline.sh
 elif file_exists "${CLINIT_HOME}"/bash/bash_prompt
 then
     # colors prompts

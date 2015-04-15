@@ -1,5 +1,114 @@
 #! /bin/bash
 
+# tmux functions
+tmux-shortcuts() {
+    off=$(tput sgr0)
+    bon=$(tput bold)        # bold on
+    boff=${off}             # bold off
+    fb=$(tput setaf 0)      # back foreground
+    fr=$(tput setaf 1)      # red foreground
+    fg=$(tput setaf 2)      # green foreground
+    fy=$(tput setaf 3)      # yellow foreground
+    fl=$(tput setaf 4)      # blue foreground
+    fm=$(tput setaf 5)      # magenta foreground
+    fc=$(tput setaf 6)      # cyan foreground
+    fw=$(tput setaf 6)      # white foreground
+    coff=${off}             # color off
+    echo "${bon}Note on trigger:${boff}"
+    echo "  By default the tmux trigger sequence is Ctrl+b, it was remapped to Crtl+a."
+    echo "  Crtl+a is referred to as \"Trigger\" throughout."
+    echo "  See ~/.tmux.conf for more information."
+    echo ""
+    echo "${bon}Bindings${boff}"
+    echo "  ${bon}List${boff} key bindings:                     ${bon}Trigger,?${boff}"
+    echo ""
+    echo "${bon}Session management${boff}"
+    echo "  ${bon}Create${boff} a session:                      ${bon}tmux-session {session}${boff}"
+    echo "  ${bon}Detach${boff} from a session:                 ${bon}Trigger,d${boff}"
+    echo "  ${bon}Attach${boff} to a session:                   ${bon}tmux-attach {session}${boff}"
+    echo "  ${bon}Rename${boff} a session:                      ${bon}Trigger,\$${boff}"
+    echo ""
+    echo "${bon}Window commands${boff}"
+    echo "  ${bon}Create${boff} a window:                       ${bon}Trigger,c${boff}"
+    echo "  ${bon}Rename${boff} a window:                       ${bon}Trigger,,${boff}"
+    echo "  ${bon}List${boff} windows:                          ${bon}Trigger,w${boff}"
+    echo "  ${bon}Next${boff} window:                           ${bon}Trigger,n${boff}"
+    echo "  ${bon}Previous${boff} window:                       ${bon}Trigger,p${boff}"
+    echo "  ${bon}Select${boff} to window number:               ${bon}Trigger,{number}${boff}"
+    echo "  ${bon}Kill${boff} window:                           ${bon}Trigger,&${boff}"
+    echo ""
+    echo "${bon}Pane commands${boff}"
+    echo "  Divide pane ${bon}horzontally${boff}:               ${bon}Trigger,-${boff}"
+    echo "  Divide pane ${bon}vertically${boff}:                ${bon}Trigger,|${boff}"
+    echo "  Display pane ${bon}numbers${boff}:                  ${bon}Trigger,q${boff}"
+    echo "  Enter pane ${bon}scroll${boff} mode:                ${bon}Trigger,[${boff}"
+    echo "    Use arrow keys and PgUp and PgDn to scroll."
+    echo "    Press Enter to exit scroll mode."
+    echo "  ${bon}Cycle${boff} panes:                           ${bon}Trigger,o${boff}"
+    echo "  Select ${bon}left${boff}:                           ${bon}Trigger,h${boff}"
+    echo "  Select ${bon}down${boff}:                           ${bon}Trigger,j${boff}"
+    echo "  Select ${bon}up${boff}:                             ${bon}Trigger,k${boff}"
+    echo "  Select ${bon}right${boff}:                          ${bon}Trigger,l${boff}"
+    echo "  ${bon}${fy}NOTE${boff}:"
+    echo "    You can also navigate panes using the arrow keys."
+    echo "  Resize ${bon}left${boff}:                           ${bon}Trigger,H${boff}"
+    echo "  Resize ${bon}down${boff}:                           ${bon}Trigger,J${boff}"
+    echo "  Resize ${bon}up${boff}:                             ${bon}Trigger,K${boff}"
+    echo "  Resize ${bon}right${boff}:                          ${bon}Trigger,L${boff}"
+    echo "  ${bon}Cycle${boff} layouts:                         ${bon}Trigger,Space${boff}"
+    echo "  ${bon}Kill${boff} pane:                             ${bon}Trigger,x${boff}"
+    echo "  ${fy}echo${coff} all panes ${bon}ON${boff}:                     ${bon}Trigger,E${boff}"
+    echo "  ${fy}echo${coff} all panes ${bon}OFF${boff}:                    ${bon}Trigger,e${boff}"
+    echo ""
+    echo "${bon}vi mode${boff}"
+    echo "  ${bon}Enter${boff} vi mode:                         ${bon}Trigger,Escape${boff}"
+    echo "  ${bon}Exit${boff} vi mode:                          ${bon}q${boff}"
+    echo "  ${bon}Select${boff} text:                           ${bon}v${boff}"
+    echo "  ${bon}Copy${boff} text:                             ${bon}y${boff}"
+    echo "  ${bon}Paste${boff} text:                            ${bon}Trigger,p${boff}"
+    echo "  ${bon}${fy}NOTE${boff}:"
+    echo "    Use vi keystrokes as usual in vi mode."
+    echo ""
+    echo "${bon}Commands${boff}"
+    echo "  ${bon}Enter${boff} command mode:                    ${bon}Trigger,:${boff}"
+}
+
+# system replacement functionions
+if [ -n "$PS1" ] ; then
+    rm ()
+    {
+        ls -sd "$@"
+        echo 'remove[ny]? ' | tr -d '\012' ; read
+        if [ "_$REPLY" = "_y" ]; then
+            /bin/rm -vrf "$@"
+        else
+            echo '(cancelled)'
+        fi
+    }
+fi
+
+if [ -n "$PS1" ] ; then
+    if [ -f $(which srm) ] ; then
+        srm ()
+        {
+            ls -sd "$@"
+            echo 'remove[ny]? ' | tr -d '\012' ; read
+            if [ "_$REPLY" = "_y" ]; then
+                $(which srm) -vrf "$@"
+            else
+                echo '(cancelled)'
+            fi
+        }
+    else
+      echo 'srm is not installed.'
+      echo 'Try installing it with apt-get install secure-delete on Ubuntu.'
+    fi
+fi
+
+pause() {
+    read -p "$1"
+}
+
 _clearfscache () {
     sync
     echo 1 > /proc/sys/vm/drop_caches

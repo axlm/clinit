@@ -1,0 +1,6 @@
+#!/bin/bash
+length=${1}
+shift
+count=${1}
+cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${length} | head -n ${count}
+

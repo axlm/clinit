@@ -104,6 +104,8 @@ set foldmethod=syntax
 
 if $TERM =~ '^xterm'
     set t_Co=256
+elseif $TERM =~ '^screen-256color'
+    set t_Co=256
 elseif $TERM =~ '^screen-bce'
     set t_Co=256            " just guessing
 elseif $TERM =~ '^rxvt'
@@ -114,7 +116,12 @@ else
     set t_Co=16
 endif
 
+" solarized
 set background=dark
+"let g:solarized_termcolors = 256
+let g:solarized_bold = 1
+let g:solarized_italic = 1
+let g:solarized_underline = 0
 colorscheme solarized
 
 let $kernel_version=system('uname -r | tr -d "\n"')

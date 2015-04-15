@@ -10,37 +10,54 @@
 
 
 %% Behaviour ======================================================= %
--define(CHILD(I, M, T, A), {I, {M, start_link, A}, permanent, 5000, T, [M]}).
+-define(L, start_link).
+
+-define(PERMANENT_WORKER(I, M, A), ?PERMANENT_WORKER(I, M, A, 5000)).
+-define(PERMANENT_WORKER(I, M, A, S), {I, {M, ?L, A}, permanent, S, worker, [M]}).
+-define(PERMANENT_SUPERVISOR(I, M, A), ?PERMANENT_SUPERVISOR(I, M, A, infinate)).
+-define(PERMANENT_SUPERVISOR(I, M, A, S), {I, {M, ?L, A}, permanent, S, supervisor, [M]}).
+
+-define(TRANSIENT_WORKER(I, M, A), ?TRANSIENT_WORKER(I, M, A, 5000)).
+-define(TRANSIENT_WORKER(I, M, A, S), {I, {M, ?L, A}, transient, S, worker, [M]}).
+-define(TRANSIENT_SUPERVISOR(I, M, A), ?TRANSIENT_SUPERVISOR(I, M, A, infinate)).
+-define(TRANSIENT_SUPERVISOR(I, M, A, S), {I, {M, ?L, A}, transient, S, supervisor, [M]}).
+
+-define(TEMPORARY_WORKER(I, M, A), ?TEMPORARY_WORKER(I, M, A, 5000)).
+-define(TEMPORARY_WORKER(I, M, A, S), {I, {M, ?L, A}, temporary, S, worker, [M]}).
+-define(TEMPORARY_SUPERVISOR(I, M, A), ?TEMPORARY_SUPERVISOR(I, M, A, infinate)).
+-define(TEMPORARY_SUPERVISOR(I, M, A, S), {I, {M, ?L, A}, temporary, S, supervisor, [M]}).
+
+-define(RESTART_ALL_ON_FAILURE(Retries, Period), {one_for_all, Retries, Period}).
+-define(RESTART_CHAIN_ON_FAILURE(Retries, Period), {rest_for_one, Retries, Period}).
+-define(RESTART_FAILED_PROCESS(Retries, Period), {one_for_one, Retries, Period}).
+-define(RECYCLE(Retries, Period), {simple_one_for_one, Retries, Period}).
 
 %% init/1
 %% -------------------------------------------------------------------
 %% @doc <a href="http://goo.gl/tjykNo">supervisor:init/1</a>
+-type(restart_strategy() :: one_for_one | one_for_all | rest_for_one | simple_one_for_one).
+-type(supervision_policy()  :: {
+        RestartStrategy         :: restart_strategy(),
+        MaximumRestartsInPeriod :: non_neg_integer(),
+        PeriodLengthInSeconds   :: pos_integer()}).
+-type(start_function() :: {M :: module(), F :: atom(), A :: [term()] | undefined}).
+-type(modules() :: [module()] | dynamic).
+-type(child_specification() :: {
+        ChildId       :: term(),
+        StartFunction :: start_function(),
+        RestartPolicy :: permanent | transient | temporary,
+        Modules       :: modules()}).
 -spec(init(Args :: term())
       -> Result when
-      Result :: {ok, {SupervisionPolicy, [ChildSpec]}} | ignore,
-      SupervisionPolicy :: {
-        RestartStrategy,
-        MaxR :: non_neg_integer(),
-        MaxT :: pos_integer()},
-      RestartStrategy :: one_for_all
-      | one_for_one
-      | rest_for_one
-      | simple_one_for_one,
-      ChildSpec :: {
-        Id :: term(),
-        StartFunc,
-        RestartPolicy,
-        Type :: worker | supervisor,
-        Modules},
-      StartFunc :: {
-        M :: module(),
-        F :: atom(),
-        A :: [term()] | undefined},
-      RestartPolicy :: permanent | transient | temporary,
-      Modules :: [module()] | dynamic).
+ Result :: {ok, {
+              SupervisionPolicy :: supervision_policy(),
+              [ChildSpecification :: child_specification()]}} | ignore).
 %% ----------------------------------------------------------------- %
 init([]) ->
-    Child = ?CHILD('Id', 'Module', worker, []), {ok, {{one_for_all, 0, 1}, [Child]}}.
+    Child = ?PERMANENT_WORKER('Id', 'Module', []),
+    SupervisionPolicy = ?RESTART_ALL_ON_FAILURE(0, 1),
+    {ok, {SupervisionPolicy, [Child]}}.
+
 
 
 %% Private ========================================================= %
