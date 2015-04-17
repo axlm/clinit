@@ -34,7 +34,7 @@ export NCURSES_NO_UTF8_ACS=1
 export POWERLINE="ON"
 
 # clinit
-export CLINIT_HOME="${HOME}"/.clinit.d
+export CLINIT_HOME="${HOME}"/Projects/GitHub/clinit
 . "${CLINIT_HOME}"/bash/bsfl
 . "${CLINIT_HOME}"/bash/bash_aliases
 . "${CLINIT_HOME}"/bash/bash_functions

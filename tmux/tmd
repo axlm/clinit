@@ -1,11 +1,8 @@
 #!/bin/bash
-# hard-coded, fix...
-. ~/.clinit.d/bash/bsfl
-
 if [ -n "${1}" ]
 then
     tmux new-session -s "${1}" -n editor -d
-    tmux split-window -h -l 129 -t "${1}" "fish"
+    tmux split-window -h -l 120 -t "${1}" "fish"
     tmux split-window -v -l 32 -t "${1}" "fish"
     tmux send-keys -t 2 "clear" Enter
     tmux send-keys -t 3 "clear" Enter

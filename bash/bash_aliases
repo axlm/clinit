@@ -12,9 +12,8 @@ fi
 
 # ALIASES
 # shells, TODO, make sure solarized color schemes for gnome-terminal is installed
-alias dark-fish="gnome-terminal --command=fish --window-with-profile=\"Axl's Dark\""
-alias solarized-dark-fish="gnome-terminal --command=fish --window-with-profile=\"Axl's Solarized (Dark)\""
-alias solarized-light-fish="gnome-terminal --command=fish --window-with-profile=\"Axl's Solarized (Light)\""
+alias solarized-dark-fish="gnome-terminal --command=fish --window-with-profile=\"Solarized Dark\""
+alias solarized-light-fish="gnome-terminal --command=fish --window-with-profile=\"Solarized Light\""
 # shortcut
 alias cp='cp -uv '
 alias lsmnt='mount | column -t | grep ^\/dev '
@@ -80,7 +79,7 @@ alias tmux-kill='tmux kill-session -t '
 alias tmux-list='tmux list-sessions '
 alias tmux-session='tmux new-session -s '
 alias tma='tmux attach-session -t '
-alias tmd='~/.clinit.d/tmux/tmd '
+alias tmd='~/Projects/GitHub/clinit/tmux/tmd '
 alias tmk='tmux kill-session -t '
 alias tml='tmux list-sessions '
 alias tms='tmux new-session -s '
