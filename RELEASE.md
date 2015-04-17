@@ -24,4 +24,6 @@ First release of Command Line Environment Intialization (clenvinit).
            Added vim bundle.
            Removed redundant submodules.
            Updated erlang supervision template.
-           
+0.09.012 - Updated path environments.
+           Deleted dependencies.
+
