@@ -26,4 +26,8 @@ First release of Command Line Environment Intialization (clenvinit).
            Updated erlang supervision template.
 0.09.012 - Updated path environments.
            Deleted dependencies.
+0.09.013 - Modified bash init scripts.
+           Moved Gedit solarized color scheme files.
+           Added tmux environment start script.
+           Removed redundant submodules (again).
 

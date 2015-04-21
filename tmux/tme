@@ -1,0 +1,8 @@
+#!/bin/bash
+tmux split-window -h -l 120 "fish"
+tmux split-window -v -l 32  "fish"
+tmux send-keys -t 1 "clear" Enter
+tmux send-keys -t 2 "clear" Enter
+tmux send-keys -t 3 "clear" Enter
+tmux select-pane -t 1
+
