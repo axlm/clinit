@@ -1,0 +1,107 @@
+snippet axmoddoc
+	%%%-------------------------------------------------------------------
+	%%% @author Axl Mattheus <${1:application}@annaxxko.net>
+	%%% [http://www.annaxxko.net/$1]
+	%%% @copyright © `strftime("%Y")`, AnnaxxKØ (Pty) Ltd
+	%%% @license [http://www.annaxxko.net/$1/lisence.html]
+	%%% @doc 
+	%%% @end
+	%%%----------------------------------------------------------------- %
+
+snippet axthis
+	-define(THIS, ?MODULE).
+
+snippet axserver
+	-define(SERVER, ?MODULE).
+
+snippet axstartlink0
+	%% start_link/0
+	%%--------------------------------------------------------------------
+	%% @doc Start the controller
+	%% @todo -spec().
+	%%------------------------------------------------------------------ %
+	start_link() ->
+	    gen_server:start_link({local, ?SERVER}, ?SERVER, [], []).
+
+snippet axstartlinkN
+	%% start_link/${1:arity}
+	%%--------------------------------------------------------------------
+	%% @doc Start the process
+	%% @todo -spec().
+	%%------------------------------------------------------------------ %
+	start_link(${2:parameters}) ->
+	    gen_server:start_link({local, ?SERVER}, ?SERVER, [$2], []).
+
+snippet axstart
+	%% start/0
+	%%--------------------------------------------------------------------
+	%% @doc Start the process
+	%% @todo -spec().
+	%%------------------------------------------------------------------ %
+	start() ->
+		start_link().
+
+snippet axstop
+	%% stop/0
+	%%--------------------------------------------------------------------
+	%% @doc Stop the process
+	%% @todo -spec().
+	%%------------------------------------------------------------------ %
+	stop() ->
+		gen_server:cast(?SERVER, stop).
+
+	handle_cast(stop, State) ->
+		{stop, normal, State};
+
+snippet axcall0
+	%% $2/0
+	%%--------------------------------------------------------------------
+	%% @doc ${1:documentation}
+	%% @todo -spec().
+	%%------------------------------------------------------------------ %
+	${2:name}() ->
+		gen_server:call(?SERVER, $2).
+
+	handle_call($2, _From, State) ->
+		Result = ok,
+		{reply, Result, State};
+
+snippet axcallN
+	%% $2/${4:arity}
+	%%--------------------------------------------------------------------
+	%% @doc ${1:documentation}
+	%% @todo -spec().
+	%%------------------------------------------------------------------ %
+	${2:name}(${3:parameters}) ->
+		gen_server:call(?SERVER, {$2, $3}).
+
+	handle_call({$2, $3}, _From, State) ->
+		Result = ok,
+		{reply, Result, State};
+
+snippet axcast0
+	%% $2/0
+	%%--------------------------------------------------------------------
+	%% @doc ${1:documentation}
+	%% @todo -spec().
+	%%------------------------------------------------------------------ %
+	${2:name}() ->
+		gen_server:cast(?SERVER, $2).
+
+	handle_cast($2, _From, State) ->
+		Result = ok,
+		{reply, Result, State};
+
+snippet axcastN
+	%% $2/${4:arity}
+	%%--------------------------------------------------------------------
+	%% @doc ${1:documentation}
+	%% @todo -spec().
+	%%------------------------------------------------------------------ %
+	${2:name}(${3:parameters}) ->
+		gen_server:cast(?SERVER, {$2, $3}).
+
+	handle_cast({$2, $3}, _From, State) ->
+		Result = ok,
+		{reply, Result, State};
+
