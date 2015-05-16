@@ -6,7 +6,7 @@
          start/0,
          stop/0,
          % Section
-         my_function/2
+         echo/1
         ]).
 -export([ % Behaviour
          init/1,
@@ -48,13 +48,13 @@ start() ->
 stop() ->
     gen_server:cast(?MODULE, stop).
 
-%% my_function/2
+%% echo/1
 %%--------------------------------------------------------------------
 %% @doc My function
 %% @todo -spec().
 %%------------------------------------------------------------------ %
-my_function(_Parameter0, _Parameter1) ->
-    gen_server:call(?MODULE, {my_function, _Parameter0, _Parameter1}).
+echo(Message) ->
+    gen_server:call(?MODULE, {echo, Message}).
 
 
 
@@ -99,8 +99,8 @@ init([]) ->
       Timeout  :: non_neg_integer() | infinity,
       Reason   :: term()).
 %% ----------------------------------------------------------------- %
-handle_call({my_function, _Parameter0, _Parameter1}, _From, State) ->
-    Result = ok,
+handle_call({echo, Message}, From, State) ->
+    Result = io:format("Got ~p from ~p!", [Message, From]),
     {reply, Result, State};
 handle_call(_Request, _From, State) ->
     Reply = ok,

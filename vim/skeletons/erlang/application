@@ -26,8 +26,8 @@
       |  {ok, Pid :: pid(), State :: term()}
       |  {error, Reason :: term()}).
 %% ----------------------------------------------------------------- %
-start(_Type, StartArgs) ->
-    case 'TopSupervisor':start_link(StartArgs) of
+start(_Type, _StartArgs) ->
+    case 'TopSupervisor':start_link() of
         {ok, Pid} ->
             {ok, Pid};
         Error ->
