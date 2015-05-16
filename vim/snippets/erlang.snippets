@@ -135,3 +135,9 @@ snippet axcastN
 		Result = ok,
 		{reply, Result, State};
 
+snippet axtest
+	${1:name}_test_() ->
+		{"${2:description}",
+		 [?_assert(true == true)]
+		}.
+
