@@ -1,8 +1,7 @@
-git://github.com/airblade/vim-gitgutter.git              /home/axl/.vim/bundle/gitgutter
-git://github.com/tpope/vim-fugitive.git                  /home/axl/.vim/bundle/fugitive
-git://github.com/tpope/vim-surround.git                  /home/axl/.vim/bundle/surround
+https://github.com/JuliaLang/julia-vim.git               /home/axl/.vim/bundle/lang-julia
 https://github.com/MarcWeber/vim-addon-mw-utils.git      /home/axl/.vim/bundle/vamwu
 https://github.com/Raimondi/delimitMate.git              /home/axl/.vim/bundle/closeout
+https://github.com/airblade/vim-gitgutter.git            /home/axl/.vim/bundle/gitgutter
 https://github.com/dag/vim-fish.git                      /home/axl/.vim/bundle/lang-fish
 https://github.com/derekwyatt/vim-scala.git              /home/axl/.vim/bundle/lang-scala
 https://github.com/elixir-lang/vim-elixir.git            /home/axl/.vim/bundle/lang-elixir
@@ -19,4 +18,7 @@ https://github.com/scrooloose/nerdcommenter.git          /home/axl/.vim/bundle/n
 https://github.com/scrooloose/nerdtree.git               /home/axl/.vim/bundle/nerdtree
 https://github.com/scrooloose/syntastic.git              /home/axl/.vim/bundle/syntastic
 https://github.com/tomtom/tlib_vim.git                   /home/axl/.vim/bundle/tlib
+https://github.com/tpope/vim-fugitive.git                /home/axl/.vim/bundle/fugitive
 https://github.com/tpope/vim-pathogen                    /home/axl/.vim/bundle/pathogen
+https://github.com/tpope/vim-surround.git                /home/axl/.vim/bundle/surround
+https://github.com/vifm/vifm.vim.git                     /home/axl/.vim/bundle/vifm

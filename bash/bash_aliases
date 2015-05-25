@@ -85,6 +85,7 @@ alias tmk='tmux kill-session -t '
 alias tml='tmux list-sessions '
 alias tms='tmux new-session -s '
 alias tmvim='TERM=screen-256color vim '
+alias tmvifm='TERM=screen-256color vifm '
 alias tmtop='TERM=screen-256color top '
 alias tmaliases='cat ~/Projects/GitHub/clinit/bash/bash_aliases | grep --color=never "^alias tm" '
 # vim
