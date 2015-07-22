@@ -2,8 +2,10 @@ if status --is-interactive
     # greeting
     set fish_greeting ''
     # path
-    set --global --export PATH .            $PATH
-    set --global --export PATH $HOME/.bin   $PATH
+    set --global --export PATH .               $PATH
+    set --global --export PATH $HOME/.bin      $PATH
+    set --global --export PATH $HOME/.go/bin   $PATH
+    set --global --export GOPATH $HOME/.go     $GOPATH
     # tmp
     set --global --export TMP               /tmp
     # apps
