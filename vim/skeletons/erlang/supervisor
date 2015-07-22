@@ -6,6 +6,7 @@
 -export([ % Behaviour
          init/1
         ]).
+-include("anx_supervisor_utilities.hrl").
 -define(SERVER, ?MODULE).
 
 
@@ -22,40 +23,6 @@ start_link() ->
 
 
 %% Behaviour ======================================================= %
--define(L, start_link).
-
--define(PERMANENT_WORKER(Id, Module, Arguments),
-        ?PERMANENT_WORKER(Id, Module, Arguments, 5000)).
--define(PERMANENT_WORKER(Id, Module, Arguments, StartupTimeout),
-        {Id, {Module, ?L, Arguments}, permanent, StartupTimeout, worker, [Module]}).
--define(PERMANENT_SUPERVISOR(Id, Module, Arguments),
-        ?PERMANENT_SUPERVISOR(Id, Module, Arguments, infinity)).
--define(PERMANENT_SUPERVISOR(Id, Module, Arguments, StartupTimeout),
-        {Id, {Module, ?L, Arguments}, permanent, StartupTimeout, supervisor, [Module]}).
-
--define(TRANSIENT_WORKER(Id, Module, Arguments),
-        ?TRANSIENT_WORKER(Id, Module, Arguments, 5000)).
--define(TRANSIENT_WORKER(Id, Module, Arguments, StartupTimeout),
-        {Id, {Module, ?L, Arguments}, transient, StartupTimeout, worker, [Module]}).
--define(TRANSIENT_SUPERVISOR(Id, Module, Arguments),
-        ?TRANSIENT_SUPERVISOR(Id, Module, Arguments, infinity)).
--define(TRANSIENT_SUPERVISOR(Id, Module, Arguments, StartupTimeout),
-        {Id, {Module, ?L, Arguments}, transient, StartupTimeout, supervisor, [Module]}).
-
--define(TEMPORARY_WORKER(Id, Module, Arguments),
-        ?TEMPORARY_WORKER(Id, Module, Arguments, 5000)).
--define(TEMPORARY_WORKER(Id, Module, Arguments, StartupTimeout),
-        {Id, {Module, ?L, Arguments}, temporary, StartupTimeout, worker, [Module]}).
--define(TEMPORARY_SUPERVISOR(Id, Module, Arguments),
-        ?TEMPORARY_SUPERVISOR(Id, Module, Arguments, infinity)).
--define(TEMPORARY_SUPERVISOR(Id, Module, Arguments, StartupTimeout),
-        {Id, {Module, ?L, Arguments}, temporary, StartupTimeout, supervisor, [Module]}).
-
--define(RESTART_ALL_ON_FAILURE(Restarts, Timeframe), {one_for_all, Restarts, Timeframe}).
--define(RESTART_CHAIN_ON_FAILURE(Restarts, Timeframe), {rest_for_one, Restarts, Timeframe}).
--define(RESTART_ONLY_FAILED_PROCESS(Restarts, Timeframe), {one_for_one, Restarts, Timeframe}).
--define(RECYCLE(Restarts, Timeframe), {simple_one_for_one, Restarts, Timeframe}).
-
 %% init/1
 %% -------------------------------------------------------------------
 %% @doc <a href="http://goo.gl/tjykNo">supervisor:init/1</a>
@@ -87,7 +54,7 @@ start_link() ->
       Result :: init_result()).
 %% ----------------------------------------------------------------- %
 init([]) ->
-    SupervisionPolicy = ?RESTART_ALL_ON_FAILURE(0, 1),
+    SupervisionPolicy = ?RESTART_ALL(0, 1),
     Child = ?PERMANENT_WORKER('Id', 'Module', []),
     {ok, {SupervisionPolicy, [Child]}}.
 
