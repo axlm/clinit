@@ -1,0 +1,11 @@
+#!/bin/bash
+if [ -n "${1}" ]
+then
+    tmux new-session -s "${1}" -n scratch "fish"
+else
+    . "${CLINIT_HOME}"/bash/bsfl
+    msg "Missing session name"
+    msg "Synopsys:"
+    msg "    tms <name>"
+fi
+

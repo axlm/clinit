@@ -90,6 +90,8 @@ map Y y$
 nmap <silent> gw "_yiw:s/\(\%#\w\+\)\(\W\+\)\(\w\+\)/\3\2\1/<cr><c-o><c-l>
 " char swapping
 nmap <silent> gc xph
+" toggle Undo Tree...
+nnoremap <F8> :GundoToggle<CR>
 " yep, toggle NERDTree...
 nmap <F9> :NERDTreeToggle<CR>
 " and TagBar too...
@@ -135,10 +137,14 @@ let erlang_skel_dir = "~/.vim/skeletons/erlang"
 set dictionary=/usr/share/dict/words            " used with CTRL-X CTRL-K
 :map <F5> :setlocal spell! spelllang=en_uk<CR>
 
+" powerline
 if $POWERLINE != "ON"
     set statusline=%<%f\ %y\ %h%m%r%=%-14.([%n]\ %l,%c%V%)\ %P
 endif
 if $POWERLINE == "ON"
+    set laststatus=2  " Always display the statusline in all windows
+    "set showtabline=2 " Always display the tabline, even if there is only one tab
+    set noshowmode    " Hide the default mode text (e.g. -- INSERT -- below the statusline)
     set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim
 endif
 
