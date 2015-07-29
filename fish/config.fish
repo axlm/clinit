@@ -1,11 +1,13 @@
 if status --is-interactive
+    # behaviour
+    #fish_vi_key_bindings
     # greeting
     set fish_greeting ''
     # path
-    set --global --export PATH .               $PATH
-    set --global --export PATH $HOME/.bin      $PATH
-    set --global --export PATH $HOME/.go/bin   $PATH
-    set --global --export GOPATH $HOME/.go     $GOPATH
+    set --global --export PATH      .               $PATH
+    set --global --export PATH      $HOME/.bin      $PATH
+    set --global --export PATH      $HOME/.go/bin   $PATH
+    set --global --export GOPATH    $HOME/.go       $GOPATH
     # tmp
     set --global --export TMP               /tmp
     # apps
@@ -21,6 +23,5 @@ if status --is-interactive
     # powerline
     set fish_function_path $fish_function_path "/usr/local/lib/python2.7/dist-packages/powerline/bindings/fish"
     powerline-setup
-    set PATH $HOME/.bin $PATH
 end
 
