@@ -26,21 +26,21 @@ snippet anx_supervisor_utilities
 	-define(PERMANENT(Id, M, F, A, TO, T),
 			#{id       => Id,        % internal child spec id for supervisor
 			  start    => {M, F, A}, % module, function, arguments to start chile process
-			  restart  => permanent, % when shall a child process be restarted (allways)
+			  restart  => permanent, % a child process will allways be restarted
 			  shutdown => TO,        % how long to wait for a child process to shut down
 			  type     => T,         % type of process. worker or supervisor?
 			  modules  => [M]}).     % implementation module(s) for behaviour
 	-define(TRANSIENT(Id, M, F, A, TO, T),
 			#{id       => Id,
 			  start    => {M, F, A},
-			  restart  => transient, % when shall a child process be restarted (on error)
+			  restart  => transient, % a child process will be restarted on error
 			  shutdown => TO,
 			  type     => T,
 			  modules  => [M]}).
 	-define(TEMPORARY(Id, M, F, A, TO, T),
 			#{id       => Id,
 			  start    => {M, F, A},
-			  restart  => temporary, % when shall a child process be restarted (never)
+			  restart  => temporary, % a child process will never be restarted
 			  shutdown => TO,
 			  type     => T,
 			  modules  => [M]}).
@@ -64,10 +64,22 @@ snippet anx_supervisor_utilities
 	-define(TEMPORARY_SUPERVISOR(Id, M, A),     ?TEMPORARY_SUPERVISOR(Id, M, A, infinity)).
 	-define(TEMPORARY_SUPERVISOR(Id, M, A, TO), ?TEMPORARY(Id, M, A, TO, supervisor)).
 
-	-define(RESTART_ALL    (N, T), {one_for_all,        N, T}).
-	-define(RESTART_REST   (N, T), {rest_for_one,       N, T}).
-	-define(RESTART_FAILED (N, T), {one_for_one,        N, T}).
-	-define(RECYCLE        (N, T), {simple_one_for_one, N, T}).
+	-define(RESTART_ALL(I, P), 
+			#{strategy  => one_for_all, % strategy
+			  intensity => I,           % intensity
+			  period    => P}).         % period
+	-define(RESTART_REST(I, P),
+			#{strategy  => rest_for_one,
+			  intensity => I,
+			  period    => P}).
+	-define(RESTART_FAILED(I, P),
+			#{strategy  => one_for_one,
+			  intensity => I,
+			  period    => P}).
+	-define(RECYCLE(I, P),
+			#{strategy  => simple_one_for_one,
+			  intensity => I,
+			  period    => P}).
 
 snippet anx_function
 	%% ${1:function}/${2:arity}

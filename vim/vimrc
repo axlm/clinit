@@ -119,12 +119,12 @@ else
 endif
 
 " solarized
-set background=dark
-"let g:solarized_termcolors = 256
-let g:solarized_bold = 1
-let g:solarized_italic = 1
-let g:solarized_underline = 0
-colorscheme solarized
+" let g:solarized_termcolors = 256
+" let g:solarized_bold       = 1
+" let g:solarized_italic     = 1
+" let g:solarized_underline  = 0
+" set background=light
+colorscheme monokai
 
 let $kernel_version=system('uname -r | tr -d "\n"')
 set tags=./tags,tags,../tags,../../tags,../../../tags,../../../../tags,/lib/modules/$kernel_version/build/tags,/usr/include/tags
