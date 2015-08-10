@@ -6,10 +6,10 @@
 :set guioptions-=r
 :set guioptions-=T
 
-" ":set background=dark
-" let g:solarized_termcolors = 256
-" let g:solarized_bold       = 1
-" let g:solarized_italic     = 1
-" let g:solarized_underline  = 0
-colorscheme monokai
+:set background=dark
+let g:solarized_termcolors = 256
+let g:solarized_bold       = 1
+let g:solarized_italic     = 1
+let g:solarized_underline  = 0
+colorscheme solarized
 
