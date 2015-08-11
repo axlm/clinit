@@ -1,37 +1,28 @@
 -module($MODULENAME).
 -behaviour(supervisor).
--export([]).
--export([init/1]).
+-export([ % API
+          start_link/0
+        ]).
+-export([ % Behaviour
+          init/1
+        ]).
+-include("anx_supervisor_utilities.hrl").
+-include("anx_debug_utilities.hrl").
 
 
 
 %% API ============================================================= %
+%% start_link/0
+%% -------------------------------------------------------------------
+%% @doc
+%% @todo -spec().
+%% ----------------------------------------------------------------- %
+start_link() ->
+    supervisor:start_link({local, 'TODO: fqn goes here'}, ?MODULE, []).
 
 
 
 %% Behaviour ======================================================= %
--define(L, start_link).
-
--define(PERMANENT_WORKER(I, M, A), ?PERMANENT_WORKER(I, M, A, 5000)).
--define(PERMANENT_WORKER(I, M, A, S), {I, {M, ?L, A}, permanent, S, worker, [M]}).
--define(PERMANENT_SUPERVISOR(I, M, A), ?PERMANENT_SUPERVISOR(I, M, A, infinate)).
--define(PERMANENT_SUPERVISOR(I, M, A, S), {I, {M, ?L, A}, permanent, S, supervisor, [M]}).
-
--define(TRANSIENT_WORKER(I, M, A), ?TRANSIENT_WORKER(I, M, A, 5000)).
--define(TRANSIENT_WORKER(I, M, A, S), {I, {M, ?L, A}, transient, S, worker, [M]}).
--define(TRANSIENT_SUPERVISOR(I, M, A), ?TRANSIENT_SUPERVISOR(I, M, A, infinate)).
--define(TRANSIENT_SUPERVISOR(I, M, A, S), {I, {M, ?L, A}, transient, S, supervisor, [M]}).
-
--define(TEMPORARY_WORKER(I, M, A), ?TEMPORARY_WORKER(I, M, A, 5000)).
--define(TEMPORARY_WORKER(I, M, A, S), {I, {M, ?L, A}, temporary, S, worker, [M]}).
--define(TEMPORARY_SUPERVISOR(I, M, A), ?TEMPORARY_SUPERVISOR(I, M, A, infinate)).
--define(TEMPORARY_SUPERVISOR(I, M, A, S), {I, {M, ?L, A}, temporary, S, supervisor, [M]}).
-
--define(RESTART_ALL_ON_FAILURE(Retries, Period), {one_for_all, Retries, Period}).
--define(RESTART_CHAIN_ON_FAILURE(Retries, Period), {rest_for_one, Retries, Period}).
--define(RESTART_FAILED_PROCESS(Retries, Period), {one_for_one, Retries, Period}).
--define(RECYCLE(Retries, Period), {simple_one_for_one, Retries, Period}).
-
 %% init/1
 %% -------------------------------------------------------------------
 %% @doc <a href="http://goo.gl/tjykNo">supervisor:init/1</a>
@@ -48,14 +39,14 @@
         RestartPolicy :: permanent | transient | temporary,
         Modules       :: modules()}).
 -spec(init(Args :: term())
-      -> Result when
- Result :: {ok, {
-              SupervisionPolicy :: supervision_policy(),
-              [ChildSpecification :: child_specification()]}} | ignore).
+        -> Result when
+        Result :: {ok, {SupervisionPolicy :: supervision_policy(),
+                        [ChildSpecification :: child_specification()]}}
+                | ignore).
 %% ----------------------------------------------------------------- %
 init([]) ->
+    SupervisionPolicy = ?RESTART_ALL(0, 1),
     Child = ?PERMANENT_WORKER('Id', 'Module', []),
-    SupervisionPolicy = ?RESTART_ALL_ON_FAILURE(0, 1),
     {ok, {SupervisionPolicy, [Child]}}.
 
 
