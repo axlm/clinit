@@ -74,6 +74,7 @@ alias irb='irb2.0 '
 # r?
 alias r='fc -s '
 # tmux
+alias tmux='TERM=screen-256color tmux '
 alias tmux-attach='tmux attach-session -t '
 alias tmux-kill='tmux kill-session -t '
 alias tmux-list='tmux list-sessions '
