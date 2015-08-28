@@ -20,10 +20,10 @@
      ;; ----------------------------------------------------------------
      ;; better-defaults
      auto-completion
-     edts
+     ;; edts
      elixir
      emacs-lisp
-     ;; erlang
+     erlang
      git
      github
      markdown
