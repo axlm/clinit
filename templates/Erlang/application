@@ -1,7 +1,11 @@
 -module($MODULENAME).
 -behaviour(application).
--export([]).
--export([start/2, stop/1]).
+-export([ % API
+        ]).
+-export([ % Callbacks
+         start/2,
+         stop/1
+         ]).
 
 
 
@@ -9,7 +13,7 @@
 
 
 
-%% Behaviour ======================================================= %
+%% Callbacks ======================================================= %
 %% start/2
 %% -------------------------------------------------------------------
 %% @doc <a href="http://goo.gl/xkkwXR">application:start/2</a>

@@ -1,7 +1,8 @@
 -module($MODULENAME).
 -behaviour(gen_event).
--export([]).
--export([
+-export([ % API
+        ]).
+-export([ % Callbacks
          init/1,
          handle_event/2,
          handle_call/2,
@@ -16,7 +17,7 @@
 
 
 
-%% Behaviour ======================================================= %
+%% Callbacks ======================================================= %
 -record(state, {}).
 
 %% init/1

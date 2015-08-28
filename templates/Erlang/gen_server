@@ -1,14 +1,13 @@
 -module($MODULENAME).
 -behaviour(gen_server).
--export([ %API
-         % Life cycle
+-export([ % Life cycle
          start_link/0,
-         start/0,
-         stop/0,
-         % Section
+         stop/0
+        ]).
+-export([ % API
          echo/1
         ]).
--export([ % Behaviour
+-export([ % Callbacks
          init/1,
          handle_call/3,
          handle_cast/2,
@@ -19,7 +18,7 @@
 
 
 
-%% API ============================================================= %
+%% LIFE CYCLE ====================================================== %
 %% start_link/0
 %%--------------------------------------------------------------------
 %% @doc Start the process
@@ -27,16 +26,7 @@
 %% @todo Does a supervised server need a start_link?
 %%------------------------------------------------------------------ %
 start_link() ->
-    gen_server:start_link({local, 'TODO: fqn goes here'}, ?MODULE, [], []).
-
-%% start/0
-%%--------------------------------------------------------------------
-%% @doc Start the process
-%% @todo -spec().
-%% @todo Does a supervised server need a start_link?
-%%------------------------------------------------------------------ %
-start() ->
-    start_link().
+    gen_server:start_link({local, ?MODULE}, ?MODULE, [], []).
 
 %% stop/0
 %%--------------------------------------------------------------------
@@ -47,6 +37,9 @@ start() ->
 stop() ->
     gen_server:cast(?MODULE, stop).
 
+
+
+%% API ============================================================= %
 %% echo/1
 %%--------------------------------------------------------------------
 %% @doc My function
@@ -57,7 +50,7 @@ echo(Message) ->
 
 
 
-%% Behaviour ======================================================= %
+%% Callbacks ======================================================= %
 -record(state, {}).
 
 %% init/1

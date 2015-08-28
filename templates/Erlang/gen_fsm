@@ -1,7 +1,8 @@
 -module($MODULENAME).
 -behaviour(gen_fsm).
--export([]).
--export([
+-export([ % API
+        ]).
+-export([ % Callbacks
          init/1,
          state_name/2,
          state_name/3,
@@ -18,7 +19,7 @@
 
 
 
-%% Behaviour ======================================================= %
+%% Callbacks ======================================================= %
 -record(state, {}).
 
 %% init/1
