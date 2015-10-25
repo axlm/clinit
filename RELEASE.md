@@ -1,4 +1,6 @@
 # NOTES
+0.09.015 - Added spacemacs update script.
+         - Added vim housekeeping scripts.
 0.09.014 - Made 'rm' fish alias interactive.
          - Set java and javac defaults.
          - Added fish configuration file.
