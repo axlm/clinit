@@ -1,6 +1,12 @@
 -module($MODULENAME).
 -behaviour(gen_fsm).
+-export([ % Life cycle
+         start_link/0,
+         stop/0
+        ]).
 -export([ % API
+        ]).
+-export([ % State names
         ]).
 -export([ % Callbacks
          init/1,
@@ -12,6 +18,27 @@
          terminate/3,
          code_change/4
         ]).
+
+
+
+%% LIFE CYCLE ====================================================== %
+%% start_link/0
+%%--------------------------------------------------------------------
+%% @doc Start the process
+%% @todo -spec().
+%% @todo Does a supervised server need a start_link?
+%%------------------------------------------------------------------ %
+start_link() ->
+    gen_fsm:start_link({local, ?MODULE}, ?MODULE, [], []).
+
+%% stop/0
+%%--------------------------------------------------------------------
+%% @doc Stop the process
+%% @todo -spec().
+%% @todo Does a supervised server need a stop?
+%%------------------------------------------------------------------ %
+stop() ->
+    gen_fsm:cast(?MODULE, stop).
 
 
 

@@ -100,6 +100,13 @@ nmap <F10> :TagbarToggle<CR>
 set listchars=tab:▸\ ,eol:¬
 nmap <leader>l :set list!<CR>
 
+" shortcuts
+inoremap <expr> vdts strftime("%y%m%d%H%M%S")
+inoremap <expr> idts strftime("%FT%T%z")
+inoremap <expr> axlg "Axl Mattheus <axl.mattheus@gmail.com>"
+inoremap <expr> axlm "Axl Mattheus <axl.mattheus@microsoft.com> (@Microsoft)"
+inoremap <expr> axla "Axl Mattheus <axl.mattheus@annaxxko.net> (@annaxxKØ)"
+
 "set foldmethod=expr
 set foldmethod=syntax
 
