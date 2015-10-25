@@ -1,7 +1,13 @@
 -module($MODULENAME).
 -behaviour(gen_server).
--export([]).
--export([
+-export([ % Life cycle
+         start_link/0,
+         stop/0
+        ]).
+-export([ % API
+         echo/1
+        ]).
+-export([ % Callbacks
          init/1,
          handle_call/3,
          handle_cast/2,
@@ -12,11 +18,39 @@
 
 
 
+%% LIFE CYCLE ====================================================== %
+%% start_link/0
+%%--------------------------------------------------------------------
+%% @doc Start the process
+%% @todo -spec().
+%% @todo Does a supervised server need a start_link?
+%%------------------------------------------------------------------ %
+start_link() ->
+    gen_server:start_link({local, ?MODULE}, ?MODULE, [], []).
+
+%% stop/0
+%%--------------------------------------------------------------------
+%% @doc Stop the process
+%% @todo -spec().
+%% @todo Does a supervised server need a stop?
+%%------------------------------------------------------------------ %
+stop() ->
+    gen_server:cast(?MODULE, stop).
+
+
+
 %% API ============================================================= %
+%% echo/1
+%%--------------------------------------------------------------------
+%% @doc My function
+%% @todo -spec().
+%%------------------------------------------------------------------ %
+echo(Message) ->
+    gen_server:call(?MODULE, {echo, Message}).
 
 
 
-%% Behaviour ======================================================= %
+%% Callbacks ======================================================= %
 -record(state, {}).
 
 %% init/1
@@ -55,6 +89,9 @@ init([]) ->
       Timeout :: non_neg_integer() | infinity,
       Reason :: term()).
 %% ----------------------------------------------------------------- %
+handle_call({echo, Message}, From, State) ->
+    Result = io:format("Got ~p from ~p!", [Message, From]),
+    {reply, Result, State};
 handle_call(_Request, _From, State) ->
     Reply = ok,
     {reply, Reply, State}.
@@ -71,6 +108,8 @@ handle_call(_Request, _From, State) ->
       NewState :: term(),
       Timeout :: non_neg_integer() | infinity).
 %% ----------------------------------------------------------------- %
+handle_cast(stop, State) ->
+    {stop, normal, State};
 handle_cast(_Msg, State) ->
     {noreply, State}.
 

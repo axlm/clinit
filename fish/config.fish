@@ -4,15 +4,15 @@ if status --is-interactive
     # greeting
     set fish_greeting ''
     # path
-    set --global --export PATH      .               $PATH
-    set --global --export PATH      $HOME/.bin      $PATH
-    set --global --export PATH      $HOME/.go/bin   $PATH
-    set --global --export GOPATH    $HOME/.go       $GOPATH
+    set --global --export PATH      .                               $PATH
+    set --global --export PATH      $HOME/.bin                      $PATH
+    set --global --export GOROOT    /opt/axl/go1.5.1.linux-amd64/go $GOROOT
+    set --global --export PATH      $GOROOT/bin                     $PATH
     # tmp
-    set --global --export TMP               /tmp
+    set --global --export TMP       /tmp
     # apps
-    set --global --export BROWSER           google-chrome
-    set --global --export PAGER             less
+    set --global --export BROWSER   google-chrome
+    set --global --export PAGER     less
     # aliases
     alias - cd\ -
     alias ... cd\ ../..

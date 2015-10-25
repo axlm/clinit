@@ -100,30 +100,23 @@ nmap <F10> :TagbarToggle<CR>
 set listchars=tab:▸\ ,eol:¬
 nmap <leader>l :set list!<CR>
 
+" shortcuts
+inoremap <expr> vdts strftime("%y%m%d%H%M%S")
+inoremap <expr> idts strftime("%FT%T%z")
+inoremap <expr> axlg "Axl Mattheus <axl.mattheus@gmail.com>"
+inoremap <expr> axlm "Axl Mattheus <axl.mattheus@microsoft.com> (@Microsoft)"
+inoremap <expr> axla "Axl Mattheus <axl.mattheus@annaxxko.net> (@annaxxKØ)"
+
 "set foldmethod=expr
 set foldmethod=syntax
 
 
-if $TERM =~ '^xterm'
-    set t_Co=256
-elseif $TERM =~ '^screen-256color'
-    set t_Co=256
-elseif $TERM =~ '^screen-bce'
-    set t_Co=256            " just guessing
-elseif $TERM =~ '^rxvt'
-    set t_Co=88
-elseif $TERM =~ '^linux'
-    set t_Co=8
-else
-    set t_Co=16
-endif
-
 " solarized
+set t_Co=16
+let g:solarized_bold       = 1
+let g:solarized_italic     = 1
+let g:solarized_underline  = 0
 set background=dark
-"let g:solarized_termcolors = 256
-let g:solarized_bold = 1
-let g:solarized_italic = 1
-let g:solarized_underline = 0
 colorscheme solarized
 
 let $kernel_version=system('uname -r | tr -d "\n"')
