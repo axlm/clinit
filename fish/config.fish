@@ -6,8 +6,8 @@ if status --is-interactive
     # path
     set --global --export PATH      .                               $PATH
     set --global --export PATH      $HOME/.bin                      $PATH
-    set --global --export GOROOT    /opt/axl/go1.5.1.linux-amd64/go $GOROOT
-    set --global --export PATH      $GOROOT/bin                     $PATH
+    # set --global --export GOROOT    /opt/axl/go1.5.1.linux-amd64/go $GOROOT
+    # set --global --export PATH      $GOROOT/bin                     $PATH
     # tmp
     set --global --export TMP       /tmp
     # apps
