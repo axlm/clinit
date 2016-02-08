@@ -108,7 +108,3 @@ fi
 export GOROOT=/home/axl/Tools/go/go-lang:$GOROOT
 PATH=/home/axl/Tools/go/go-lang/bin:$PATH
 
-# Ubuntu make installation of Scala Lang
-PATH=/home/axl/Tools/bin:$PATH
-export SCALA_HOME=/home/axl/Tools
-
