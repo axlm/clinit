@@ -104,3 +104,7 @@ if [ -f "${HOME}/.dir_colors" ]; then
 fi
 
 # EOF
+# Ubuntu make installation of Go Lang
+export GOROOT=/home/axl/Tools/go/go-lang:$GOROOT
+PATH=/home/axl/Tools/go/go-lang/bin:$PATH
+

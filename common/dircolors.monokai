@@ -126,7 +126,7 @@ NORMAL 00
 # normal file
 FILE 00
 # directory
-DIR 36
+DIR 32
 # symbolic link
 LINK 35
 
@@ -213,15 +213,15 @@ EXEC 01;31  # Unix
 # }}}
 # Project files {{{
 
-*Makefile    00;00
+*Makefile    01;00
 *README      00;00
 *RELEASE     00;00
-*bulid.xml   00;00
+*bulid.xml   01;00
 *readme      00;00
 *release     00;00
-.mix         00;00
-.mk          00;00
-.pom         00;00
+.mix         01;00
+.mk          01;00
+.pom         01;00
 
 # }}}
 # Image {{{
