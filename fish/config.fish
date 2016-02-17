@@ -1,18 +1,23 @@
 if status --is-interactive
     # behaviour
-    #fish_vi_key_bindings
+    fish_vi_key_bindings
     # greeting
     set fish_greeting ''
-    # path
-    set --global --export PATH      .                               $PATH
-    set --global --export PATH      $HOME/.bin                      $PATH
-    # set --global --export GOROOT    /opt/axl/go1.5.1.linux-amd64/go $GOROOT
-    # set --global --export PATH      $GOROOT/bin                     $PATH
+    ## bin path
+    set --global --export BIN $HOME/.bin
+    ## cargo path
+    set --global --export CARGO     $HOME/.cargo
+    set --global --export CARGO_BIN $CARGO/bin
+    ## path
+    set --global --export PATH $CARGO_BIN   $PATH
+    set --global --export PATH $CARGO       $PATH
+    set --global --export PATH $BIN         $PATH
+    # set --global --export PATH .            $PATH
     # tmp
-    set --global --export TMP       /tmp
+    set --global --export TMP  /tmp
     # apps
-    set --global --export BROWSER   google-chrome
-    set --global --export PAGER     less
+    set --global --export BROWSER google-chrome
+    set --global --export PAGER   less
     # aliases
     alias - cd\ -
     alias ... cd\ ../..
@@ -21,6 +26,7 @@ if status --is-interactive
     # colors
     eval (dircolors --c-shell /home/axl/.dircolors)
     # powerline
+    set --global --export POWERLINE "ON"
     set fish_function_path $fish_function_path "/usr/local/lib/python2.7/dist-packages/powerline/bindings/fish"
     powerline-setup
 end
