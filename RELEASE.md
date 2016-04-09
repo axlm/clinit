@@ -1,4 +1,8 @@
 # NOTES
+0.09.017 — Renamed and removed fish functions.
+           Modified path fish.config.
+           Modified .vimrc.
+           Added XCompose file.
 0.09.016 - Minor tmux tweaks.
            Modified PATH variables.
 0.09.015 - Added spacemacs update script.
