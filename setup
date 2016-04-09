@@ -109,23 +109,23 @@ cmd "${setup_home}/scripts/modifyBashPowerlineTheme"
 msg_info "Done setting up bash environment..."
 
 # git
-msg_info "Setting up git environment..." 
+msg_info "Setting up git environment..."
 cmd "ln -s ${clinit_home}/git/gitconfig .gitconfig"
 cmd "ln -s ${clinit_home}/git/gitignore .gitignore"
 cmd "ln -s ${clinit_home}/git/tigrc     .tigrc"
-msg_info "Done setting up git environment..." 
+msg_info "Done setting up git environment..."
 
 # vim
-msg_info "Setting up vim environment..." 
+msg_info "Setting up vim environment..."
 cmd "mkdir -p .vim/autoload"
 cmd "mkdir -p .vim/bundle"
 cmd "mkdir -p .vim/colors"
 cmd "mkdkr -p .vimbackup"
 if file_exists "${HOME}"/.vimrc
 then
-    msg_info "Backing up .vimrc..." 
+    msg_info "Backing up .vimrc..."
     cmd "mv ${HOME}/.vimrc ${clinit_home}/backup/vimrc.${now}"
-    msg_info "Done backing up .vimrc..." 
+    msg_info "Done backing up .vimrc..."
 fi
 cmd "ln -s ${clinit_home}/vim/gvimrc .gvimrc"
 cmd "ln -s ${clinit_home}/vim/vimrc  .vimrc"
@@ -161,18 +161,18 @@ cmd "cp ${clinit_home}/vim/update ."
 
 popd                        # ~/.vim
 popd                        # ~
-msg_info "Done setting up vim environment..." 
+msg_info "Done setting up vim environment..."
 
 # tmux
-msg_info "Setting up tmux environment..." 
+msg_info "Setting up tmux environment..."
 if file_exists "${HOME}"/.tmux.conf
 then
-    msg_info "Backing up .tmux.conf..." 
+    msg_info "Backing up .tmux.conf..."
     cmd "mv ${HOME}/.tmux.conf ${clinit_home}/backup/tmux.conf.${now}"
-    msg_info "Done backing up .tmux.conf..." 
+    msg_info "Done backing up .tmux.conf..."
 fi
 cmd "ln -s ${clinit_home}/tmux/tmux.conf .tmux.conf"
-msg_info "Done setting up tmux environment..." 
+msg_info "Done setting up tmux environment..."
 
 # gedit
 msg_info "Setting up gedit environment..."

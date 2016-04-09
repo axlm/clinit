@@ -1,31 +1,44 @@
 if status --is-interactive
-    # behaviour
-    fish_vi_key_bindings
-    # greeting
+    # BEHAVIOUR
+    #fish_vi_mode
+
+    # GREETING
     set fish_greeting ''
-    ## bin path
-    set --global --export BIN $HOME/.bin
-    ## cargo path
-    set --global --export CARGO     $HOME/.cargo
-    set --global --export CARGO_BIN $CARGO/bin
-    ## path
-    set --global --export PATH $CARGO_BIN   $PATH
-    set --global --export PATH $CARGO       $PATH
-    set --global --export PATH $BIN         $PATH
-    # set --global --export PATH .            $PATH
-    # tmp
+
+    # PATH
+    ## CONSTANTS
+    set OPT                                 /opt/axl
+    set CARGO                               $HOME/.cargo
+    set PROJECTS                            $HOME/Projects
+    ## PREPEND
+    set --global --export PATH $HOME/.bin   $PATH
+    set --global --export PATH .            $PATH
+    ## APPEND
+    set --global --export PATH $PATH        $CARGO
+    set --global --export PATH $PATH        $CARGO/bin
+    set --global --export PATH $PATH        $PROJECTS/GitHub/lang-rust/src
+    set --global --export PATH $PATH        $OPT/swift-latest/usr/bin
+
+    # DEFINES
+    set --global --export RUST_SRC_PATH     $HOME/Projects/GitHub/lang-rust/src
+
+    # TMP
     set --global --export TMP  /tmp
-    # apps
+
+    # APPS
     set --global --export BROWSER google-chrome
     set --global --export PAGER   less
-    # aliases
+
+    # ALIASES
     alias - cd\ -
     alias ... cd\ ../..
     alias .... cd\ ../../..
     alias ..... cd\ ../../../../
-    # colors
-    eval (dircolors --c-shell /home/axl/.dircolors)
-    # powerline
+
+    # COLORS
+    eval (dircolors --c-shell $HOME/.dircolors)
+
+    # POWERLINE
     set --global --export POWERLINE "ON"
     set fish_function_path $fish_function_path "/usr/local/lib/python2.7/dist-packages/powerline/bindings/fish"
     powerline-setup
