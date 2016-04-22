@@ -83,13 +83,9 @@ set showmatch                  " show matching brackets when typing
 set diffopt=filler,iwhite       " ignore all whitespace and sync
 
 " ---------------------------------------------------------------------------
-" some useful mappings
+" mappings
 " Y yanks from cursor to $
 map Y y$
-" word swapping TODO need this?
-" nmap <silent> gw "_yiw:s/\(\%#\w\+\)\(\W\+\)\(\w\+\)/\3\2\1/<cr><c-o><c-l>
-" char swapping TODO need this?
-" nmap <silent> gc xph
 " toggle Undo Tree...
 nnoremap <F8> :GundoToggle<CR>
 " yep, toggle NERDTree...
@@ -98,7 +94,7 @@ nmap <F9> :NERDTreeToggle<CR>
 nmap <F10> :TagbarToggle<CR>
 " toggle invisible characters
 set listchars=tab:▸\ ,eol:¬
-nmap <leader>l :set list!<CR>
+nmap <leader>h :set list!<CR>
 
 " shortcuts
 inoremap <expr> vdts strftime("%y%m%d%H%M%S")
@@ -116,10 +112,11 @@ let g:solarized_bold       = 1
 let g:solarized_italic     = 1
 let g:solarized_underline  = 0
 colorscheme solarized
-set background=dark
-
-let $kernel_version=system('uname -r | tr -d "\n"')
-set tags=./tags,tags,../tags,../../tags,../../../tags,../../../../tags,/lib/modules/$kernel_version/build/tags,/usr/include/tags
+if $SOLARIZED == "LIGHT"
+    set background=light
+else
+    set background=dark
+endif
 
 " erlang
 let erlang_folding  = 1
@@ -129,81 +126,18 @@ let erlang_skel_dir = "/home/axl/vim/skeletons/erlang"
 let g:racer_cmd   = "/home/axl/.cargo/bin/racer"
 let $RUST_SRC_PATH="/home/axl/Projects/GitHub/lang-rust/src/"
 
-
+" dictionary
 set dictionary=/usr/share/dict/words            " used with CTRL-X CTRL-K
 :map <F5> :setlocal spell! spelllang=en_uk<CR>
 
-" powerline
+" status line
+set laststatus=2  " Always display the statusline in all windows
+set showtabline=2 " Always display the tabline, even if there is only one tab
 if $POWERLINE != "ON"
     set statusline=%<%f\ %y\ %h%m%r%=%-14.([%n]\ %l,%c%V%)\ %P
 endif
 if $POWERLINE == "ON"
-    set laststatus=2  " Always display the statusline in all windows
-    "set showtabline=2 " Always display the tabline, even if there is only one tab
     set noshowmode    " Hide the default mode text (e.g. -- INSERT -- below the statusline)
     set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim
 endif
-
-
-" Rename.vim  -  Rename a buffer within Vim and on the disk
-" Copyright June 2007-2011 by Christian J. Robinson <heptite@gmail.com>
-" Distributed under the terms of the Vim license.  See ":help license".
-"
-" Usage:
-" :Rename[!] {newname}
-
-command! -nargs=* -complete=file -bang Rename call Rename(<q-args>, '<bang>')
-
-function! Rename(name, bang)
-    let l:name    = a:name
-    let l:oldfile = expand('%:p')
-
-    if bufexists(fnamemodify(l:name, ':p'))
-        if (a:bang ==# '!')
-            silent exe bufnr(fnamemodify(l:name, ':p')) . 'bwipe!'
-        else
-            echohl ErrorMsg
-            echomsg 'A buffer with that name already exists (use ! to override).'
-            echohl None
-            return 0
-        endif
-    endif
-
-    let l:status = 1
-
-    let v:errmsg = ''
-    silent! exe 'saveas' . a:bang . ' ' . l:name
-
-    if v:errmsg =~# '^$\|^E329'
-        let l:lastbufnr = bufnr('$')
-
-        if expand('%:p') !=# l:oldfile && filewritable(expand('%:p'))
-            if fnamemodify(bufname(l:lastbufnr), ':p') ==# l:oldfile
-                silent exe l:lastbufnr . 'bwipe!'
-            else
-                echohl ErrorMsg
-                echomsg 'Could not wipe out the old buffer for some reason.'
-                echohl None
-                let l:status = 0
-            endif
-
-            if delete(l:oldfile) != 0
-                echohl ErrorMsg
-                echomsg 'Could not delete the old file: ' . l:oldfile
-                echohl None
-                let l:status = 0
-            endif
-        else
-            echohl ErrorMsg
-            echomsg 'Rename failed for some reason.'
-            echohl None
-            let l:status = 0
-        endif
-    else
-        echoerr v:errmsg
-        let l:status = 0
-    endif
-
-    return l:status
-endfunction
 

@@ -1,4 +1,4 @@
-function vim-update-bundles
+function update-bundles
     set repositories (ls -d */ | sed -e 's/\/\/$/\//')
     for repository in $repositories
         pushd $repository
