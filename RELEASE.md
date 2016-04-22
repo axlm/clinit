@@ -1,4 +1,5 @@
 # NOTES
+0.09.018 — Minor tweaks. Ready to update host OS.
 0.09.017 — Renamed and removed fish functions.
            Modified path fish.config.
            Modified .vimrc.
