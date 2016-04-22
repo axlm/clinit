@@ -1,39 +1,44 @@
+# BEHAVIOUR
+#fish_vi_mode
+
+# GREETING
+set fish_greeting ''
+
+# PATHS
+## CONSTANTS
+set OPT_HOME                            /opt/axl
+set CARGO_HOME                          $HOME/.cargo
+set PROJECTS_HOME                       $HOME/Projects
+set NODEJS_HOME                         $OPT/node-v5.10.1-linux-x64
+
+## PREPEND
+set --global --export PATH $HOME/.bin   $PATH
+set --global --export PATH .            $PATH
+
+## APPEND
+set --global --export PATH $PATH        $NODEJS/bin
+set --global --export PATH $PATH        $CARGO/bin
+set --global --export PATH $PATH        $PROJECTS/GitHub/lang-rust/src
+
+# DEFINES
+set --global --export TMP               /tmp
+set --global --export RUST_SRC_PATH     $HOME/Projects/GitHub/lang-rust/src
+
+# APPS
+set --global --export BROWSER google-chrome
+set --global --export PAGER   less
+
 if status --is-interactive
-    # BEHAVIOUR
-    #fish_vi_mode
-
-    # GREETING
-    set fish_greeting ''
-
-    # PATH
-    ## CONSTANTS
-    set OPT                                 /opt/axl
-    set CARGO                               $HOME/.cargo
-    set PROJECTS                            $HOME/Projects
-    ## PREPEND
-    set --global --export PATH $HOME/.bin   $PATH
-    set --global --export PATH .            $PATH
-    ## APPEND
-    set --global --export PATH $PATH        $CARGO
-    set --global --export PATH $PATH        $CARGO/bin
-    set --global --export PATH $PATH        $PROJECTS/GitHub/lang-rust/src
-    set --global --export PATH $PATH        $OPT/swift-latest/usr/bin
-
-    # DEFINES
-    set --global --export RUST_SRC_PATH     $HOME/Projects/GitHub/lang-rust/src
-
-    # TMP
-    set --global --export TMP  /tmp
-
-    # APPS
-    set --global --export BROWSER google-chrome
-    set --global --export PAGER   less
-
     # ALIASES
-    alias - cd\ -
-    alias ... cd\ ../..
-    alias .... cd\ ../../..
-    alias ..... cd\ ../../../../
+    alias ..        cd\ ..
+    alias ...       cd\ ../..
+    alias ....      cd\ ../../..
+    alias .....     cd\ ../../../..
+    alias projects  cd\ $PROJECTS_HOME
+    alias annaxxko  cd\ $PROJECTS_HOME/annaxxKØ
+    alias github    cd\ $PROJECTS_HOME/GitHub
+    alias downloads cd\ $HOME/Downloads
+    alias music     cd\ $HOME/Music
 
     # COLORS
     eval (dircolors --c-shell $HOME/.dircolors)
