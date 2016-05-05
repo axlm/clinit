@@ -22,7 +22,7 @@ set --global --export PATH $PATH        $PROJECTS/GitHub/lang-rust/src
 
 # DEFINES
 set --global --export TMP               /tmp
-set --global --export RUST_SRC_PATH     $HOME/Projects/GitHub/lang-rust/src
+set --global --export RUST_SRC_PATH     $HOME/.lib/rustc-1.8.0/src
 
 # APPS
 set --global --export BROWSER google-chrome
