@@ -1,4 +1,4 @@
-clenvinit
-=========
+# Standard Environment
 
-Command Line Environment Initialization
+~/.stdenv.d
+
