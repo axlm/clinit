@@ -13,12 +13,11 @@ set NODEJS_HOME                         $OPT/node-v5.10.1-linux-x64
 
 ## PREPEND
 set --global --export PATH $HOME/.bin   $PATH
-set --global --export PATH .            $PATH
 
 ## APPEND
-set --global --export PATH $PATH        $NODEJS/bin
-set --global --export PATH $PATH        $CARGO/bin
-set --global --export PATH $PATH        $PROJECTS/GitHub/lang-rust/src
+set --global --export PATH $PATH        $NODEJS_HOME/bin
+set --global --export PATH $PATH        $CARGO_HOME/bin
+set --global --export PATH $PATH        $PROJECTS_HOME/GitHub/lang-rust/src
 
 # DEFINES
 set --global --export TMP               /tmp
@@ -39,6 +38,9 @@ if status --is-interactive
     alias github    cd\ $PROJECTS_HOME/GitHub
     alias downloads cd\ $HOME/Downloads
     alias music     cd\ $HOME/Music
+    alias fish      cd\ $HOME/.config/fish
+    alias bin       cd\ $HOME/.bin
+    alias :q        exit
 
     # COLORS
     eval (dircolors --c-shell $HOME/.dircolors)
