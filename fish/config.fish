@@ -35,6 +35,7 @@ if status --is-interactive
     alias .....     cd\ ../../../..
     alias projects  cd\ $PROJECTS_HOME
     alias annaxxko  cd\ $PROJECTS_HOME/annaxxKØ
+    alias axler8tor cd\ $PROJECTS_HOME/axler8tor
     alias github    cd\ $PROJECTS_HOME/GitHub
     alias downloads cd\ $HOME/Downloads
     alias music     cd\ $HOME/Music

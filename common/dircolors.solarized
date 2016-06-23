@@ -120,7 +120,7 @@ STICKY_OTHER_WRITABLE 48;5;64;38;5;230 # dir that is sticky and other-writable (
 OTHER_WRITABLE 48;5;235;38;5;33 # dir that is other-writable (o+w) and not sticky
 STICKY 48;5;33;38;5;230 # dir with the sticky bit set (+t) and not other-writable
 # This is for files with execute permission:
-EXEC 00;38;5;64
+EXEC 01;38;5;64
 
 ## Archives or compressed (violet + bold for compression)
 .7z     01;38;5;61
@@ -196,10 +196,13 @@ EXEC 00;38;5;64
 *LICENSE.md      00;38;5;245
 *LICENSE.txt     00;38;5;245
 *Makefile        01;38;5;245
-*README          01;38;5;245
-*README.md       00;38;5;245
+*README          00;38;5;245
+*README.md       01;38;5;245
 *README.txt      00;38;5;245
-*Rakefile        01;38;5;245
+*RELEASE         00;38;5;245
+*RELEASE.md      01;38;5;245
+*RELEASE.txt     00;38;5;245
+*Rakefile        00;38;5;245
 *SETUP           01;38;5;245
 *SETUP.md        00;38;5;245
 *SETUP.txt       00;38;5;245

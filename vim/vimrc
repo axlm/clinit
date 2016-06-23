@@ -97,26 +97,31 @@ set listchars=tab:▸\ ,eol:¬
 nmap <leader>h :set list!<CR>
 
 " shortcuts
-inoremap <expr> vdts strftime("%y%m%d%H%M%S")
-inoremap <expr> idts strftime("%FT%T%z")
-inoremap <expr> axlg "Axl Mattheus <axl.mattheus@gmail.com>"
-inoremap <expr> axlm "Axl Mattheus <axl.mattheus@microsoft.com> (@Microsoft)"
+inoremap <expr> dtnow  strftime("%Y%m%d%H%M%S")
+inoremap <expr> dtiso  strftime("%FT%T%z")
+inoremap <expr> dtloc  strftime("%FT%T%z(%Z)")
+inoremap <expr> dtdate strftime("%F")
+inoremap <expr> dttime strftime("%T")
 inoremap <expr> axla "Axl Mattheus <axl.mattheus@annaxxko.net> (@annaxxKØ)"
+inoremap <expr> axlg "Axl Mattheus <axl.mattheus@gmail.com>"
+inoremap <expr> axlh "Axl Mattheus <axl.mattheus@hotmail.net> (@axler8tor)"
+inoremap <expr> axlm "Axl Mattheus <axl.mattheus@microsoft.com> (@Microsoft)"
 
 "set foldmethod=expr
 set foldmethod=syntax
 
 
 " solarized
-let g:solarized_bold       = 1
-let g:solarized_italic     = 1
-let g:solarized_underline  = 0
-colorscheme solarized
-if $SOLARIZED == "LIGHT"
-    set background=light
-else
-    set background=dark
-endif
+"let g:solarized_bold       = 1
+"let g:solarized_italic     = 1
+"let g:solarized_underline  = 0
+"colorscheme solarized
+colorscheme monokai
+"if $SOLARIZED == "LIGHT"
+    "set background=light
+"else
+    "set background=dark
+"endif
 
 " erlang
 let erlang_folding  = 1
