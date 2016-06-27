@@ -1,4 +1,7 @@
 # NOTES
+0.09.020 — Updated powerline functionality for bash, fish and tmux.
+           Added Monokai colorscheme customizations.
+           Again...
 0.09.019 — Updated powerline functionality for bash, fish and tmux.
            Added Monokai colorscheme customizations.
 0.09.018 — Minor tweaks. Ready to update host OS.
