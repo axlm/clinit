@@ -108,15 +108,16 @@ set foldmethod=syntax
 
 
 " solarized
-let g:solarized_bold       = 1
-let g:solarized_italic     = 1
-let g:solarized_underline  = 0
-colorscheme solarized
-if $SOLARIZED == "LIGHT"
-    set background=light
-else
-    set background=dark
-endif
+" let g:solarized_bold       = 1
+" let g:solarized_italic     = 1
+" let g:solarized_underline  = 0
+" colorscheme solarized
+colorscheme monokai
+" if $SOLARIZED == "LIGHT"
+    " set background=light
+" else
+    " set background=dark
+" endif
 
 " erlang
 let erlang_folding  = 1
@@ -138,6 +139,6 @@ if $POWERLINE != "ON"
 endif
 if $POWERLINE == "ON"
     set noshowmode    " Hide the default mode text (e.g. -- INSERT -- below the statusline)
-    set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim
+    set rtp+=/home/axl/./local/lib/python2.7/site-packages/powerline/bindings/vim
 endif
 

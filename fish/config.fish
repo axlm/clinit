@@ -12,7 +12,8 @@ set PROJECTS_HOME                       $HOME/Projects
 set NODEJS_HOME                         $OPT/node-v5.10.1-linux-x64
 
 ## PREPEND
-set --global --export PATH $HOME/.bin   $PATH
+set --global --export PATH $HOME/.bin       $PATH
+set --global --export PATH $HOME/.local/bin $PATH
 
 ## APPEND
 set --global --export PATH $PATH        $NODEJS_HOME/bin
@@ -47,7 +48,7 @@ if status --is-interactive
 
     # POWERLINE
     set --global --export POWERLINE "ON"
-    set fish_function_path $fish_function_path "/usr/local/lib/python2.7/dist-packages/powerline/bindings/fish"
+    set fish_function_path $fish_function_path "/home/axl/.local/lib/python2.7/site-packages/powerline/bindings/fish"
     powerline-setup
 end
 
