@@ -139,6 +139,6 @@ if $POWERLINE != "ON"
 endif
 if $POWERLINE == "ON"
     set noshowmode    " Hide the default mode text (e.g. -- INSERT -- below the statusline)
-    set rtp+=/home/axl/./local/lib/python2.7/site-packages/powerline/bindings/vim
+    set rtp+=/home/axl/.local/lib/python2.7/site-packages/powerline/bindings/vim
 endif
 
