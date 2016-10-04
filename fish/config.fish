@@ -18,11 +18,10 @@ set --global --export PATH $HOME/.local/bin $PATH
 ## APPEND
 set --global --export PATH $PATH        $NODEJS_HOME/bin
 set --global --export PATH $PATH        $CARGO_HOME/bin
-set --global --export PATH $PATH        $PROJECTS_HOME/GitHub/lang-rust/src
 
 # DEFINES
 set --global --export TMP               /tmp
-set --global --export RUST_SRC_PATH     $HOME/.lib/rustc-1.8.0/src
+set --global --export RUST_SRC_PATH     $HOME/.lib/src/rust/src
 
 # APPS
 set --global --export BROWSER google-chrome
@@ -36,12 +35,15 @@ if status --is-interactive
     alias .....     cd\ ../../../..
     alias projects  cd\ $PROJECTS_HOME
     alias annaxxko  cd\ $PROJECTS_HOME/annaxxKØ
+    alias axler8tor cd\ $PROJECTS_HOME/axler8tor
     alias github    cd\ $PROJECTS_HOME/GitHub
     alias downloads cd\ $HOME/Downloads
     alias music     cd\ $HOME/Music
     alias fish      cd\ $HOME/.config/fish
     alias bin       cd\ $HOME/.bin
+    alias lib       cd\ $HOME/.lib
     alias :q        exit
+    alias clipboard xsel\ --input\ --clipboard
 
     # COLORS
     eval (dircolors --c-shell $HOME/.dircolors)
