@@ -40,3 +40,5 @@
     frf = flow release finish
 [branch]
     autosetuprebase = never
+[push]
+	default = simple
