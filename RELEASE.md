@@ -1,4 +1,8 @@
 # NOTES
+0.09.021 — Added fish functions.
+           Added apt package format modification script.
+           Switched to python 3.5 for powerline.
+           General updates, modifications and improvements.
 0.09.020 — Updated powerline functionality for bash, fish and tmux.
            Added Monokai colorscheme customizations.
            Again...
