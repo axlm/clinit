@@ -119,3 +119,4 @@ fi
 #export GOROOT=/home/axl/Tools/go/go-lang:$GOROOT
 #PATH=/home/axl/Tools/go/go-lang/bin:$PATH
 
+export PATH="$HOME/.cargo/bin:$PATH"
