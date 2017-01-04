@@ -9,15 +9,15 @@ set fish_greeting ''
 set OPT_HOME                            /opt/axl
 set CARGO_HOME                          $HOME/.cargo
 set PROJECTS_HOME                       $HOME/Projects
-set NODEJS_HOME                         $OPT/node-v5.10.1-linux-x64
+set NODE_MODULES_HOME                   $HOME/.node_modules
 
 ## PREPEND
 set --global --export PATH $HOME/.bin       $PATH
 set --global --export PATH $HOME/.local/bin $PATH
 
 ## APPEND
-set --global --export PATH $PATH        $NODEJS_HOME/bin
 set --global --export PATH $PATH        $CARGO_HOME/bin
+set --global --export PATH $PATH        $NODE_MODULES_HOME/bin
 
 # DEFINES
 set --global --export TMP               /tmp
@@ -50,7 +50,7 @@ if status --is-interactive
 
     # POWERLINE
     set --global --export POWERLINE "ON"
-    set fish_function_path $fish_function_path "/home/axl/.local/lib/python2.7/site-packages/powerline/bindings/fish"
+    set fish_function_path $fish_function_path "/home/axl/.local/lib/python3.5/site-packages/powerline/bindings/fish"
     powerline-setup
 end
 
