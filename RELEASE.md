@@ -16,18 +16,18 @@
 0.09.016 - Minor tmux tweaks.
            Modified PATH variables.
 0.09.015 - Added spacemacs update script.
-         - Added vim housekeeping scripts.
+           Added vim housekeeping scripts.
 0.09.014 - Made 'rm' fish alias interactive.
-         - Set java and javac defaults.
-         - Added fish configuration file.
-         - Updated tmux.conf.
-         - Modified elang snippets.
-         - Updated vim bundle script.
-         - Added, removed and modifed scripts.
-         - Modified enfironement files.
-         - Updated fish shell options.
-         - Updated spacemacs update script.
-         - Updated dircolors.
+           Set java and javac defaults.
+           Added fish configuration file.
+           Updated tmux.conf.
+           Modified elang snippets.
+           Updated vim bundle script.
+           Added, removed and modifed scripts.
+           Modified enfironement files.
+           Updated fish shell options.
+           Updated spacemacs update script.
+           Updated dircolors.
 0.09.013 - Modified bash init scripts.
            Moved Gedit solarized color scheme files.
            Added tmux environment start script.
@@ -56,7 +56,6 @@
 0.09.001 - Added functionality to modify default bash powerline theme during setup.
 0.09.000 - Added powerline functionality to bash, vim and tmux.
 0.08.002 - Added aliases for git flow.
-0.08.1 - Fixed tig graph display issue in UTF8 localles.
+0.08.1   - Fixed tig graph display issue in UTF8 localles.
 0.07.100.000 - Complete with bash, git, vim and tmux.
 First release of Command Line Environment Intialization (clenvinit).
-
