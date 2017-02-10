@@ -55,3 +55,4 @@ then
     . "${CLINIT_HOME}"/bash/bash_prompt
 fi
 
+source '/home/axl/.lib/azure-cli/az.completion'
