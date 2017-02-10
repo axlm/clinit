@@ -46,11 +46,10 @@ if status --is-interactive
     alias clipboard xsel\ --input\ --clipboard
 
     # COLORS
-    eval (dircolors --c-shell $HOME/.dircolors)
+    dircolors --c-shell $HOME/.dircolors | source
 
     # POWERLINE
     set --global --export POWERLINE "ON"
     set fish_function_path $fish_function_path "/home/axl/.local/lib/python3.5/site-packages/powerline/bindings/fish"
     powerline-setup
 end
-
