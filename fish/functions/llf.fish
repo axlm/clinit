@@ -1,3 +1,3 @@
 function llf
-    tree -if --noreport $argv
+  tree -if --noreport $argv
 end

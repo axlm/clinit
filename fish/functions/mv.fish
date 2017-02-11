@@ -1,3 +1,3 @@
 function mv
-    command mv -uv $argv
+  command mv -uv $argv
 end

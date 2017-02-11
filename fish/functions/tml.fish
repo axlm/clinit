@@ -1,3 +1,3 @@
 function tml
-    tmux list-sessions $argv
+  tmux list-sessions $argv
 end

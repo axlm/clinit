@@ -1,3 +1,3 @@
 function dir
-    command dir --color=auto $argv
+  command dir --color=auto $argv
 end

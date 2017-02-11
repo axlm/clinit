@@ -1,3 +1,3 @@
 function ngrep
-    grep -v $argv
+  grep -v $argv
 end

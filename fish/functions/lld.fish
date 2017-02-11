@@ -1,3 +1,3 @@
 function lld
-    tree -ifd --noreport --dirsfirst $argv
+  tree -ifd --noreport --dirsfirst $argv
 end

@@ -1,3 +1,3 @@
 function rgrep
-    command rgrep --color=auto $argv
+  command rgrep --color=auto $argv
 end

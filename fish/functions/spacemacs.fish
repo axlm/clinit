@@ -1,3 +1,3 @@
 function spacemacs
-    emacs -nw $argv
+  emacs -nw $argv
 end

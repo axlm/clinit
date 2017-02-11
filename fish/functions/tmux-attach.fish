@@ -1,3 +1,3 @@
 function tmux-attach
-    tmux attach-session -t $argv
+  tmux attach-session -t $argv
 end

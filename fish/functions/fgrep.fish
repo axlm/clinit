@@ -1,3 +1,3 @@
 function fgrep
-    command fgrep --color=auto $argv
+  command fgrep --color=auto $argv
 end

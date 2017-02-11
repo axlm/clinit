@@ -1,3 +1,3 @@
 function pgrep
-    command pgrep $argv
+  command pgrep $argv
 end
