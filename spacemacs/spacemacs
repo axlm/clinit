@@ -31,7 +31,6 @@ values."
      erlang
      ;; eyebrowse
      git
-     haskell
      ivy
      markdown
      org

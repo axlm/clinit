@@ -7,7 +7,6 @@
 *.beam
 *.bz2
 *.class
-*.db4o
 *.dll
 *.exe
 *.gz
@@ -32,6 +31,7 @@ mix.lock
 .idea/
 .rebar/
 .settings/
+_build/
 bin/
 build/
 classes/

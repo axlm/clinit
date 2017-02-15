@@ -27,6 +27,9 @@ set --global --export RUST_SRC_PATH         $HOME/.lib/src/rust/src
 set --global --export BROWSER google-chrome
 set --global --export PAGER   less
 
+# SYSTEM
+set --global --export TERM    xterm-256color
+
 if status --is-interactive
   # ALIASES
   alias ..        cd\ ..
@@ -39,7 +42,7 @@ if status --is-interactive
   alias github    cd\ $PROJECTS_HOME/GitHub
   alias downloads cd\ $HOME/Downloads
   alias music     cd\ $HOME/Music
-  alias fish      cd\ $HOME/.config/fish
+  alias fishcfg   cd\ $HOME/.config/fish
   alias bin       cd\ $HOME/.bin
   alias lib       cd\ $HOME/.lib
   # needed to let :q work in `insert mode`
