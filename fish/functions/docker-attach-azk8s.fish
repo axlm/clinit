@@ -5,8 +5,6 @@ function docker-attach-azk8s                                   \
 # there must be a cluster name
   if test -z "$k8s_cluster_"
     printf "%s" "error: cluster name not specified"
-    exit 127
+    docker start --interactive --attach "$k8s_cluster_"
   end
-
-  docker start --interactive --attach "$k8s_cluster_"
 end
