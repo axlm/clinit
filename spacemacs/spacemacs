@@ -23,15 +23,15 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ;; better-defaults
      auto-completion
      docker
      elixir
      emacs-lisp
      erlang
-     ;; eyebrowse
      git
+     github
      ivy
+     javascript
      markdown
      org
      python
