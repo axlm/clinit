@@ -4,7 +4,7 @@
 **2017-02-10**
 + Changed format of release notes.
 + Added IEX configuration file.
-+ Added restart function for sound and bluetooth.
++ Added restart function for sound and Bluetooth.
 + Added autocomplete from az on bash.
 + Export $PATH to ~/.bin:
 + Added Spacemacs layers.
