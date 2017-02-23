@@ -1,3 +1,3 @@
 function system-restart-bluetooth
-    sudo service bluetooth restart
+  sudo service bluetooth restart
 end

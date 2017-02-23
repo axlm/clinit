@@ -86,9 +86,6 @@ export __pcfn linfo ldebug
 
 # PATHS ########################################################################
 #if [[ ${EUID} -ge 1000 ]]; then
-    #if [[ pathexist ${HOME}/.cargo/bin == 0 ]]; then
-        #pathprepend ${HOME}/.cargo/bin
-    #fi
     #if [[ -d ${HOME}/.cargo/bin && -z $(echo ${PATH} | grep -o ${HOME}/.cargp/bin) ]]; then
         #pathprepend ${HOME}/.cargo/bin
     #fi
@@ -97,9 +94,6 @@ export __pcfn linfo ldebug
     #fi
     #pathprepend .
 #fi
-
-#export RUST_SRC_PATH=${HOME}/Projects/GitHub/lang-rust/src
-#export PATH
 
 ## SCRIPTS #####################################################################
 ## BASHRC ----------------------------------------------------------------------
@@ -113,11 +107,6 @@ fi
 if [ -f "${HOME}/.dir_colors" ]; then
     eval $(dircolors ${HOME}/.dir_colors)
 fi
-
-# EOF
-# Ubuntu make installation of Go Lang
-#export GOROOT=/home/axl/Tools/go/go-lang:$GOROOT
-#PATH=/home/axl/Tools/go/go-lang/bin:$PATH
 
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"

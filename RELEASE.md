@@ -1,46 +1,55 @@
 # RELEASE NOTES
 
 ## 0.09.022
+**2017-02-10**
 + Changed format of release notes.
 + Added IEX configuration file.
-+ Added restart function for sound and bluetooth.
++ Added restart function for sound and Bluetooth.
 + Added autocomplete from az on bash.
 + Export $PATH to ~/.bin:
 + Added Spacemacs layers.
 
 ## 0.09.021
+**2017-01-04**
 + Added fish functions.
 + Added apt package format modification script.
 + Switched to python 3.5 for powerline.
 + General updates, modifications and improvements.
 
 ## 0.09.020
+**2016-06-27**
 + Updated powerline functionality for bash, fish and tmux.
 + Added Monokai colorscheme customizations.
 + Again...
 
 ## 0.09.019
+**2016-06-27**
 + Updated powerline functionality for bash, fish and tmux.
 + Added Monokai colorscheme customizations.
 
 ## 0.09.018
+**2016-04-22**
 + Minor tweaks. Ready to update host OS.
 
 ## 0.09.017
+**2016-04-09**
 + Renamed and removed fish functions.
 + Modified path fish.config.
 + Modified .vimrc.
 + Added XCompose file.
 
 ## 0.09.016
+**2016-02-08**
 + Minor tmux tweaks.
 + Modified PATH variables.
 
 ## 0.09.015
+**2015-10-25**
 + Added spacemacs update script.
 + Added vim housekeeping scripts.
 
 ## 0.09.014
+**2015-07-29**
 + Made 'rm' fish alias interactive.
 + Set java and javac defaults.
 + Added fish configuration file.
@@ -54,16 +63,19 @@
 + Updated dircolors.
 
 ## 0.09.013
+**2015-04-21**
 + Modified bash init scripts.
 + Moved Gedit solarized color scheme files.
 + Added tmux environment start script.
 + Removed redundant submodules (again).
 
 ## 0.09.012
+**2015-04-17**
 + Updated path environments.
 + Deleted dependencies.
 
 ## 0.09.011
+**2015-04-15**
 + Cleaned up bash.
 + Added vim remote over ssh.
 + Added random character generation script.
@@ -74,46 +86,60 @@
 + Updated erlang supervision template.
 
 ## 0.09.010
+**2015-04-09**
 + Added erlang templates.
 + Synched files that drifted apart.
 
 ## 0.09.009
+**2015-02-26**
 + Removed uneccesary dependencies.
 + Synched files that drifted apart.
 
 ## 0.09.008
+**2014-11-11**
 + General cleanup and enhancements.
 
 ## 0.09.007
+**2014-09-29**
 + Updated setup script.
 
 ## 0.09.006
+**2014-09-29**
 + Brought clinit up to date with external changes.
 
 ## 0.09.005
+**2014-07-01**
 + Cleaned up .vimrc, added powerline to gvim, configured solarized for GEdit.
 
 ## 0.09.004
+**2014-06-30**
 + .profile was bash, specific. Fixed bash-specific syntax.
 
 ## 0.09.003
+**2014-06-28**
 + Added useful bundles to vim.
 
 ## 0.09.002
+**2014-06-26**
 + Modified setup to work of main branch.
 
 ## 0.09.001
+**2014-06-26**
 + Added functionality to modify default bash powerline theme during setup.
 
 ## 0.09.000
+**2014-06-25**
 + Added powerline functionality to bash, vim and tmux.
 
 ## 0.08.002
+**2014-06-25**
 + Added aliases for git flow.
 
 ## 0.08.1
+**2014-06-25**
 + Fixed tig graph display issue in UTF8 localles.
 
 ## 0.07.100.000
+**2014-06-17**
 + Complete with bash, git, vim and tmux.
 + First release of Command Line Environment Intialization (clenvinit).
