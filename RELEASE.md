@@ -1,5 +1,13 @@
 # RELEASE NOTES
 
+## 0.09.023
+**2017-02-23**
++ Added many fish functions.
++ Removed many fish functions.
++ Re-implemented many fish aliases.
++ Refined spacemacs configuration.
++ Removed other redundant files.
+
 ## 0.09.022
 **2017-02-10**
 + Changed format of release notes.
