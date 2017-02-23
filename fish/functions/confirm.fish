@@ -1,7 +1,7 @@
 function confirm
     while true
-        read -l -p confirm_prompt confirm
-        switch $confirm
+    read -l -p confirm_prompt confirm
+    switch $confirm
         case '' N n
             return 1
         case Y y
@@ -13,4 +13,3 @@ end
 function confirm_prompt
     echo 'Continue? [y/N] '
 end
-

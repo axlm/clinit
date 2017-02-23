@@ -1,9 +1,11 @@
-function getopts -d "Command line options parser"
+function getopts -d "cli parser"
+    if not set -q argv[1]
+        return
+    end
+
     printf "%s\n" $argv | awk '
         function out(k,v) {
-            if (!seen[k v]++) {
-                print k (v == "" ? "" : " "v)
-            }
+            print(k "" (v == "" ? "" : " "v))
         }
 
         function pop() {
@@ -11,28 +13,19 @@ function getopts -d "Command line options parser"
         }
 
         {
+            if (done) {
+                out("_" , $0)
+                next
+            }
+
             if (match($0, "^-[A-Za-z]+")) {
                 $0 = "- " substr($0, 2, RLENGTH - 1) " " substr($0, RLENGTH + 1)
 
             } else if (match($0, "^--[A-Za-z0-9_-]+")) {
-                offset = 0
-                sep = substr($0, RLENGTH + 1 , 1)
-
-                if (sep == "!") {
-                    offset = 1
-                } else {
-                    sep = ""
-                }
-
-                $0 = "-- " substr($0, 3, RLENGTH - 2) " " substr($0, RLENGTH + 2 + offset) " " sep
+                $0 = "-- " substr($0, 3, RLENGTH - 2) " " substr($0, RLENGTH + 2)
             }
-        }
 
-        !/^ *$/ {
-            if (done) {
-                out("_" , $1$2$3)
-
-            } else if ($1 == "--" && !$2) {
+            if ($1 == "--" && $2 == "") {
                 done = 1
 
             } else if ($2 == "" || $1 !~ /^-|^--/ ) {
@@ -43,16 +36,15 @@ function getopts -d "Command line options parser"
                     out(pop())
                 }
 
-                if ($3) {
-                    for (i = 4; i <= NF; i++) {
-                        $3 = $3" "$i
+                if ($3 != "") {
+                    if (match($0, $2)) {
+                        $3 = substr($0, RSTART + RLENGTH + 1)
                     }
                 }
 
                 if ($1 == "--") {
                     if ($3 == "") {
                         opt[++len] = $2
-
                     } else {
                         out($2, $3)
                     }
@@ -60,7 +52,7 @@ function getopts -d "Command line options parser"
 
                 if ($1 == "-") {
                     if ($2 == "") {
-                        print $1
+                        print($1)
                         next
 
                     } else {
@@ -86,5 +78,5 @@ function getopts -d "Command line options parser"
                 out(pop())
             }
         }
-    '
+'
 end

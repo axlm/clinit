@@ -1,3 +1,3 @@
 function tmd
-    ~/Projects/GitHub/clinit/tmux/tmd $argv
+  ~/Projects/GitHub/clinit/tmux/tmd $argv
 end
