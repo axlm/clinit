@@ -31,7 +31,6 @@ values."
      git
      github
      ivy
-     javascript
      markdown
      org
      python
@@ -264,6 +263,7 @@ you should place your code here."
   (global-company-mode)
   (define-key global-map (kbd "C-+") 'text-scale-increase)
   (define-key global-map (kbd "C--") 'text-scale-decrease)
+  (define-key global-map (kbd "C-0") 'text-scale-adjust)
   (when window-system
     (set-frame-size (selected-frame) 196 56)
     (set-frame-position (selected-frame) 20 36))
