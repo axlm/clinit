@@ -1,5 +1,5 @@
 set completion-ignore-case on
-#set show-all-if-ambiguous on
+set show-all-if-ambiguous on
 set match-hidden-files off
 set page-completions off
 set visible-stats on
