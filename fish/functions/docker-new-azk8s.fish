@@ -18,6 +18,7 @@ function docker-new-azk8s                                  \
     mkdir "azure"
     mkdir "env"
     mkdir "kube"
+    mkdir "script"
     mkdir "ssh"
     ssh-keygen -t rsa -f "ssh/rsa_$k8s_cluster_" -q -N ""
     popd
@@ -31,6 +32,7 @@ function docker-new-azk8s                                  \
     --volume "$cluster_home_/azure:/root/.azure"           \
     --volume "$cluster_home_/env:/root/.env"               \
     --volume "$cluster_home_/kube:/root/.kube"             \
+    --volume "$cluster_home_/script:/root/.script"         \
     --volume "$cluster_home_/ssh:/root/.ssh"               \
     --name "$k8s_cluster_"                                 \
     azuresdk/azure-cli-python:latest
