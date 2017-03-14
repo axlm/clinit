@@ -1,4 +1,4 @@
-function docker-new-azk8s                                  \
+function docker-new-azcli                                  \
   --argument-names k8s_cluster_                            \
   --description 'Connect to a Kubernetes cluster in Azure' \
 

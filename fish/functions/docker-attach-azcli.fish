@@ -1,4 +1,4 @@
-function docker-attach-azk8s                                   \
+function docker-attach-azcli                                   \
   --argument-names k8s_cluster_                                \
   --description 'Attach to an existing Kubernetes environment' \
 
