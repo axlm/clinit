@@ -73,6 +73,7 @@ if status --is-interactive
     alias tma "tmux attach-session -t "
     alias tmk "tmux kill-session -t "
     alias tml "tmux list-sessions "
+    alias tmlynx "env TERM=screen-256color lynx "
     alias tms "tmux new-session -s "
     alias tmtop "env TERM=screen-256color top "
     alias tmvim "env TERM=screen-256color vim "
