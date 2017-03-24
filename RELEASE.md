@@ -1,5 +1,10 @@
 # RELEASE NOTES
 
+## 1.0.0+17125-00
+**2017-03-24**
++ Changed versioning scheme to comply with [`Symantic Verion 2.0.0`](http://semver.org/).
++ Generalized Azure Container Services functions to become Azure CLI functions.
+
 ## 0.09.023
 **2017-02-23**
 + Added many fish functions.
