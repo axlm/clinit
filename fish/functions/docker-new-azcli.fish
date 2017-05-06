@@ -9,9 +9,18 @@ function docker-new-azcli                          \
   end
 
   set --local az_home_   "$HOME/.az"
+  set --local az_azqst_  "$az_home_/azqst"
   set --local cli_home_  "$az_home_/$cli_"
 
-  # set up the environment
+  if not test -d "$az_azqst_"
+    mkdir -p "$az_azqst_"
+    git clone https://github.com/Azure/azure-quickstart-templates.git "$az_azqst_"
+  else
+    pushd "$az_azqst_"
+    git pull
+    popd
+  end
+
   if not test -d "$cli_home_"
     mkdir -p "$cli_home_"
 
@@ -20,13 +29,10 @@ function docker-new-azcli                          \
     mkdir "azure"
     mkdir "env"
     mkdir "kube"
-    mkdir "projects"
     mkdir "scripts"
     mkdir "ssh"
 
     ssh-keygen -t rsa -f "ssh/id_rsa" -q -N ""
-
-    git clone https://github.com/Azure/azure-quickstart-templates.git projects/azqst
 
     popd
   end
@@ -35,10 +41,10 @@ function docker-new-azcli                          \
   docker run                                               \
     --interactive                                          \
     --tty                                                  \
+    --volume "$az_azqst_:/root/azqst:ro"                   \
     --volume "$cli_home_/azure:/root/.azure"               \
     --volume "$cli_home_/env:/root/.env"                   \
     --volume "$cli_home_/kube:/root/.kube"                 \
-    --volume "$cli_home_/projects:/root/projects"          \
     --volume "$cli_home_/script:/root/.scripts"            \
     --volume "$cli_home_/ssh:/root/.ssh"                   \
     --name "$cli_"                                         \
