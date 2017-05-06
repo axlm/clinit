@@ -1,4 +1,6 @@
 # BEHAVIOUR
+function fish_mode_prompt; end
+
 fish_vi_key_bindings
 
 # GREETING
@@ -40,6 +42,7 @@ if status --is-interactive
     alias annaxxko  cd\ $PROJECTS_HOME/annaxxKØ
     alias axler8tor cd\ $PROJECTS_HOME/axler8tor
     alias github    cd\ $PROJECTS_HOME/GitHub
+    alias books     cd\ $HOME/Documents/Books
     alias downloads cd\ $HOME/Downloads
     alias music     cd\ $HOME/Music
     alias fishcfg   cd\ $HOME/.config/fish
@@ -66,10 +69,11 @@ if status --is-interactive
     alias ls "command ls --color=auto -F --group-directories-first -X "
     alias lsd "find (pwd) -mindepth 1 -maxdepth 1 -type d | sort "
     alias lsf "find (pwd) -maxdepth 1 -type f | sort "
+    alias less "command less -RFX "
     alias mv "command mv -uv "
     alias ngrep "grep -v "
     alias pgrep "command pgrep "
-    alias spacemacs "emacs -nw "
+    alias spacemacs "env SHELL=/bin/bash emacs25 --insecure -nw "
     alias tma "tmux attach-session -t "
     alias tmk "tmux kill-session -t "
     alias tml "tmux list-sessions "
@@ -89,5 +93,3 @@ if status --is-interactive
     set fish_function_path $fish_function_path "/home/axl/.local/lib/python3.5/site-packages/powerline/bindings/fish"
     powerline-setup
 end
-
-
