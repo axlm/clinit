@@ -1,7 +1,8 @@
 function docker-run-tmp
-  if count $argv -lt 2
-    docker run --interactive --tty --name "$argv[1]".(timestamp *) --rm $argv[1]
+  set --local image (printf "%s" $argv[1] | sed -e 's/\//./g')
+  if test (count $argv) -lt 2
+    docker run --interactive --tty --name "$image".(timestamp *) --rm $argv[1]
   else
-    docker run --interactive --tty --name "$argv[1]".(timestamp *) --rm $argv[1] $argv[2]
+    docker run --interactive --tty --name "$image".(timestamp *) --rm $image $argv[2]
   end
 end
