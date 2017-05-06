@@ -1,4 +1,9 @@
 # RELEASE NOTES
+## 1.0.1+17186-00
+**2017-05-06**
++ Added layers to spacemacs configuration.
++ Updated spacemacs configuration.
++ Fixed Azure CLI management scripts.
 
 ## 1.0.0+17125-00
 **2017-03-24**
