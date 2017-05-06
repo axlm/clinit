@@ -21,33 +21,12 @@ function docker-new-azcli                          \
     mkdir "env"
     mkdir "kube"
     mkdir "projects"
-    mkdir "script"
+    mkdir "scripts"
     mkdir "ssh"
-    mkdir "tools"
 
     ssh-keygen -t rsa -f "ssh/id_rsa" -q -N ""
 
-    set --local github_axler8tor_ "https://github.com/axler8tor"
-
-    echo "#!/bin/bash
-          git clone $github_axler8tor_/azureOSSContainer azacs
-          " | sed -e 's/^[ \t]*//' > tools/get-azacs
-    chmod u+x tools/get-azacs
-
-    echo "#!/bin/bash
-          git clone $github_axler8tor_/azureOSSCompute azcpu
-          " | sed -e 's/^[ \t]*//' > tools/get-azcpu
-    chmod u+x tools/get-azcpu
-
-    echo "#!/bin/bash
-          git clone $github_axler8tor_/azureOSSNetwork aznet
-          " | sed -e 's/^[ \t]*//' > tools/get-aznet
-    chmod u+x tools/get-aznet
-
-    echo "#!/bin/bash
-          git clone $github_axler8tor_/azureOSSStorage azstor
-          " | sed -e 's/^[ \t]*//' > tools/get-azstor
-    chmod u+x tools/get-azstor
+    git clone https://github.com/Azure/azure-quickstart-templates.git projects/azqst
 
     popd
   end
@@ -57,11 +36,10 @@ function docker-new-azcli                          \
     --interactive                                          \
     --tty                                                  \
     --volume "$cli_home_/azure:/root/.azure"               \
-    --volume "$cli_home_/tools:/root/tools"                \
-    --volume "$cli_home_/projects:/root/projects"          \
     --volume "$cli_home_/env:/root/.env"                   \
     --volume "$cli_home_/kube:/root/.kube"                 \
-    --volume "$cli_home_/script:/root/.script"             \
+    --volume "$cli_home_/projects:/root/projects"          \
+    --volume "$cli_home_/script:/root/.scripts"            \
     --volume "$cli_home_/ssh:/root/.ssh"                   \
     --name "$cli_"                                         \
     azuresdk/azure-cli-python:latest
