@@ -1,4 +1,4 @@
-function docker-new-azcli                          \
+function docker-run-azcli                          \
   --argument-names cli_                            \
   --description 'Provision an Azure CLI in Docker' \
 
