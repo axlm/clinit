@@ -279,6 +279,7 @@ EXEC 01;31  # Unix
 .dotx   00;33
 .html   00;33
 .htmlx  00;33
+.json   00;33
 .odb    00;33
 .odf    00;33
 .odg    00;33
