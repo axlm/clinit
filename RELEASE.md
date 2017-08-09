@@ -1,4 +1,13 @@
 # RELEASE NOTES
+## 1.0.2+17221-00
+**2017-08-09
++ Removed redundant Azure CLI functions.
++ Added git-update function.
++ Added mkcert function.
++ Refined docker image utilties.
++ Frist pass to get code completion working in Spacemacs.
++ First pass to get rm function to function correctly.
+
 ## 1.0.1+17186-00
 **2017-05-06**
 + Added layers to spacemacs configuration.
