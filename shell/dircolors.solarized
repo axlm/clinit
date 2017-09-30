@@ -1,4 +1,3 @@
-
 # Dark 256 color solarized theme for the color GNU ls utility.
 # Used and tested with dircolors (GNU coreutils) 8.5
 #
@@ -77,28 +76,35 @@ TERM xterm-debian
 TERM xterm-termite
 
 ## Documentation
-#
-# standard colors
-#
-# Below are the color init strings for the basic file types. A color init
-# string consists of one or more of the following numeric codes:
-# Attribute codes:
-# 00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
-# Text color codes:
-# 30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
-# Background color codes:
-# 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
-#
-#
 # 256 color support
 # see here: http://www.mail-archive.com/bug-coreutils@gnu.org/msg11030.html)
 #
-# Text 256 color coding:
-# 38;5;COLOR_NUMBER
-# Background 256 color coding:
-# 48;5;COLOR_NUMBER
-
-## Special files
+# NORMAL_BLACK=00;30
+# NORMAL_RED=00;31
+# NORMAL_GREEN=00;32
+# NORMAL_YELLOW=00;33
+# NORMAL_BLUE=00;34
+# NORMAL_MAGENTA=00;35
+# NORMAL_CYAN=00;36
+# NORMAL_WHITE=00;37
+#
+# BOLD_BLACK=01;30
+# BOLD_RED=01;31
+# BOLD_GREEN=01;32
+# BOLD_YELLOW=01;33
+# BOLD_BLUE=01;34
+# BOLD_MAGENTA=01;35
+# BOLD_CYAN=01;36
+# BOLD_WHITE=01;37
+#
+# BACK_BLACK=01;40
+# BACK_RED=01;41
+# BACK_GREEN=01;42
+# BACK_YELLOW=01;43
+# BACK_BLUE=01;44
+# BACK_MAGENTA=01;45
+# BACK_CYAN=01;46
+# BACK_WHITE=01;47
 
 NORMAL 00;38;5;244 # no color code at all
 #FILE 00 # regular file: use no color at all
@@ -122,268 +128,185 @@ STICKY 48;5;33;38;5;230 # dir with the sticky bit set (+t) and not other-writabl
 # This is for files with execute permission:
 EXEC 00;38;5;64
 
-## Archives or compressed (violet + bold for compression)
-.7z     01;38;5;61
-.Z      01;38;5;61
-.ace    00;38;5;61
-.apk    00;38;5;61
-.arj    00;38;5;61
-.bz     01;38;5;61
-.bz2    01;38;5;61
-.cpio   00;38;5;61
-.deb    00;38;5;61
-.dz     00;38;5;61
-.gem    00;38;5;61
-.gz     01;38;5;61
-.gzip   01;38;5;61
-.jar    00;38;5;61
-.lz     00;38;5;61
-.lzh    00;38;5;61
-.lzma   00;38;5;61
-.rar    00;38;5;61
-.rpm    00;38;5;61
-.rz     00;38;5;61
-.tar    01;38;5;61
-.taz    00;38;5;61
-.tbz    01;38;5;61
-.tbz2   01;38;5;61
-.tgz    01;38;5;61
-.tlz    00;38;5;61
-.txz    00;38;5;61
-.tz     00;38;5;61
-.xz     00;38;5;61
-.z      01;38;5;61
-.zip    01;38;5;61
-.zoo    00;38;5;61
+# cyan
+.7z     00;36
+.Z      00;36
+.apk    00;36
+.arj    00;36
+.bz     00;36
+.bz2    00;36
+.cpio   00;36
+.deb    00;36
+.ear    00;36
+.gem    00;36
+.gz     00;36
+.gzip   00;36
+.jar    00;36
+.lz     00;36
+.lzh    00;36
+.lzma   00;36
+.rar    00;36
+.rpm    00;36
+.tar    00;36
+.taz    00;36
+.tbz    00;36
+.tbz2   00;36
+.tgz    00;36
+.war    00;36
+.z      00;36
+.zip    00;36
 
-# Image formats (yellow)
-.CR2    00;38;5;136
-.JPG    01;38;5;136
-.PNG    01;38;5;136
-.bmp    01;38;5;136
-.cgm    00;38;5;136
-.dl     00;38;5;136
-.emf    00;38;5;136
-.eps    00;38;5;136
-.gif    01;38;5;136
-.ico    00;38;5;136
-.jpeg   01;38;5;136
-.jpg    01;38;5;136
-.mng    00;38;5;136
-.pbm    00;38;5;136
-.pcx    00;38;5;136
-.pgm    00;38;5;136
-.png    01;38;5;136
-.ppm    00;38;5;136
-.svg    01;38;5;136
-.svgz   01;38;5;136
-.tga    00;38;5;136
-.tif    00;38;5;136
-.tiff   00;38;5;136
-.xbm    00;38;5;136
-.xcf    00;38;5;136
-.xpm    00;38;5;136
-.xwd    00;38;5;136
-.yuv    00;38;5;136
+# purple
+.JPG    01;36
+.PNG    01;36
+.bmp    01;36
+.gif    01;36
+.ico    01;36
+.jpeg   01;36
+.jpg    01;36
+.png    01;36
+.ppm    01;36
+.svg    01;36
+.svgz   01;36
+.tiff   01;36
+.xpm    01;36
 
 # Files of special interest (base1)
-*Cargo.toml      01;38;5;245
-*Dockerfile      01;38;5;245
-*INSTALL         01;38;5;245
-*INSTALL.md      00;38;5;245
-*INSTALL.txt     00;38;5;245
-*LICENSE         01;38;5;245
-*LICENSE.md      00;38;5;245
-*LICENSE.txt     00;38;5;245
-*Makefile        01;38;5;245
-*README          01;38;5;245
-*README.md       00;38;5;245
-*README.txt      00;38;5;245
-*Rakefile        01;38;5;245
-*SETUP           01;38;5;245
-*SETUP.md        00;38;5;245
-*SETUP.txt       00;38;5;245
-*build.sbt       01;38;5;245
-*build.xml       01;38;5;245
-*mix.exs         01;38;5;245
-*readme          00;38;5;245
-*readme.txt      00;38;5;245
-*rebar.config    01;38;5;245
-.cfg             00;38;5;245
-.conf            00;38;5;245
-.config          00;38;5;245
-.ini             00;38;5;245
-.markdown        00;38;5;245
-.md              00;38;5;245
-.n3              00;38;5;245
-.nfo             00;38;5;245
-.nt              00;38;5;245
-.owl             00;38;5;245
-.pom             00;38;5;245
-.rdf             00;38;5;245
-.tex             00;38;5;245
-.torrent         00;38;5;245
-.ttl             00;38;5;245
-.xml             00;38;5;245
-.yml             00;38;5;245
+*Cargo.toml      01;35
+*Dockerfile      01;35
+*INSTALL         01;35
+*INSTALL.md      01;35
+*INSTALL.txt     01;35
+*LICENSE         01;35
+*LICENSE.md      01;35
+*LICENSE.txt     01;35
+*Makefile        01;35
+*README          01;35
+*README.md       01;35
+*README.txt      01;35
+*Rakefile        01;35
+*SETUP           01;35
+*SETUP.md        01;35
+*SETUP.txt       01;35
+*build.sbt       01;35
+*build.xml       01;35
+*mix.exs         01;35
+*readme          01;35
+*readme.txt      01;35
+*rebar.config    01;35
+.cfg             01;35
+.conf            01;35
+.config          01;35
+.ini             01;35
+.markdown        01;35
+.md              01;35
+.pom             01;35
+.xml             01;35
+.yml             01;35
+.yaml            01;35
 
-# "unimportant" files as logs and backups (base01)
-*#          00;38;5;240
-*~          00;38;5;240
-.aux        00;38;5;240
-.bak        00;38;5;240
-.bbl        00;38;5;240
-.beam       00;38;5;240
-.blg        00;38;5;240
-.cache      00;38;5;240
-.class      00;38;5;240
-.incomplete 00;38;5;240
-.lof        00;38;5;240
-.log        00;38;5;240
-.lol        00;38;5;240
-.lot        00;38;5;240
-.o          00;38;5;240
-.out        00;38;5;240
-.part       00;38;5;240
-.pyc        00;38;5;240
-.swp        00;38;5;240
-.temp       00;38;5;240
-.tmp        00;38;5;240
-.toc        00;38;5;240
+# grey
+*#          01;32
+*~          01;32
+.aux        01;32
+.bak        01;32
+.bbl        01;32
+.beam       01;32
+.blg        01;32
+.cache      01;32
+.class      01;32
+.incomplete 01;32
+.lof        01;32
+.log        01;32
+.lol        01;32
+.lot        01;32
+.o          01;32
+.out        01;32
+.part       01;32
+.pyc        01;32
+.swp        01;32
+.temp       01;32
+.tmp        01;32
+.toc        01;32
 
-# Audio formats (orange)
-.aac    00;38;5;166
-.au     00;38;5;166
-.axa    00;38;5;166
-.flac   00;38;5;166
-.m4a    00;38;5;166
-.mid    00;38;5;166
-.midi   00;38;5;166
-.mka    00;38;5;166
-.mp3    01;38;5;166
-.mpc    00;38;5;166
-.oga    00;38;5;166
-.ogg    00;38;5;166
-.ra     00;38;5;166
-.spx    00;38;5;166
-.wav    00;38;5;166
-.wma    01;38;5;166
-.xspf   00;38;5;166
+# orange
+.mp3    01;33
+.wma    01;33
 
-# Video formats (as audio + bold)
-.MOV    00;38;5;166
-.anx    00;38;5;166
-.asf    00;38;5;166
-.avi    00;38;5;166
-.axv    00;38;5;166
-.divx   00;38;5;166
-.flc    00;38;5;166
-.fli    00;38;5;166
-.flv    00;38;5;166
-.gl     00;38;5;166
-.m2ts   00;38;5;166
-.m2v    00;38;5;166
-.m4v    00;38;5;166
-.mkv    00;38;5;166
-.mov    00;38;5;166
-.mp4    01;38;5;166
-.mp4v   00;38;5;166
-.mpeg   00;38;5;166
-.mpg    00;38;5;166
-.nuv    00;38;5;166
-.ogm    00;38;5;166
-.ogv    00;38;5;166
-.ogx    00;38;5;166
-.qt     00;38;5;166
-.rm     00;38;5;166
-.rmvb   00;38;5;166
-.vob    00;38;5;166
-.webm   00;38;5;166
-.wmv    01;38;5;166
+# orange
+.mp4    01;33
+.mpeg   01;33
+.mpg    01;33
+.webm   01;33
+.wmv    01;33
 
-# Source files
-.C       00;38;5;64
-.D       00;38;5;64 
-.H       00;38;5;64
-.c       00;38;5;64
-.c++     00;38;5;64
-.cc      00;38;5;64
-.cpp     00;38;5;64
-.d       00;38;5;64
-.erl     00;38;5;64
-.ex      00;38;5;64
-.exs     00;38;5;64
-.go      00;38;5;64
-.h       00;38;5;64
-.h++     00;38;5;64
-.hh      00;38;5;64
-.hpp     00;38;5;64
-.hrl     00;38;5;64
-.java    00;38;5;64
-.julia   00;38;5;64
-.py      00;38;5;64
-.rs      00;38;5;64
-.scala   00;38;5;64
-.sql     00;38;5;64
+# Source files (green)
+.C       00;32
+.D       00;32
+.H       00;32
+.c       00;32
+.c++     00;32
+.cc      00;32
+.cpp     00;32
+.cs      00;32
+.d       00;32
+.erl     00;32
+.ex      00;32
+.exs     00;32
+.fs      00;32
+.go      00;32
+.h       00;32
+.h++     00;32
+.hh      00;32
+.hpp     00;32
+.hrl     00;32
+.java    00;32
+.julia   00;32
+.py      00;32
+.rs      00;32
+.scala   00;32
+.sql     00;32
 
-# Shell scripts
-.bash   00;38;5;37
-.fish   00;38;5;37
-.sh     00;38;5;37
-.zsh    00;38;5;37
+# white
+.bash   01;37
+.fish   01;37
+.sh     01;37
+.zsh    01;37
 
-# Documents
-.doc   00;38;5;241
-.docb  00;38;5;241
-.docm  00;38;5;241
-.docx  00;38;5;241
-.dot   00;38;5;241
-.dotx  00;38;5;241
-.html  00;38;5;241
-.htmlx 00;38;5;241
-.odb   00;38;5;241
-.odf   00;38;5;241
-.odg   00;38;5;241
-.odm   00;38;5;241
-.odp   00;38;5;241
-.ods   00;38;5;241
-.odt   00;38;5;241
-.otg   00;38;5;241
-.oth   00;38;5;241
-.otp   00;38;5;241
-.ots   00;38;5;241
-.ott   00;38;5;241
-.oxt   00;38;5;241
-.pdf   01;38;5;241
-.pot   00;38;5;241
-.potm  00;38;5;241
-.potx  00;38;5;241
-.ppam  00;38;5;241
-.pps   00;38;5;241
-.ppsm  00;38;5;241
-.ppsx  00;38;5;241
-.ppt   00;38;5;241
-.pptm  00;38;5;241
-.pptx  00;38;5;241
-.pptx  00;38;5;241
-.ps    00;38;5;241
-.sldm  00;38;5;241
-.sldx  00;38;5;241
-.txt   00;38;5;241
-.xla   00;38;5;241
-.xlam  00;38;5;241
-.xll   00;38;5;241
-.xlm   00;38;5;241
-.xlmx  00;38;5;241
-.xls   00;38;5;241
-.xlsb  00;38;5;241
-.xlsx  00;38;5;241
-.xlt   00;38;5;241
-.xltx  00;38;5;241
-.xlw   00;38;5;241
+# magenta
+.doc   00;35
+.docx  00;35
+.html  00;35
+.htmlx 00;35
+.md    00;35
+.pdf   00;35
+.ppt   00;35
+.pptx  00;35
+.ps    00;35
+.txt   00;35
+.xls   00;35
+.xlsx  00;35
+.xlt   00;35
+.xltx  00;35
 
 # Big problems
-*core             01;38;5;160
-*erl_crash.dump   01;38;5;160
-*hs_err_pid*.log  01;38;5;160
+*core             00;31
+*erl_crash.dump   00;31
+*hs_err_pid*.log  00;31
+
+.color01 00;31 # (red)
+.color02 00;32 # (green)
+.color03 00;33 # (yellow)
+.color04 00;34 # (blue)
+.color05 00;35 # (magenta)
+.color06 00;36 # (cyan)
+.color07 00;37 # (white)
+
+.color11 01;31 # (bold red)
+.color12 01;32 # (bold green)
+.color13 01;33 # (bold yellow) 
+.color14 01;34 # (bold blue)
+.color15 01;35 # (bold magenta)
+.color16 01;36 # (bold cyan)
+.color17 01;37 # (bold white)
 
