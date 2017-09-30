@@ -1,4 +1,11 @@
 # RELEASE NOTES
+## 1.0.3+17273-00
+**2017-09-30
++ Removed redundant files.
++ Simplified files.
++ Updated fish functions.
++ Updated configuration files.
+
 ## 1.0.2+17221-00
 **2017-08-09
 + Removed redundant Azure CLI functions.
