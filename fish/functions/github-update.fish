@@ -1,4 +1,4 @@
-function git-update
+function github-update
     for dir in (ls)
         printf "$dir\n\n"
         pushd $dir
