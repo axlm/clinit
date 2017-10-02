@@ -84,6 +84,13 @@ if status --is-interactive
     alias tmviml "env TERM=screen-256color SOLARIZED=LIGHT vim "
     alias top "htop "
     alias tree "command tree -F "
+    # shells
+    alias new-bash-dark-terminal "gnome-terminal --command bash --window-with-profile \"Solarized Dark\" --geometry \"110x40\" "
+    alias new-bash-light-terminal "gnome-terminal --command bash --window-with-profile \"Solarized Light\" --geometry \"110x40\" "
+    alias new-zsh-dark-terminal "gnome-terminal --command zsh --window-with-profile \"Solarized Dark\" --geometry \"110x40\" "
+    alias new-zsh-light-terminal "gnome-terminal --command zsh --window-with-profile \"Solarized Light\" --geometry \"110x40\" "
+    alias new-fish-dark-terminal "gnome-terminal --command fish --window-with-profile \"Solarized Dark\" --geometry \"110x40\" "
+    alias new-fish-light-terminal "gnome-terminal --command fish --window-with-profile \"Solarized Light\" --geometry \"110x40\" "
 
     # COLORS
     dircolors --c-shell $HOME/.dircolors | source
