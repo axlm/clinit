@@ -24,6 +24,7 @@ set --global --export PATH $PATH            $NODE_MODULES_HOME/bin
 # DEFINES
 set --global --export TMP                   /tmp
 set --global --export RUST_SRC_PATH         $HOME/.lib/src/rust/src
+set --global --export XDG_CONFIG_HOME       $HOME/.config
 
 # APPS
 set --global --export BROWSER google-chrome
