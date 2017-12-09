@@ -39,16 +39,19 @@ if status --is-interactive
     alias ...       cd\ ../..
     alias ....      cd\ ../../..
     alias .....     cd\ ../../../..
-    alias projects  cd\ $PROJECTS_HOME
     alias annaxxko  cd\ $PROJECTS_HOME/annaxxKØ
     alias axler8tor cd\ $PROJECTS_HOME/axler8tor
-    alias github    cd\ $PROJECTS_HOME/GitHub
+    alias bin       cd\ $HOME/.bin
     alias books     cd\ $HOME/Documents/Books
     alias downloads cd\ $HOME/Downloads
-    alias music     cd\ $HOME/Music
     alias fishcfg   cd\ $HOME/.config/fish
-    alias bin       cd\ $HOME/.bin
+    alias github    cd\ $PROJECTS_HOME/GitHub
     alias lib       cd\ $HOME/.lib
+    alias music     cd\ $HOME/Music
+    alias opt       cd\ /opt/axl
+    alias projects  cd\ $PROJECTS_HOME
+    alias stdcfg    cd\ $HOME/.stdcfg.d
+    alias venv      cd\ $HOME/VirtualEnv
     # needed to let :q work in `insert mode`
     alias :q        exit
     alias clipboard xsel\ --input\ --clipboard
@@ -81,17 +84,17 @@ if status --is-interactive
     alias tmlynx "env TERM=screen-256color lynx "
     alias tms "tmux new-session -s "
     alias tmtop "env TERM=screen-256color top "
-    alias tmvim "env TERM=screen-256color vim "
-    alias tmviml "env TERM=screen-256color SOLARIZED=LIGHT vim "
+    alias tmvim "env TERM=screen-256color nvim "
+    # alias tmviml "env TERM=screen-256color SOLARIZED=LIGHT nvim "
     alias top "htop "
     alias tree "command tree -F "
     # shells
-    alias new-bash-dark-terminal "gnome-terminal --command bash --window-with-profile \"Solarized Dark\" --geometry \"110x40\" "
-    alias new-bash-light-terminal "gnome-terminal --command bash --window-with-profile \"Solarized Light\" --geometry \"110x40\" "
-    alias new-zsh-dark-terminal "gnome-terminal --command zsh --window-with-profile \"Solarized Dark\" --geometry \"110x40\" "
-    alias new-zsh-light-terminal "gnome-terminal --command zsh --window-with-profile \"Solarized Light\" --geometry \"110x40\" "
-    alias new-fish-dark-terminal "gnome-terminal --command fish --window-with-profile \"Solarized Dark\" --geometry \"110x40\" "
-    alias new-fish-light-terminal "gnome-terminal --command fish --window-with-profile \"Solarized Light\" --geometry \"110x40\" "
+    alias new-bash-dark-terminal "gnome-terminal --command bash --window-with-profile 'Solarized Dark' --geometry '110x40' "
+    alias new-bash-light-terminal "gnome-terminal --command bash --window-with-profile 'Solarized Light' --geometry '110x40' "
+    alias new-zsh-dark-terminal "gnome-terminal --command zsh --window-with-profile 'Solarized Dark' --geometry '110x40' "
+    alias new-zsh-light-terminal "gnome-terminal --command zsh --window-with-profile 'Solarized Light' --geometry '110x40' "
+    alias new-fish-dark-terminal "gnome-terminal --command fish --window-with-profile 'Solarized Dark' --geometry '110x40' "
+    alias new-fish-light-terminal "gnome-terminal --command fish --window-with-profile 'Solarized Light' --geometry '110x40' "
 
     # COLORS
     dircolors --c-shell $HOME/.dircolors | source
