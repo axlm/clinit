@@ -1,0 +1,24 @@
+* DO Common [0/5]
+** DOING Set Background Color
+   :NOTES:
+
+   :END:
+
+** DO Create Section Start
+** DO Set Font Color
+** DO Create Section End
+** DO Create Prompt End
+* DO PROMPT [0/7]
+** DO Create VI Mode Indicator Section
+** DO Create User Section
+** DO Crete Current Working Directory Section
+** DO Create Python Virtual Environment Section
+** DO Create Command Counter Section
+** DO Create Exit Status Section
+* DO RPROMPT [0/2]
+** DO Create Git Section [0/4]
+*** DO Display Git branch
+*** DO Display Git status
+*** DO Display Git local branch position
+*** DO Display Git stash
+* DO PROMPT2 [/]
