@@ -45,10 +45,13 @@ values."
      ivy
      javascript
      markdown
-     org
+     (org :variables
+          org-projectile-file "TODO.org")
      python
      rust
      search-engine
+     (shell :variables
+            shell-default-term-shell "/bin/zsh")
      shell-scripts
      spell-checking
      syntax-checking
@@ -56,9 +59,6 @@ values."
      version-control
      vimscript
      yaml
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -359,7 +359,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (s dash-functional log4e gntp alert ht avy marshal async rust-mode org-category-capture helm helm-core projectile smartparens evil flycheck markdown-mode org-plus-contrib magit-popup git-commit js2-mode simple-httpd powerline ivy vimrc-mode dactyl-mode live-py-mode hy-mode ansible ace-link company counsel magit with-editor yapfify yaml-mode ws-butler winum which-key wgrep web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org terraform-mode swiper spaceline solarized-theme smex smeargle restart-emacs request rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file ob-elixir neotree move-text monokai-theme mmm-mode markdown-toc magit-gitflow magit-gh-pulls macrostep lorem-ipsum livid-mode linum-relative link-hint js2-refactor js-doc jinja2-mode ivy-hydra insert-shebang info+ indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make google-translate golden-ratio gnuplot gitignore-mode github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gist gh-md fuzzy flyspell-correct-ivy flycheck-rust flycheck-pos-tip flycheck-mix flycheck-credo flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu erlang engine-mode elisp-slime-nav dumb-jump dockerfile-mode docker disaster diff-hl define-word cython-mode counsel-projectile company-tern company-statistics company-shell company-quickhelp company-c-headers company-ansible company-anaconda column-enforce-mode coffee-mode cmake-mode clean-aindent-mode clang-format cargo auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile ansible-doc alchemist aggressive-indent adaptive-wrap ace-window ac-ispell))))
+    (bind-key gh hydra xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help f s dash-functional log4e gntp alert ht avy marshal async rust-mode org-category-capture helm helm-core projectile smartparens evil flycheck markdown-mode org-plus-contrib magit-popup git-commit js2-mode simple-httpd powerline ivy vimrc-mode dactyl-mode live-py-mode hy-mode ansible ace-link company counsel magit with-editor yapfify yaml-mode ws-butler winum which-key wgrep web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org terraform-mode swiper spaceline solarized-theme smex smeargle restart-emacs request rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file ob-elixir neotree move-text monokai-theme mmm-mode markdown-toc magit-gitflow magit-gh-pulls macrostep lorem-ipsum livid-mode linum-relative link-hint js2-refactor js-doc jinja2-mode ivy-hydra insert-shebang info+ indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make google-translate golden-ratio gnuplot gitignore-mode github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gist gh-md fuzzy flyspell-correct-ivy flycheck-rust flycheck-pos-tip flycheck-mix flycheck-credo flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu erlang engine-mode elisp-slime-nav dumb-jump dockerfile-mode docker disaster diff-hl define-word cython-mode counsel-projectile company-tern company-statistics company-shell company-quickhelp company-c-headers company-ansible company-anaconda column-enforce-mode coffee-mode cmake-mode clean-aindent-mode clang-format cargo auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile ansible-doc alchemist aggressive-indent adaptive-wrap ace-window ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
