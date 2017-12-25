@@ -67,10 +67,14 @@ __trace() {
 local _sb
 _section_begin() {
     __enter "_section_begin"
+
     __trace "bg = $1"
     __trace "fg = $2"
+
     _sb="$1$2"
+
     __trace "sb = $_sb"
+
     __exit "_section_begin"
 }
 
@@ -78,15 +82,19 @@ _section_begin() {
 local _sc
 _section_content() {
     __enter "_section_content"
+
     _sc="$1"
+
     __exit "_section_content"
 }
 
 # $1 - section separator character
 local _sp
 _section_part() {
-    __enter ${FUNCNAME[1]}
+    __enter "_section_part"
+
     _sp="$1"
+
     __exit "_section_part"
 }
 
@@ -94,7 +102,11 @@ _section_part() {
 local _se
 _section_end() {
     __enter "_section_end"
-    _se="$_FG[RST]$_GB[RST]$1"
+
+    _se="$_FG[RST]$_BG[RST]$1"
+
+    __trace "se = $_se"
+
     __exit "_section_end"
 }
 
@@ -109,64 +121,20 @@ _section() {
     _section_begin
 }
 
-print -P "$_BG[BLA]$_FG[WHI]yaddah$_SY[RHS]$_FG[RST]$_BG[RST]"
-print -P "$_BG[RED]$_FG[WHI]yaddah$_SY[RHS]$_FG[RST]$_BG[RST]"
-print -P "$_BG[GRE]$_FG[WHI]yaddah$_SY[RHS]$_FG[RST]$_BG[RST]"
-print -P "$_BG[YEL]$_FG[WHI]yaddah$_SY[RHS]$_FG[RST]$_BG[RST]"
-print -P "$_BG[BLU]$_FG[WHI]yaddah$_SY[RHS]$_FG[RST]$_BG[RST]"
-print -P "$_BG[MAG]$_FG[WHI]yaddah$_SY[RHS]$_FG[RST]$_BG[RST]"
-print -P "$_BG[CYA]$_FG[WHI]yaddah$_SY[RHS]$_FG[RST]$_BG[RST]"
-print -P "$_BG[WHI]$_FG[BLA]yaddah$_SY[RHS]$_FG[RST]$_BG[RST]"
+# print -P "$_BG[BLA]$_FG[WHI]yaddah$_SY[RHS]$_FG[RST]$_BG[RST]"
+# print -P "$_BG[RED]$_FG[WHI]yaddah$_SY[RHS]$_FG[RST]$_BG[RST]"
+# print -P "$_BG[GRE]$_FG[WHI]yaddah$_SY[RHS]$_FG[RST]$_BG[RST]"
+# print -P "$_BG[YEL]$_FG[WHI]yaddah$_SY[RHS]$_FG[RST]$_BG[RST]"
+# print -P "$_BG[BLU]$_FG[WHI]yaddah$_SY[RHS]$_FG[RST]$_BG[RST]"
+# print -P "$_BG[MAG]$_FG[WHI]yaddah$_SY[RHS]$_FG[RST]$_BG[RST]"
+# print -P "$_BG[CYA]$_FG[WHI]yaddah$_SY[RHS]$_FG[RST]$_BG[RST]"
+# print -P "$_BG[WHI]$_FG[BLA]yaddah$_SY[RHS]$_FG[RST]$_BG[RST]"
 
 
 _section_begin $_BG[GRE] $_FG[WHI]
-_section_content
-_section_part
-_section_end
+_section_content "Hello!"
+# _section_part
+_section_end $_SY[RHT]
 
 
-print -P "$_sb$_sc_$se"
-
-# echo -e "$_RH_TERMINATOR"
-# echo -e "$_RH_SEPARATOR"
-# echo -e "$_LH_TERMINATOR"
-# echo -e "$_LH_SEPARATOR"
-# echo -e "$_BRANCH"
-# echo -e "$_ELIPSIS"
-
-
-# print -P "%F{black}black%f"
-# print -P "%F{red}red%f"
-# print -P "%F{green}green%f"
-# print -P "%F{yellow}yellow%f"
-# print -P "%F{blue}blue%f"
-# print -P "%F{magenta}magenta%f"
-# print -P "%F{cyan}cyan%f"
-# print -P "%F{white}white%f"
-
-# print -P "%K{black}black%k"
-# print -P "%K{red}red$_RH_TERMINATOR%k" # understand…
-# print -P "%K{green}green%k"
-# print -P "%K{yellow}yellow%k"
-# print -P "%K{blue}blue%k"
-# print -P "%K{magenta}magenta%k"
-# print -P "%K{cyan}cyan%k"
-# print -P "%K{white}white%k"
-
-# print -P "Line(%l)."
-# print -P "FQHN(%M)."
-# print -P "Host(%m)."
-# print -P "User(%n)."
-# print -P "Line2(%y)."
-
-# print -P "Privilege(%#)."
-# print -P "Exit status(%?)."
-# print -P "Parse status(%_)."
-
-# print -P "PWD(%d(%/))."
-# print -P "HOME(%~)."
-
-# print -P "History(%h(%!))."
-# print -P "Jobs(%j)."
-
-# print -P "SHLVL(%L)."
+print -P $_sb$_sc$_se
