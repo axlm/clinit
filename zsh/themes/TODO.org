@@ -1,7 +1,6 @@
 * DO Common [0/5]
-** DOING Set Background Color
+** DOING Set Background and Foreground Color
 ** DO Create Section Start
-** DO Set Font Color
 ** DO Create Section End
 ** DO Create Prompt End
 * DO PROMPT [0/7]

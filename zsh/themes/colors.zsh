@@ -103,7 +103,8 @@ local _se
 _section_end() {
     __enter "_section_end"
 
-    _se="$_FG[RST]$_BG[RST]$1"
+    _se=""
+    _se="$_se" "$_FG[RST]$_BG[RST]"
 
     __trace "se = $_se"
 
