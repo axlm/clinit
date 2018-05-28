@@ -6,31 +6,31 @@
     | Convention              | Rationale                                            |
     |-------------------------+------------------------------------------------------|
     | Must be easy to TYPE    | Underscores and shit like that slows me down         |
-    | Must work on all shells | BASH, fish, zsh, korn shell                          |
+    | Must work on all shells | BASH, fish, zsh, korn shell ( not PowerShell )       |
     | May be a symlink        | Underlying the command may be a symlink              |
     | May be an alias         | Just make sure the arguments are passed in correctly |
     |-------------------------+------------------------------------------------------|
 
 
-    | Action                                          | Verb      | Classic |
-    |-------------------------------------------------+-----------+---------|
-    | Create something unique                         | New       | mk      |
-    | Add something new (or existing) to a collection | Add       |         |
-    | Remove something unique permanently             | Delete    | rm      |
-    | Remove something from a collection permanently  | Remove    |         |
-    | Remove something temporarily                    | Hide      |         |
-    | Restore something that was temporarily removed  | Show      |         |
-    | Change something manually                       | Modify    | ch      |
-    | Change something automatically                  | Update    |         |
-    | Look for zero or more things                    | Search    | ls      |
-    | Look for for one thing                          | Find      |         |
-    | Execute something                               | Start/Run |         |
-    | Stop execution permanently                      | Stop      |         |
-    | Stop execution temporarily                      | Pause     |         |
-    | Start temporarily stopped something             | Resume    |         |
-    | Show something simple on the terminal           | Print     |         |
-    | Show something complex on the terminal          | Display   |         |
-    |-------------------------------------------------+-----------+---------|
+    | Verb      | Classic | Action                                          |
+    |-----------+---------+-------------------------------------------------|
+    | New       | mk      | Create something unique                         |
+    | Add       |         | Add something new (or existing) to a collection |
+    | Delete    | rm      | Remove something unique permanently             |
+    | Remove    |         | Remove something from a collection permanently  |
+    | Hide      |         | Remove something temporarily                    |
+    | Show      |         | Restore something that was temporarily removed  |
+    | Modify    | ch      | Change something manually                       |
+    | Update    |         | Change something automatically                  |
+    | Search    | ls      | Look for zero or more things                    |
+    | Find      |         | Look for for one thing                          |
+    | Start/Run |         | Execute something                               |
+    | Stop      |         | Stop execution permanently                      |
+    | Pause     |         | Stop execution temporarily                      |
+    | Resume    |         | Start temporarily stopped something             |
+    | Print     |         | Show something simple on the terminal           |
+    | Display   |         | Show something complex on the terminal          |
+    |-----------+---------+-------------------------------------------------|
 
 
     | Thing      | Noun   |
