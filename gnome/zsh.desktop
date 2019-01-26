@@ -1,0 +1,18 @@
+[Desktop Entry]
+Name=ZSH Shell
+Comment=ZSH Shell
+GenericName=ZSH Shell
+Type=Application
+Icon=~/.stdcfg.d/icons/zsh.svg
+StartupNotify=true
+OnlyShowIn=GNOME;Unity;
+Actions=New
+Keywords=shell;zsh;prompt;command;commandline;cmd;terminal;
+Categories=GNOME;GTK;System;TerminalEmulator
+Exec=gnome-terminal --command zsh --window-with-profile "Solarized Dark" --geometry "110x40"
+
+[Desktop Action NewLightZSH]
+Name=New Light Solarized ZSH Terminal
+Icon=~/.stdcfg.d/icons/zsh.svg
+OnlyShowIn=Unity;
+Exec=gnome-terminal --command zsh --window-with-profile "Solarized Light" --geometry "110x40"

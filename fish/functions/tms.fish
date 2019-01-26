@@ -1,3 +1,3 @@
-function tms
-    tmux new-session -s $argv
+function tms --argument-names name_ --description 'New tmux session.'
+    env TERM=screen-256color-italic tmux new-session -s $name_ -n $name_
 end

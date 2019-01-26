@@ -13,9 +13,9 @@
 # Description:
 #
 # This is a shell script library. It contains functions that can be called by
-# programs that include (source) this library. 
+# programs that include (source) this library.
 #
-# By simply sourcing this library, you can use all available functions as 
+# By simply sourcing this library, you can use all available functions as
 # documented on the projects page.
 #
 #
@@ -33,8 +33,8 @@ init () {
     # Value: yes or no (y / n)
     #
     DEBUG=no
-    
-    # 
+
+    #
     # Syslog style log messages
     #
     if ! defined LOGDATEFORMAT
@@ -45,7 +45,7 @@ init () {
     then
         LOG_FILE=$0.log
     fi
-    
+
     #
     # Enable / disable logging to a file
     # Value: yes or no (y / n)
@@ -62,7 +62,7 @@ init () {
     then
         SYSLOG_TAG=$0
     fi
-    
+
     #
     # Use colours in output.
     #
@@ -75,15 +75,15 @@ init () {
     LIGHT_BLUE="$CYAN"
     BOLD="tput bold"
     DEFAULT="tput sgr0"
-    
+
     RED_BG="tput setab 1"
     GREEN_BG="tput setab 2"
     YELLOW_BG="tput setab 3"
     BLUE_BG="tput setab 4"
     MAGENTA_BG="tput setab 5"
     CYAN_BG="tput setab 6"
-    
-    # 
+
+    #
     # Bug fix for Bash, parsing exclamation mark.
     #
     set +o histexpand
@@ -159,7 +159,7 @@ trim () {
 # Override this function if required.
 #
 show_usage () {
-    MESSAGE="$1" 
+    MESSAGE="$1"
     echo "$MESSAGE"
     exit 1
 }
@@ -173,10 +173,10 @@ option_enabled () {
     VAR="${1}"
     VAR_VALUE=$(eval echo \$VAR)
     if  [[ "${VAR_VALUE}" == "y"   ]] || \
-        [[ "${VAR_VALUE}" == "yes" ]] || \
-        [[ "${VAR_VALUE}" == "YES" ]] || \
-        [[ "${VAR_VALUE}" == "on"  ]] || \
-        [[ "${VAR_VALUE}" == "ON"  ]]
+            [[ "${VAR_VALUE}" == "yes" ]] || \
+            [[ "${VAR_VALUE}" == "YES" ]] || \
+            [[ "${VAR_VALUE}" == "on"  ]] || \
+            [[ "${VAR_VALUE}" == "ON"  ]]
     then
         return 0
     else
@@ -185,27 +185,27 @@ option_enabled () {
 }
 
 #
-# The log funcion just puts a string into a file, prepended with a date & time in 
+# The log funcion just puts a string into a file, prepended with a date & time in
 # syslog format.
 #
 
 log2syslog () {
     if option_enabled  SYSLOG_ENABLED
     then
-       MESSAGE="$1"
-       logger -t "$SYSLOG_TAG" " $MESSAGE" #The space is not a typo!"
+        MESSAGE="$1"
+        logger -t "$SYSLOG_TAG" " $MESSAGE" #The space is not a typo!"
     fi
 }
 
 #
 # This function writes messages to a log file and/or syslog
 # The only argument is a message that has to be logged.
-# 
+#
 
 log () {
-    if option_enabled LOG_ENABLED || option_enabled SYSLOG_ENABLED 
+    if option_enabled LOG_ENABLED || option_enabled SYSLOG_ENABLED
     then
-        LOG_MESSAGE="$1" 
+        LOG_MESSAGE="$1"
         DATE=`date +"$LOGDATEFORMAT"`
 
         if has_value LOG_MESSAGE
@@ -223,8 +223,8 @@ log () {
         if option_enabled SYSLOG_ENABLED
         then
             #
-            # Syslog already prepends a date/time stamp so only the message 
-            # is logged. 
+            # Syslog already prepends a date/time stamp so only the message
+            # is logged.
             #
             log2syslog "$LOG_MESSAGE"
         fi
@@ -234,7 +234,7 @@ log () {
 
 #
 # This function basically replaces the 'echo' function in bash scripts.
-# The added functionality over echo is logging and using colors. 
+# The added functionality over echo is logging and using colors.
 #
 # The first argument is the string / message that must be displayed.
 # The second argument is the text color.
@@ -251,7 +251,7 @@ msg () {
     if has_value "MESSAGE"
     then
         $COLOR
-        echo "$MESSAGE" 
+        echo "$MESSAGE"
         $DEFAULT
         log "$MESSAGE"
     else
@@ -261,7 +261,7 @@ msg () {
 }
 
 #
-# This function echos a message 
+# This function echos a message
 # and displays the status at the end of the line.
 #
 # It can be used to create status messages other
@@ -282,8 +282,8 @@ msg_status () {
 #
 
 #
-# The following functions are shorthand for 
-# msg_status "a message" OK 
+# The following functions are shorthand for
+# msg_status "a message" OK
 # msg_status "another message" FAIL
 
 
@@ -417,68 +417,68 @@ raw_status () {
 display_status () {
     STATUS="$1"
 
-    case $STATUS in 
+    case $STATUS in
 
-    EMERGENCY )
+        EMERGENCY )
             STATUS="EMERGENCY"
             COLOR="$RED"
             ;;
-    ALERT )
+        ALERT )
             STATUS="  ALERT  "
             COLOR="$RED"
             ;;
-    CRITICAL )
+        CRITICAL )
             STATUS="CRITICAL "
             COLOR="$RED"
             ;;
-    ERROR )
-            STATUS="  ERROR  " 
+        ERROR )
+            STATUS="  ERROR  "
             COLOR="$RED"
             ;;
 
-    WARNING )
-            STATUS=" WARNING "  
+        WARNING )
+            STATUS=" WARNING "
             COLOR="$YELLOW"
             ;;
 
-    NOTICE )
-            STATUS=" NOTICE  "  
+        NOTICE )
+            STATUS=" NOTICE  "
             COLOR="$BLUE"
             ;;
-    INFO )
-            STATUS="  INFO   "  
+        INFO )
+            STATUS="  INFO   "
             COLOR="$LIGHT_BLUE"
             ;;
-    DEBUG )
+        DEBUG )
             STATUS="  DEBUG  "
             COLOR="$DEFAULT"
-            ;;    
+            ;;
 
-    OK  ) 
-            STATUS="   OK    "  
+        OK  )
+            STATUS="   OK    "
             COLOR="$GREEN"
             ;;
-    NOT_OK)
+        NOT_OK)
             STATUS=" NOT OK  "
             COLOR="$RED"
             ;;
 
-    PASSED ) 
-            STATUS=" PASSED  "  
+        PASSED )
+            STATUS=" PASSED  "
             COLOR="$GREEN"
             ;;
 
-    SUCCESS ) 
-            STATUS=" SUCCESS "  
+        SUCCESS )
+            STATUS=" SUCCESS "
             COLOR="$GREEN"
             ;;
-    
-    FAILURE | FAILED )
-            STATUS=" FAILED  "  
+
+        FAILURE | FAILED )
+            STATUS=" FAILED  "
             COLOR="$RED"
             ;;
 
-    *)
+        *)
             STATUS="UNDEFINED"
             COLOR="$YELLOW"
     esac
@@ -487,7 +487,7 @@ display_status () {
 }
 
 #
-# Exit with error status 
+# Exit with error status
 #
 bail () {
     ERROR="$?"
@@ -511,7 +511,7 @@ cmd () {
     ERROR="$?"
 
     MSG="Command: ${COMMAND:0:29}..."
-    
+
     tput cuu1
 
     if [ "$ERROR" == "0" ]
@@ -534,7 +534,7 @@ cmd () {
 # execute.
 #
 now () {
-   echo $(date +%s)
+    echo $(date +%s)
 }
 
 elapsed () {
@@ -615,7 +615,7 @@ str_replace_in_file () {
     local DEST="$2"
     local FILE="$3"
 
-    has_value FILE 
+    has_value FILE
     die_if_false $? "Empty argument 'file'"
     file_exists "$FILE"
     die_if_false $? "File does not exist"
@@ -623,6 +623,3 @@ str_replace_in_file () {
     printf ",s/$ORIG/$DEST/g\nw\nQ" | ed -s "$FILE" > /dev/null 2>&1
     return "$?"
 }
-
-init
-

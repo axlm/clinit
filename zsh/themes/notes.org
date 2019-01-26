@@ -1,0 +1,4 @@
+* Tasks
+** TODO
+   [2018-01-01 Mon]
+   [[file:~/.stdcfg.d/zsh/themes/axler8tor.zsh-theme::_mode()%20{]]
