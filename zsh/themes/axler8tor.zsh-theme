@@ -57,6 +57,12 @@ _FOREGROUND[RST]="%f"
 # CONSTANTS
 readonly _EMPTY=""
 
+# COLOURS
+_BG=$_EMPTY
+_FG=$_EMPTY
+_bg=$_BG[RST]
+_fg=$_FG[RST]
+
 
 # zsh's current vi mode
 #
@@ -75,31 +81,47 @@ _mode() {
     echo ${_MODE}
 }
 
+__reset() {
+    $_BG=$_EMPTY
+    $_FG=$_EMPTY
+    $_bg=$_BG[RST]
+    $_fg=$_FG[RST]
+}
+
+__yellow_on_red() {
+    _BG=$_BG$_BACKGROUND[RED]
+    _FG=$_FG$_FOREGROUND[YEL]
+}
+
+__white_on_blue() {
+    _BG=$_BG$_BACKGROUND[BLU]
+    _FG=$_FG$_BACKGROUND[WHI]
+}
+
+__black_on_yellow() {
+    _BG=$_BG$_BACKGROUND[YEL]
+    _FG=$_FG$_FOREGROUND[BLA]
+}
+
 # current user
 #
 # | User ID | Display
 # +---------+------------------------
 # | 0       | <user> yellow on red
-# | Makura Road, Long Bay, Auckland 07921000    | <user> white on blue
+# | 1000    | <user> white on blue
 # | else    | <user> black on yellow
 #
 _user() {
-    local _USER=${_EMPTY}
-    local _BG=$_EMPTY
-    local _FG=$_EMPTY
-    local _bg=$_BG[RST]
-    local _fg=$_FG[RST]
+    local _USER=$_EMPTY
 
+    __reset
     _USER=$_USER$_SYMBOL[SPC]
     if test $UID -eq 1000; then
-        _BG=$_BG$_BACKGROUND[BLU]
-        _FG=$_FG$_BACKGROUND[WHI]
+        __white_on_blue
     elif test $UID -eq 0; then
-        _BG=$_BG$_BACKGROUND[RED]
-        _FG=$_FG$_FOREGROUND[YEL]
+        __yellow_on_red
     else
-        _BG=$_BG$_BACKGROUND[YEL]
-        _FG=$_FG$_FOREGROUND[BLA]
+        __black_on_yellow
     fi
     _USER=$_USER$_BG$_FG%n$_fg$_bg
 

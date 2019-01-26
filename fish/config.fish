@@ -9,14 +9,18 @@ set fish_greeting ''
 # PATHS
 ## CONSTANTS
 set OPT_HOME               /opt
+set LOCAL_HOME             $HOME/.local
 set CARGO_HOME             $HOME/.cargo
 set PROJECTS_HOME          $HOME/Projects
 set NODE_MODULES_HOME      $HOME/.node_modules
 set GOPATH                 $HOME/.go
 
+# APPLICATION
+set SBCL_HOME              $LOCAL_HOME/lib/sbcl
+
 ## PREPEND
 set --global --export PATH $HOME/.bin       $PATH
-set --global --export PATH $HOME/.local/bin $PATH
+set --global --export PATH $LOCAL_HOME/bin  $PATH
 
 ## APPEND
 set --global --export PATH $PATH            $CARGO_HOME/bin
@@ -29,14 +33,17 @@ set --global --export RUST_SRC_PATH         $HOME/.lib/src/rust/src
 set --global --export XDG_CONFIG_HOME       $HOME/.config
 
 # APPS
-set --global --export BROWSER google-chrome
-set --global --export PAGER   less
+set --global --export BROWSER       google-chrome
+set --global --export PAGER         less
+
+# URLS
+set --global --export VAULT_ADDR    'http://127.0.0.1:8200'
 
 # SYSTEM
 set --global --export TERM    xterm-256color
 
 if status --is-interactive
-    # ALIASES
+    # directories
     alias ..        "cd .."
     alias ...       "cd ../.."
     alias ....      "cd ../../.."
@@ -53,21 +60,22 @@ if status --is-interactive
     alias projects  "cd $PROJECTS_HOME"
     alias stdcfg    "cd $HOME/.stdcfg.d"
     alias venv      "cd $HOME/VirtualEnv"
-    # needed to let :q work in `insert mode`
-    alias :q        exit
     # applications
     alias ckspell-af "env TERM=screen-256color aspell check -laf "
     alias ckspell-en "env TERM=screen-256color aspell check "
-    alias dict-af "env TERM=screen-256color aspell -a -laf "
-    alias dict-en "env TERM=screen-256color aspell -a "
-    alias spacemacs "env SHELL=/bin/bash emacs25 --insecure -nw "
-    alias tma "tmux attach-session -t "
-    alias tmk "tmux kill-session -t "
-    alias tml "tmux list-sessions "
-    alias tmw "tmux new-window -n "
-    alias tmvim "env TERM=screen-256color-italic nvim "
-    alias top "htop "
-    # productivity
+    alias clisp      "clisp -q "
+    alias dict-af    "env TERM=screen-256color aspell -a -laf "
+    alias dict-en    "env TERM=screen-256color aspell -a "
+    alias sbcl       "env SBCL_HOME=$SBCL_HOME sbcl "
+    alias spacemacs  "env SHELL=/bin/bash emacs25 --insecure -nw "
+    alias tma        "tmux attach-session -t "
+    alias tmk        "tmux kill-session -t "
+    alias tml        "tmux list-sessions "
+    alias tmw        "tmux new-window -n "
+    alias tmvim      "env TERM=screen-256color-italic nvim "
+    alias top        "env TERM=screen-256color-italic htop"
+    # shells
+    alias :q exit
     alias cp "command cp -uv "
     alias df "command df -h "
     alias dir "command dir --color=auto "
@@ -90,19 +98,23 @@ if status --is-interactive
     alias ngrep "grep -v "
     alias pgrep "command pgrep "
     alias tree "command tree -F "
-    # shells
+    # terminals
     alias new-bash-dark-terminal "gnome-terminal --command bash --window-with-profile 'Solarized Dark' --geometry '110x40' "
     alias new-bash-light-terminal "gnome-terminal --command bash --window-with-profile 'Solarized Light' --geometry '110x40' "
     alias new-fish-dark-terminal "gnome-terminal --command fish --window-with-profile 'Solarized Dark' --geometry '110x40' "
     alias new-fish-light-terminal "gnome-terminal --command fish --window-with-profile 'Solarized Light' --geometry '110x40' "
     alias new-zsh-dark-terminal "gnome-terminal --command zsh --window-with-profile 'Solarized Dark' --geometry '110x40' "
     alias new-zsh-light-terminal "gnome-terminal --command zsh --window-with-profile 'Solarized Light' --geometry '110x40' "
+    alias new-pwsh-dark-terminal "gnome-terminal --command pwsh --window-with-profile 'Solarized Dark' --geometry '110x40' "
+    alias new-pwsh-light-terminal "gnome-terminal --command pwsh --window-with-profile 'Solarized Light' --geometry '110x40' "
     alias bdt new-bash-dark-terminal
     alias blt new-bash-light-terminal
     alias fdt new-fish-dark-terminal
     alias flt new-fish-light-terminal
     alias zdt new-zsh-dark-terminal
     alias zlt new-zsh-light-terminal
+    alias pdt new-pwsh-dark-terminal
+    alias plt new-pwsh-light-terminal
 
     # COLORS
     dircolors --c-shell $HOME/.dircolors | source
@@ -117,3 +129,6 @@ if status --is-interactive
     set -g theme_display_date no
     set theme_color_scheme solarized
 end
+
+# OPAM configuration
+source /home/axl/.opam/opam-init/init.fish > /dev/null 2> /dev/null or true

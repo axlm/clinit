@@ -56,3 +56,5 @@ then
 fi
 
 source '/home/axl/.lib/azure-cli/az.completion'
+
+complete -C /home/axl/.bin/vault vault
