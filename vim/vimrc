@@ -111,8 +111,8 @@ set foldmethod=syntax
 " let g:solarized_bold       = 1
 " let g:solarized_italic     = 1
 " let g:solarized_underline  = 0
-" colorscheme solarized
-colorscheme monokai
+colorscheme solarized
+" colorscheme monokai
 " if $SOLARIZED == "LIGHT"
     " set background=light
 " else

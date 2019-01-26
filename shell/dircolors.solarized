@@ -200,6 +200,7 @@ EXEC 00;38;5;64
 .ini             01;35
 .markdown        01;35
 .md              01;35
+.org             01;35
 .pom             01;35
 .xml             01;35
 .yml             01;35
@@ -262,6 +263,8 @@ EXEC 00;38;5;64
 .hrl     00;32
 .java    00;32
 .julia   00;32
+.kt      00;32
+.ml      00;32
 .py      00;32
 .rs      00;32
 .scala   00;32
@@ -304,9 +307,8 @@ EXEC 00;38;5;64
 
 .color11 01;31 # (bold red)
 .color12 01;32 # (bold green)
-.color13 01;33 # (bold yellow) 
+.color13 01;33 # (bold yellow)
 .color14 01;34 # (bold blue)
 .color15 01;35 # (bold magenta)
 .color16 01;36 # (bold cyan)
 .color17 01;37 # (bold white)
-

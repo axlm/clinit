@@ -1,1 +1,1 @@
-IEx.configure [width: 96] 
+IEx.configure [width: 96]

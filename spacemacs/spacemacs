@@ -36,28 +36,34 @@ values."
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-enable-help-tooltip 'manual)
      c-c++
+     common-lisp
      docker
      elixir
      emacs-lisp
      erlang
      git
      github
+     go
      ivy
      javascript
      markdown
-     org
+     ocaml
+     (org :variables
+          org-projectile-file "TODO.org")
      python
+     ruby
      rust
      search-engine
-     spell-checking
+     (shell :variables
+            shell-default-term-shell "/bin/zsh")
      shell-scripts
-     terraform
+     spell-checking
      syntax-checking
+     terraform
      version-control
+     vimscript
+     windows-scripts
      yaml
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -119,15 +125,18 @@ values."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
-   dotspacemacs-startup-banner 'official
+   dotspacemacs-startup-banner 'random
    ;; List of items to show in startup buffer or an association list of
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
    ;; Possible values for list-type are:
    ;; `recents' `bookmarks' `projects' `agenda' `todos'."
    ;; List sizes may be nil, in which case
    ;; `spacemacs-buffer-startup-lists-length' takes effect.
-   dotspacemacs-startup-lists '((recents . 5)
-                                (projects . 7))
+   dotspacemacs-startup-lists '((todos . 5)
+                                (agenda . 11)
+                                (projects . 5)
+                                (recents . 7)
+                                (bookmarks . 5))
    ;; True if the home buffer should respond to resize events.
    dotspacemacs-startup-buffer-responsive t
    ;; Default major mode of the scratch buffer (default `text-mode')
@@ -145,7 +154,7 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Fantasque Sans Mono"
-                               :size 13
+                               :size 12
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -173,7 +182,7 @@ values."
    ;; works in the GUI. (default nil)
    dotspacemacs-distinguish-gui-tab nil
    ;; If non nil `Y' is remapped to `y$' in Evil states. (default nil)
-   dotspacemacs-remap-Y-to-y$ nil
+   dotspacemacs-remap-Y-to-y$ t
    ;; If non-nil, the shift mappings `<' and `>' retain visual state if used
    ;; there. (default t)
    dotspacemacs-retain-visual-state-on-shift t
@@ -247,7 +256,7 @@ values."
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
-   dotspacemacs-active-transparency 90
+   dotspacemacs-active-transparency 97
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's inactive or deselected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
@@ -277,10 +286,10 @@ values."
    ;; (default nil)
    ;; dotspacemacs-line-numbers t
    dotspacemacs-line-numbers '(:relative t
-                                         :disabled-for-modes doc-view-mode
-                                         markdown-mode
-                                         org-mode
-                                         text-mode)
+                               :disabled-for-modes doc-view-mode
+                                                   markdown-mode
+                                                   org-mode
+                                                   text-mode)
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -342,11 +351,10 @@ you should place your code here."
   (define-key global-map (kbd "C--") 'text-scale-decrease)
   (define-key global-map (kbd "C-0") 'text-scale-adjust)
   (when window-system
-    (set-frame-size (selected-frame) 196 56)
-    (set-frame-position (selected-frame) 20 36))
+    (set-frame-size (selected-frame) 168 56)
+    (set-frame-position (selected-frame) 320 40))
   (setq linum-format "%4d \u2502 ")
   (setq powerline-default-separator 'bar)
-  ;; (setq-default persp-auto-save-opt 0)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -358,7 +366,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (live-py-mode hy-mode ansible ace-link company counsel magit with-editor yapfify yaml-mode ws-butler winum which-key wgrep web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org terraform-mode swiper spaceline solarized-theme smex smeargle restart-emacs request rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file ob-elixir neotree move-text monokai-theme mmm-mode markdown-toc magit-gitflow magit-gh-pulls macrostep lorem-ipsum livid-mode linum-relative link-hint js2-refactor js-doc jinja2-mode ivy-hydra insert-shebang info+ indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make google-translate golden-ratio gnuplot gitignore-mode github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gist gh-md fuzzy flyspell-correct-ivy flycheck-rust flycheck-pos-tip flycheck-mix flycheck-credo flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu erlang engine-mode elisp-slime-nav dumb-jump dockerfile-mode docker disaster diff-hl define-word cython-mode counsel-projectile company-tern company-statistics company-shell company-quickhelp company-c-headers company-ansible company-anaconda column-enforce-mode coffee-mode cmake-mode clean-aindent-mode clang-format cargo auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile ansible-doc alchemist aggressive-indent adaptive-wrap ace-window ac-ispell))))
+    (treepy graphql slime-company slime common-lisp-snippets utop tuareg caml ocp-indent merlin hcl-mode powerline pcre2el org-category-capture alert log4e gntp org-plus-contrib skewer-mode simple-httpd multiple-cursors js2-mode hydra parent-mode helm helm-core fringe-helper git-gutter+ git-gutter gh marshal logito pcache ht flyspell-correct flycheck flx smartparens iedit anzu evil goto-chg highlight json-mode tablist magit-popup docker-tramp json-snatcher json-reformat projectile dash-functional tern pos-tip go-mode markdown-mode rust-mode inf-ruby bind-map bind-key yasnippet packed async anaconda-mode pythonic company elixir-mode pkg-info epl avy auto-complete popup f s wgrep counsel-projectile counsel swiper ivy magit git-commit yapfify yaml-mode xterm-color ws-butler with-editor winum which-key web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package toml-mode toc-org terraform-mode spaceline solarized-theme smex smeargle shell-pop rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restart-emacs request rbenv rake rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort powershell popwin pip-requirements persp-mode paradox orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file ob-elixir neotree multi-term move-text mmm-mode minitest markdown-toc magit-gitflow magit-gh-pulls macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint js2-refactor js-doc jinja2-mode ivy-hydra insert-shebang indent-guide hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-make google-translate golden-ratio go-guru go-eldoc gnuplot gitignore-mode github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gist ghub gh-md fuzzy flyspell-correct-ivy flycheck-rust flycheck-pos-tip flycheck-mix flycheck-credo flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help erlang engine-mode elisp-slime-nav dumb-jump dockerfile-mode docker disaster diminish diff-hl define-word dactyl-mode cython-mode company-tern company-statistics company-shell company-quickhelp company-go company-c-headers company-ansible company-anaconda column-enforce-mode coffee-mode cmake-mode clean-aindent-mode clang-format chruby cargo bundler auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile ansible-doc ansible alchemist aggressive-indent adaptive-wrap ace-window ace-link ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

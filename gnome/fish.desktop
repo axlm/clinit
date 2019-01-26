@@ -1,0 +1,18 @@
+[Desktop Entry]
+Name=Fish Shell
+Comment=Friendly Interactive SHell
+GenericName=Friendly Interactive SHell
+Type=Application
+Icon=~/.stdcfg.d/icons/fish.svg
+StartupNotify=true
+OnlyShowIn=GNOME;Unity;
+Actions=New
+Keywords=shell;fish;prompt;command;commandline;cmd;terminal;
+Categories=GNOME;GTK;System;TerminalEmulator
+Exec=gnome-terminal --command fish --window-with-profile "Solarized Dark" --geometry "110x40"
+
+[Desktop Action NewLightFish]
+Name=New Light Solarized Fish Terminal
+Icon=~/.stdcfg.d/icons/fish.svg
+OnlyShowIn=Unity;
+Exec=gnome-terminal --command fish --window-with-profile "Solarized Light" --geometry "110x40"

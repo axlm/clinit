@@ -15,7 +15,7 @@ fi
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # shell options
-set -o vi
+# set -o vi
 shopt -s cdable_vars
 shopt -s checkwinsize
 shopt -s histappend
@@ -56,3 +56,5 @@ then
 fi
 
 source '/home/axl/.lib/azure-cli/az.completion'
+
+complete -C /home/axl/.bin/vault vault
